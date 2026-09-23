@@ -1,0 +1,69 @@
+PCC studies the chemistry of which two things?	polymers and colorants
+Electronegativity increases toward which element?	fluorine
+Rank F, O, C, Na by electronegativity	F O C Na
+Hydrogen bonds: primary or secondary?	secondary
+Acid dye bonds to nylon's amine end by what bond?	ionic
+Carbons in a zigzag of 4 lines	5
+Hidden H on each bare benzene carbon	1
+Phenol (benzene + OH) formula	C6H6O
+Toluene (benzene + CH3) formula	C7H8
+All single C-C bonds	alkane
+Has a C=C double bond	alkene
+Has a C≡C triple bond	alkyne
+Has a double bond: saturated or unsaturated?	unsaturated
+Who proposed the Macromolecular Hypothesis?	Staudinger
+Macromolecular Hypothesis: repeat units joined by what bonds?	covalent
+Before Staudinger: polymers were clumps held by what forces?	weak forces
+Units in an oligomer	2 to 10
+Units in a polymer	thousands
+Addition monomer template	H2C=CHR
+R group of propylene	CH3
+R group of styrene	benzene ring
+Polymer made from H2C=CHCl	PVC
+In addition polymerization, what opens up?	the double bond
+Condensation polymerization loses what?	water
+Nylon-6,6 amine monomer	1,6-diaminohexane
+Nylon-6,6 acid monomer	adipic acid
+Nylon-6,6 link type	amide
+PET acid monomer	terephthalic acid
+PET alcohol monomer	ethylene glycol
+PET link type	ester
+Nylon-6,6: homopolymer or heteropolymer?	homopolymer
+Classification category: natural vs synthetic	origin
+Classification category: homo vs hetero	monomer composition
+Classification category: linear vs branched	chain architecture
+Classification category: random vs block	monomer arrangement
+Classification category: thermoplastic vs thermoset	material behavior
+Classification category: crystalline vs amorphous	crystallinity
+Rayon origin	semi-synthetic
+Rayon is made by modifying what?	cellulose
+One type of repeat unit	homopolymer
+Two or more types of repeat unit	heteropolymer
+A protein is a heteropolymer and a	biopolymer
+Copolymer: ABABAB	alternating
+Copolymer: AAABBB	block
+Copolymer: ABBAAB	random
+Copolymer: A backbone with B side chains	graft
+Chain architecture: chains tied together	cross-linked
+Chain architecture: side branches off the main chain	branched
+Softens when heated, re-melts	thermoplastic
+Cross-linked, won't re-melt	thermoset
+Stretches and snaps back	elastomer
+Ordered, tightly packed chains	crystalline
+Disordered chains	amorphous
+Has both crystalline and amorphous regions	semi-crystalline
+More branched: HDPE or LDPE?	LDPE
+More crystalline: HDPE or LDPE?	HDPE
+Cross-linked polymer in solvent or base	swells
+Repeat-unit molar mass: count atoms where?	inside the brackets
+DP = polymer molar mass divided by the	repeat-unit molar mass
+DP is rounded to a	whole number
+DP of 50,000 g/mol polyethylene	1783
+Tg stands for	glass transition temperature
+Glassy to rubbery	Tg
+Crystalline regions melt	Tm
+Tg governs which regions?	amorphous
+Tm governs which regions?	crystalline
+Fully amorphous polymer lacks which transition?	Tm
+Example polymer with Tg but no Tm	polystyrene
+Dye polyester above or below Tg?	above

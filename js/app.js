@@ -36,16 +36,30 @@
     return d;
   }
 
-  // Adds built-in decks on first run. When a built-in deck ships a higher
+  // Adds each built-in deck once. When a built-in deck ships a higher
   // `version`, the copy in storage is replaced (cards and progress reset).
-  // A built-in deck the user deleted is not re-added.
+  // A built-in deck the user deleted is not re-added. Retired built-in decks
+  // are removed.
   function seed() {
     var changed = false;
+    if (!Array.isArray(db.seedIds)) {
+      // Storage from before seedIds existed: every built-in deck present then
+      // was already offered once.
+      db.seedIds = db.seeded ? ['seed-pcc101-exam1', 'seed-pcc101-structures'] : [];
+      changed = true;
+    }
+    (window.SEED_RETIRED || []).forEach(function (id) {
+      var before = db.decks.length;
+      db.decks = db.decks.filter(function (d) { return d.id !== id; });
+      if (db.decks.length !== before) changed = true;
+    });
     (window.SEED_DECKS || []).forEach(function (s) {
       var version = s.version || 1;
       var existing = getDeck(s.id);
+      if (existing && db.seedIds.indexOf(s.id) === -1) { db.seedIds.push(s.id); changed = true; }
       if (!existing) {
-        if (db.seeded) return;
+        if (db.seedIds.indexOf(s.id) !== -1) return;
+        db.seedIds.push(s.id);
         var fresh = fixDeck(JSON.parse(JSON.stringify(s)));
         fresh.seedVersion = version;
         db.decks.push(fresh);

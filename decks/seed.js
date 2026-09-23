@@ -2,903 +2,355 @@
 window.SEED_DECKS = [
  {
   "id": "seed-pcc101-exam1",
-  "version": 2,
+  "version": 3,
   "name": "PCC 101 Exam 1",
   "folder": "PCC 101",
   "cards": [
    {
-    "id": "seed-exam1-001",
+    "id": "seed-core-001",
     "term": "PCC studies the chemistry of which two things?",
     "def": "polymers and colorants"
    },
    {
-    "id": "seed-exam1-002",
-    "term": "Colorants include which two things?",
-    "def": "dyes and pigments"
-   },
-   {
-    "id": "seed-exam1-003",
-    "term": "Main branch of chemistry PCC falls under",
-    "def": "organic"
-   },
-   {
-    "id": "seed-exam1-004",
-    "term": "Branch: synthesizing an azo dye",
-    "def": "organic"
-   },
-   {
-    "id": "seed-exam1-005",
-    "term": "Branch: copper ions that improve wash fastness",
-    "def": "inorganic"
-   },
-   {
-    "id": "seed-exam1-006",
-    "term": "Branch: HPLC to check dye purity",
-    "def": "analytical"
-   },
-   {
-    "id": "seed-exam1-007",
-    "term": "Branch: Tg and chain mobility",
-    "def": "physical"
-   },
-   {
-    "id": "seed-exam1-008",
-    "term": "Branch: polymers for drug delivery",
-    "def": "biochemistry"
-   },
-   {
-    "id": "seed-exam1-009",
-    "term": "Atomic number equals the number of",
-    "def": "protons"
-   },
-   {
-    "id": "seed-exam1-010",
-    "term": "Neutrons =",
-    "def": "mass minus protons"
-   },
-   {
-    "id": "seed-exam1-011",
-    "term": "Round the mass before subtracting?",
-    "def": "yes"
-   },
-   {
-    "id": "seed-exam1-012",
-    "term": "Electrons in a neutral atom equal the number of",
-    "def": "protons"
-   },
-   {
-    "id": "seed-exam1-013",
-    "term": "Element with 17 protons",
-    "def": "chlorine"
-   },
-   {
-    "id": "seed-exam1-014",
-    "term": "Neutrons in chlorine (mass 35)",
-    "def": "18"
-   },
-   {
-    "id": "seed-exam1-015",
-    "term": "Neutrons in aluminum (Z 13, mass 26.98)",
-    "def": "14"
-   },
-   {
-    "id": "seed-exam1-016",
-    "term": "Neutrons in iron (Z 26, mass 55.85)",
-    "def": "30"
-   },
-   {
-    "id": "seed-exam1-017",
-    "term": "2 or more atoms bonded together",
-    "def": "molecule"
-   },
-   {
-    "id": "seed-exam1-018",
-    "term": "Atoms of 2 or more different elements bonded",
-    "def": "compound"
-   },
-   {
-    "id": "seed-exam1-019",
-    "term": "NaCl: molecule, compound, or both?",
-    "def": "compound"
-   },
-   {
-    "id": "seed-exam1-020",
-    "term": "O2: molecule, compound, or both?",
-    "def": "molecule"
-   },
-   {
-    "id": "seed-exam1-021",
-    "term": "A dye: molecule, compound, or both?",
-    "def": "both"
-   },
-   {
-    "id": "seed-exam1-022",
-    "term": "CO2: best single term",
-    "def": "compound"
-   },
-   {
-    "id": "seed-exam1-023",
-    "term": "Why is NaCl not a molecule?",
-    "def": "ionic lattice"
-   },
-   {
-    "id": "seed-exam1-024",
-    "term": "Shell capacities in this class",
-    "def": "2, 8, 8"
-   },
-   {
-    "id": "seed-exam1-025",
-    "term": "Valence electrons for groups 13 to 18",
-    "def": "group minus 10"
-   },
-   {
-    "id": "seed-exam1-026",
-    "term": "Valence electrons: carbon",
-    "def": "4"
-   },
-   {
-    "id": "seed-exam1-027",
-    "term": "Valence electrons: nitrogen",
-    "def": "5"
-   },
-   {
-    "id": "seed-exam1-028",
-    "term": "Valence electrons: oxygen",
-    "def": "6"
-   },
-   {
-    "id": "seed-exam1-029",
-    "term": "Valence electrons: chlorine",
-    "def": "7"
-   },
-   {
-    "id": "seed-exam1-030",
-    "term": "Valence electrons: hydrogen",
-    "def": "1"
-   },
-   {
-    "id": "seed-exam1-031",
-    "term": "Unreactive elements with full shells",
-    "def": "noble gases"
-   },
-   {
-    "id": "seed-exam1-032",
-    "term": "Most likely to bond: He, Ne, Na, or Ar",
-    "def": "Na"
-   },
-   {
-    "id": "seed-exam1-033",
-    "term": "Why sodium bonds easily",
-    "def": "1 valence electron"
-   },
-   {
-    "id": "seed-exam1-034",
-    "term": "Atoms bond to reach how many valence electrons?",
-    "def": "8"
-   },
-   {
-    "id": "seed-exam1-035",
-    "term": "Name of the rule for 8 valence electrons",
-    "def": "octet rule"
-   },
-   {
-    "id": "seed-exam1-036",
-    "term": "Strong bonds: primary or secondary?",
-    "def": "primary"
-   },
-   {
-    "id": "seed-exam1-037",
-    "term": "Hydrogen bonds: primary or secondary?",
-    "def": "secondary"
-   },
-   {
-    "id": "seed-exam1-038",
-    "term": "Two kinds of primary bonds",
-    "def": "ionic and covalent"
-   },
-   {
-    "id": "seed-exam1-039",
-    "term": "Electrons transferred",
-    "def": "ionic"
-   },
-   {
-    "id": "seed-exam1-040",
-    "term": "Electrons shared",
-    "def": "covalent"
-   },
-   {
-    "id": "seed-exam1-041",
-    "term": "Ionic bonds form between a metal and a",
-    "def": "nonmetal"
-   },
-   {
-    "id": "seed-exam1-042",
-    "term": "Bonds in a polymer backbone",
-    "def": "covalent"
-   },
-   {
-    "id": "seed-exam1-043",
-    "term": "Acid dye bonds to nylon's amine end by what bond?",
-    "def": "ionic"
-   },
-   {
-    "id": "seed-exam1-044",
+    "id": "seed-core-002",
     "term": "Electronegativity increases toward which element?",
     "def": "fluorine"
    },
    {
-    "id": "seed-exam1-045",
-    "term": "Electronegativity direction on the table",
-    "def": "up and right"
-   },
-   {
-    "id": "seed-exam1-046",
-    "term": "Highest electronegativity",
-    "def": "fluorine"
-   },
-   {
-    "id": "seed-exam1-047",
+    "id": "seed-core-003",
     "term": "Rank F, O, C, Na by electronegativity",
     "def": "F O C Na"
    },
    {
-    "id": "seed-exam1-048",
-    "term": "Bonds carbon always forms",
-    "def": "4"
+    "id": "seed-core-004",
+    "term": "Hydrogen bonds: primary or secondary?",
+    "def": "secondary"
    },
    {
-    "id": "seed-exam1-049",
-    "term": "Lone pairs on carbon",
-    "def": "0"
+    "id": "seed-core-005",
+    "term": "Acid dye bonds to nylon's amine end by what bond?",
+    "def": "ionic"
    },
    {
-    "id": "seed-exam1-050",
-    "term": "Lone pairs on oxygen",
-    "def": "2"
-   },
-   {
-    "id": "seed-exam1-051",
-    "term": "Lone pairs on nitrogen",
-    "def": "1"
-   },
-   {
-    "id": "seed-exam1-052",
-    "term": "Lone pairs on water's O",
-    "def": "2"
-   },
-   {
-    "id": "seed-exam1-053",
-    "term": "Lone pairs on ammonia's N",
-    "def": "1"
-   },
-   {
-    "id": "seed-exam1-054",
-    "term": "Total lone pairs in O2",
-    "def": "4"
-   },
-   {
-    "id": "seed-exam1-055",
-    "term": "Bond between the two O's in O2",
-    "def": "double"
-   },
-   {
-    "id": "seed-exam1-056",
-    "term": "Skeletal structure: a carbon sits at every",
-    "def": "corner and end"
-   },
-   {
-    "id": "seed-exam1-057",
-    "term": "Skeletal structure: which atoms are hidden?",
-    "def": "hydrogens"
-   },
-   {
-    "id": "seed-exam1-058",
+    "id": "seed-core-006",
     "term": "Carbons in a zigzag of 4 lines",
     "def": "5"
    },
    {
-    "id": "seed-exam1-059",
-    "term": "Carbons in a zigzag of n lines",
-    "def": "n + 1"
-   },
-   {
-    "id": "seed-exam1-060",
+    "id": "seed-core-007",
     "term": "Hidden H on each bare benzene carbon",
     "def": "1"
    },
    {
-    "id": "seed-exam1-061",
-    "term": "Benzene formula",
-    "def": "C6H6"
-   },
-   {
-    "id": "seed-exam1-062",
+    "id": "seed-core-008",
     "term": "Phenol (benzene + OH) formula",
     "def": "C6H6O"
    },
    {
-    "id": "seed-exam1-063",
+    "id": "seed-core-009",
     "term": "Toluene (benzene + CH3) formula",
     "def": "C7H8"
    },
    {
-    "id": "seed-exam1-064",
-    "term": "Pentane formula",
-    "def": "C5H12"
-   },
-   {
-    "id": "seed-exam1-065",
-    "term": "Hexane formula",
-    "def": "C6H14"
-   },
-   {
-    "id": "seed-exam1-066",
+    "id": "seed-core-010",
     "term": "All single C-C bonds",
     "def": "alkane"
    },
    {
-    "id": "seed-exam1-067",
+    "id": "seed-core-011",
     "term": "Has a C=C double bond",
     "def": "alkene"
    },
    {
-    "id": "seed-exam1-068",
+    "id": "seed-core-012",
     "term": "Has a C≡C triple bond",
     "def": "alkyne"
    },
    {
-    "id": "seed-exam1-069",
-    "term": "Ethane: alkane, alkene, or alkyne?",
-    "def": "alkane"
-   },
-   {
-    "id": "seed-exam1-070",
-    "term": "Ethylene: alkane, alkene, or alkyne?",
-    "def": "alkene"
-   },
-   {
-    "id": "seed-exam1-071",
-    "term": "Acetylene: alkane, alkene, or alkyne?",
-    "def": "alkyne"
-   },
-   {
-    "id": "seed-exam1-072",
-    "term": "Ethane formula",
-    "def": "C2H6"
-   },
-   {
-    "id": "seed-exam1-073",
-    "term": "Ethylene formula",
-    "def": "C2H4"
-   },
-   {
-    "id": "seed-exam1-074",
-    "term": "Acetylene formula",
-    "def": "C2H2"
-   },
-   {
-    "id": "seed-exam1-075",
-    "term": "All single bonds: saturated or unsaturated?",
-    "def": "saturated"
-   },
-   {
-    "id": "seed-exam1-076",
+    "id": "seed-core-013",
     "term": "Has a double bond: saturated or unsaturated?",
     "def": "unsaturated"
    },
    {
-    "id": "seed-exam1-077",
+    "id": "seed-core-014",
     "term": "Who proposed the Macromolecular Hypothesis?",
     "def": "Staudinger"
    },
    {
-    "id": "seed-exam1-078",
+    "id": "seed-core-015",
     "term": "Macromolecular Hypothesis: repeat units joined by what bonds?",
     "def": "covalent"
    },
    {
-    "id": "seed-exam1-079",
+    "id": "seed-core-016",
     "term": "Before Staudinger: polymers were clumps held by what forces?",
     "def": "weak forces"
    },
    {
-    "id": "seed-exam1-080",
-    "term": "Staudinger equation: memorize it?",
-    "def": "no"
-   },
-   {
-    "id": "seed-exam1-081",
-    "term": "Units in a monomer",
-    "def": "1"
-   },
-   {
-    "id": "seed-exam1-082",
+    "id": "seed-core-017",
     "term": "Units in an oligomer",
     "def": "2 to 10"
    },
    {
-    "id": "seed-exam1-083",
+    "id": "seed-core-018",
     "term": "Units in a polymer",
     "def": "thousands"
    },
    {
-    "id": "seed-exam1-084",
-    "term": "The piece in brackets that repeats n times",
-    "def": "repeat unit"
-   },
-   {
-    "id": "seed-exam1-085",
+    "id": "seed-core-019",
     "term": "Addition monomer template",
     "def": "H2C=CHR"
    },
    {
-    "id": "seed-exam1-086",
-    "term": "Monomer of polyethylene",
-    "def": "ethylene"
-   },
-   {
-    "id": "seed-exam1-087",
-    "term": "Monomer of polypropylene",
-    "def": "propylene"
-   },
-   {
-    "id": "seed-exam1-088",
-    "term": "Monomer of polystyrene",
-    "def": "styrene"
-   },
-   {
-    "id": "seed-exam1-089",
-    "term": "Monomer of PVC",
-    "def": "vinyl chloride"
-   },
-   {
-    "id": "seed-exam1-090",
-    "term": "R group of ethylene",
-    "def": "H"
-   },
-   {
-    "id": "seed-exam1-091",
+    "id": "seed-core-020",
     "term": "R group of propylene",
     "def": "CH3"
    },
    {
-    "id": "seed-exam1-092",
+    "id": "seed-core-021",
     "term": "R group of styrene",
     "def": "benzene ring"
    },
    {
-    "id": "seed-exam1-093",
-    "term": "R group of vinyl chloride",
-    "def": "Cl"
-   },
-   {
-    "id": "seed-exam1-094",
+    "id": "seed-core-022",
     "term": "Polymer made from H2C=CHCl",
     "def": "PVC"
    },
    {
-    "id": "seed-exam1-095",
-    "term": "PE repeat unit formula",
-    "def": "C2H4"
-   },
-   {
-    "id": "seed-exam1-096",
-    "term": "PP repeat unit formula",
-    "def": "C3H6"
-   },
-   {
-    "id": "seed-exam1-097",
-    "term": "PS repeat unit formula",
-    "def": "C8H8"
-   },
-   {
-    "id": "seed-exam1-098",
+    "id": "seed-core-023",
     "term": "In addition polymerization, what opens up?",
     "def": "the double bond"
    },
    {
-    "id": "seed-exam1-099",
-    "term": "Addition polymerization: anything lost?",
-    "def": "no"
-   },
-   {
-    "id": "seed-exam1-100",
+    "id": "seed-core-024",
     "term": "Condensation polymerization loses what?",
     "def": "water"
    },
    {
-    "id": "seed-exam1-101",
-    "term": "Nylon-6,6: addition or condensation?",
-    "def": "condensation"
-   },
-   {
-    "id": "seed-exam1-102",
-    "term": "PET: addition or condensation?",
-    "def": "condensation"
-   },
-   {
-    "id": "seed-exam1-103",
+    "id": "seed-core-025",
     "term": "Nylon-6,6 amine monomer",
     "def": "1,6-diaminohexane"
    },
    {
-    "id": "seed-exam1-104",
+    "id": "seed-core-026",
     "term": "Nylon-6,6 acid monomer",
     "def": "adipic acid"
    },
    {
-    "id": "seed-exam1-105",
-    "term": "Carbons in each nylon-6,6 monomer",
-    "def": "6"
-   },
-   {
-    "id": "seed-exam1-106",
+    "id": "seed-core-027",
     "term": "Nylon-6,6 link type",
     "def": "amide"
    },
    {
-    "id": "seed-exam1-107",
-    "term": "Amide link atoms",
-    "def": "C(=O)-NH"
-   },
-   {
-    "id": "seed-exam1-108",
-    "term": "Nylon-6,6 repeat unit formula",
-    "def": "C12H22N2O2"
-   },
-   {
-    "id": "seed-exam1-109",
-    "term": "Nylon-6,6 repeat unit molar mass",
-    "def": "226.32"
-   },
-   {
-    "id": "seed-exam1-110",
+    "id": "seed-core-028",
     "term": "PET acid monomer",
     "def": "terephthalic acid"
    },
    {
-    "id": "seed-exam1-111",
+    "id": "seed-core-029",
     "term": "PET alcohol monomer",
     "def": "ethylene glycol"
    },
    {
-    "id": "seed-exam1-112",
+    "id": "seed-core-030",
     "term": "PET link type",
     "def": "ester"
    },
    {
-    "id": "seed-exam1-113",
-    "term": "Ester link atoms",
-    "def": "C(=O)-O"
-   },
-   {
-    "id": "seed-exam1-114",
-    "term": "PET repeat unit formula",
-    "def": "C10H8O4"
-   },
-   {
-    "id": "seed-exam1-115",
-    "term": "PET repeat unit molar mass",
-    "def": "192.16"
-   },
-   {
-    "id": "seed-exam1-116",
+    "id": "seed-core-031",
     "term": "Nylon-6,6: homopolymer or heteropolymer?",
     "def": "homopolymer"
    },
    {
-    "id": "seed-exam1-117",
-    "term": "Number of classification categories",
-    "def": "6"
-   },
-   {
-    "id": "seed-exam1-118",
+    "id": "seed-core-032",
     "term": "Classification category: natural vs synthetic",
     "def": "origin"
    },
    {
-    "id": "seed-exam1-119",
+    "id": "seed-core-033",
     "term": "Classification category: homo vs hetero",
     "def": "monomer composition"
    },
    {
-    "id": "seed-exam1-120",
+    "id": "seed-core-034",
     "term": "Classification category: linear vs branched",
     "def": "chain architecture"
    },
    {
-    "id": "seed-exam1-121",
+    "id": "seed-core-035",
     "term": "Classification category: random vs block",
     "def": "monomer arrangement"
    },
    {
-    "id": "seed-exam1-122",
+    "id": "seed-core-036",
     "term": "Classification category: thermoplastic vs thermoset",
     "def": "material behavior"
    },
    {
-    "id": "seed-exam1-123",
+    "id": "seed-core-037",
     "term": "Classification category: crystalline vs amorphous",
     "def": "crystallinity"
    },
    {
-    "id": "seed-exam1-124",
-    "term": "Cellulose origin",
-    "def": "natural"
-   },
-   {
-    "id": "seed-exam1-125",
-    "term": "Protein origin",
-    "def": "natural"
-   },
-   {
-    "id": "seed-exam1-126",
-    "term": "Polyethylene origin",
-    "def": "synthetic"
-   },
-   {
-    "id": "seed-exam1-127",
-    "term": "Nylon origin",
-    "def": "synthetic"
-   },
-   {
-    "id": "seed-exam1-128",
+    "id": "seed-core-038",
     "term": "Rayon origin",
     "def": "semi-synthetic"
    },
    {
-    "id": "seed-exam1-129",
-    "term": "Cellulose acetate origin",
-    "def": "semi-synthetic"
-   },
-   {
-    "id": "seed-exam1-130",
+    "id": "seed-core-039",
     "term": "Rayon is made by modifying what?",
     "def": "cellulose"
    },
    {
-    "id": "seed-exam1-131",
+    "id": "seed-core-040",
     "term": "One type of repeat unit",
     "def": "homopolymer"
    },
    {
-    "id": "seed-exam1-132",
+    "id": "seed-core-041",
     "term": "Two or more types of repeat unit",
     "def": "heteropolymer"
    },
    {
-    "id": "seed-exam1-133",
+    "id": "seed-core-042",
     "term": "A protein is a heteropolymer and a",
     "def": "biopolymer"
    },
    {
-    "id": "seed-exam1-134",
+    "id": "seed-core-043",
     "term": "Copolymer: ABABAB",
     "def": "alternating"
    },
    {
-    "id": "seed-exam1-135",
+    "id": "seed-core-044",
     "term": "Copolymer: AAABBB",
     "def": "block"
    },
    {
-    "id": "seed-exam1-136",
+    "id": "seed-core-045",
     "term": "Copolymer: ABBAAB",
     "def": "random"
    },
    {
-    "id": "seed-exam1-137",
+    "id": "seed-core-046",
     "term": "Copolymer: A backbone with B side chains",
     "def": "graft"
    },
    {
-    "id": "seed-exam1-138",
+    "id": "seed-core-047",
     "term": "Chain architecture: chains tied together",
     "def": "cross-linked"
    },
    {
-    "id": "seed-exam1-139",
+    "id": "seed-core-048",
     "term": "Chain architecture: side branches off the main chain",
     "def": "branched"
    },
    {
-    "id": "seed-exam1-140",
+    "id": "seed-core-049",
     "term": "Softens when heated, re-melts",
     "def": "thermoplastic"
    },
    {
-    "id": "seed-exam1-141",
+    "id": "seed-core-050",
     "term": "Cross-linked, won't re-melt",
     "def": "thermoset"
    },
    {
-    "id": "seed-exam1-142",
+    "id": "seed-core-051",
     "term": "Stretches and snaps back",
     "def": "elastomer"
    },
    {
-    "id": "seed-exam1-143",
-    "term": "Recyclable by melting: thermoplastic or thermoset?",
-    "def": "thermoplastic"
-   },
-   {
-    "id": "seed-exam1-144",
+    "id": "seed-core-052",
     "term": "Ordered, tightly packed chains",
     "def": "crystalline"
    },
    {
-    "id": "seed-exam1-145",
+    "id": "seed-core-053",
     "term": "Disordered chains",
     "def": "amorphous"
    },
    {
-    "id": "seed-exam1-146",
+    "id": "seed-core-054",
     "term": "Has both crystalline and amorphous regions",
     "def": "semi-crystalline"
    },
    {
-    "id": "seed-exam1-147",
-    "term": "Most polymers are",
-    "def": "semi-crystalline"
-   },
-   {
-    "id": "seed-exam1-148",
-    "term": "Milk jug polyethylene",
-    "def": "HDPE"
-   },
-   {
-    "id": "seed-exam1-149",
-    "term": "Plastic bag polyethylene",
-    "def": "LDPE"
-   },
-   {
-    "id": "seed-exam1-150",
+    "id": "seed-core-055",
     "term": "More branched: HDPE or LDPE?",
     "def": "LDPE"
    },
    {
-    "id": "seed-exam1-151",
+    "id": "seed-core-056",
     "term": "More crystalline: HDPE or LDPE?",
     "def": "HDPE"
    },
    {
-    "id": "seed-exam1-152",
-    "term": "Branching makes crystallinity go",
-    "def": "down"
-   },
-   {
-    "id": "seed-exam1-153",
-    "term": "Lab 1 cross-linked polymer",
-    "def": "poly(acrylic acid)"
-   },
-   {
-    "id": "seed-exam1-154",
+    "id": "seed-core-057",
     "term": "Cross-linked polymer in solvent or base",
     "def": "swells"
    },
    {
-    "id": "seed-exam1-155",
+    "id": "seed-core-058",
     "term": "Repeat-unit molar mass: count atoms where?",
     "def": "inside the brackets"
    },
    {
-    "id": "seed-exam1-156",
-    "term": "Atomic mass of C",
-    "def": "12.01"
-   },
-   {
-    "id": "seed-exam1-157",
-    "term": "Atomic mass of H",
-    "def": "1.008"
-   },
-   {
-    "id": "seed-exam1-158",
-    "term": "Atomic mass of N",
-    "def": "14.01"
-   },
-   {
-    "id": "seed-exam1-159",
-    "term": "Atomic mass of O",
-    "def": "16.00"
-   },
-   {
-    "id": "seed-exam1-160",
-    "term": "DP stands for",
-    "def": "degree of polymerization"
-   },
-   {
-    "id": "seed-exam1-161",
+    "id": "seed-core-059",
     "term": "DP = polymer molar mass divided by the",
     "def": "repeat-unit molar mass"
    },
    {
-    "id": "seed-exam1-162",
-    "term": "Polymer molar mass = DP times the",
-    "def": "repeat-unit molar mass"
-   },
-   {
-    "id": "seed-exam1-163",
+    "id": "seed-core-060",
     "term": "DP is rounded to a",
     "def": "whole number"
    },
    {
-    "id": "seed-exam1-164",
+    "id": "seed-core-061",
     "term": "DP of 50,000 g/mol polyethylene",
     "def": "1783"
    },
    {
-    "id": "seed-exam1-165",
-    "term": "DP of 20,000 g/mol PET",
-    "def": "104"
-   },
-   {
-    "id": "seed-exam1-166",
+    "id": "seed-core-062",
     "term": "Tg stands for",
     "def": "glass transition temperature"
    },
    {
-    "id": "seed-exam1-167",
-    "term": "Tm stands for",
-    "def": "melting temperature"
-   },
-   {
-    "id": "seed-exam1-168",
+    "id": "seed-core-063",
     "term": "Glassy to rubbery",
     "def": "Tg"
    },
    {
-    "id": "seed-exam1-169",
+    "id": "seed-core-064",
     "term": "Crystalline regions melt",
     "def": "Tm"
    },
    {
-    "id": "seed-exam1-170",
+    "id": "seed-core-065",
     "term": "Tg governs which regions?",
     "def": "amorphous"
    },
    {
-    "id": "seed-exam1-171",
+    "id": "seed-core-066",
     "term": "Tm governs which regions?",
     "def": "crystalline"
    },
    {
-    "id": "seed-exam1-172",
-    "term": "Dry spaghetti: above or below Tg?",
-    "def": "below"
-   },
-   {
-    "id": "seed-exam1-173",
-    "term": "Cooked spaghetti: above or below Tg?",
-    "def": "above"
-   },
-   {
-    "id": "seed-exam1-174",
+    "id": "seed-core-067",
     "term": "Fully amorphous polymer lacks which transition?",
     "def": "Tm"
    },
    {
-    "id": "seed-exam1-175",
+    "id": "seed-core-068",
     "term": "Example polymer with Tg but no Tm",
     "def": "polystyrene"
    },
    {
-    "id": "seed-exam1-176",
+    "id": "seed-core-069",
     "term": "Dye polyester above or below Tg?",
     "def": "above"
    },
-   {
-    "id": "seed-exam1-177",
-    "term": "Free-radical mechanism on the exam?",
-    "def": "no"
-   }
-  ]
- },
- {
-  "id": "seed-pcc101-structures",
-  "version": 2,
-  "name": "PCC 101 Structures",
-  "folder": "PCC 101",
-  "cards": [
    {
     "id": "seed-struct-01",
     "term": "Structure 01: Name this molecule",
@@ -1098,5 +550,899 @@ window.SEED_DECKS = [
     "termImg": "decks/pcc-structures/33.png"
    }
   ]
+ },
+ {
+  "id": "seed-pcc101-exam1-full",
+  "version": 1,
+  "name": "PCC 101 Exam 1 (all 177 text cards)",
+  "folder": "PCC 101",
+  "cards": [
+   {
+    "id": "seed-full-001",
+    "term": "PCC studies the chemistry of which two things?",
+    "def": "polymers and colorants"
+   },
+   {
+    "id": "seed-full-002",
+    "term": "Colorants include which two things?",
+    "def": "dyes and pigments"
+   },
+   {
+    "id": "seed-full-003",
+    "term": "Main branch of chemistry PCC falls under",
+    "def": "organic"
+   },
+   {
+    "id": "seed-full-004",
+    "term": "Branch: synthesizing an azo dye",
+    "def": "organic"
+   },
+   {
+    "id": "seed-full-005",
+    "term": "Branch: copper ions that improve wash fastness",
+    "def": "inorganic"
+   },
+   {
+    "id": "seed-full-006",
+    "term": "Branch: HPLC to check dye purity",
+    "def": "analytical"
+   },
+   {
+    "id": "seed-full-007",
+    "term": "Branch: Tg and chain mobility",
+    "def": "physical"
+   },
+   {
+    "id": "seed-full-008",
+    "term": "Branch: polymers for drug delivery",
+    "def": "biochemistry"
+   },
+   {
+    "id": "seed-full-009",
+    "term": "Atomic number equals the number of",
+    "def": "protons"
+   },
+   {
+    "id": "seed-full-010",
+    "term": "Neutrons =",
+    "def": "mass minus protons"
+   },
+   {
+    "id": "seed-full-011",
+    "term": "Round the mass before subtracting?",
+    "def": "yes"
+   },
+   {
+    "id": "seed-full-012",
+    "term": "Electrons in a neutral atom equal the number of",
+    "def": "protons"
+   },
+   {
+    "id": "seed-full-013",
+    "term": "Element with 17 protons",
+    "def": "chlorine"
+   },
+   {
+    "id": "seed-full-014",
+    "term": "Neutrons in chlorine (mass 35)",
+    "def": "18"
+   },
+   {
+    "id": "seed-full-015",
+    "term": "Neutrons in aluminum (Z 13, mass 26.98)",
+    "def": "14"
+   },
+   {
+    "id": "seed-full-016",
+    "term": "Neutrons in iron (Z 26, mass 55.85)",
+    "def": "30"
+   },
+   {
+    "id": "seed-full-017",
+    "term": "2 or more atoms bonded together",
+    "def": "molecule"
+   },
+   {
+    "id": "seed-full-018",
+    "term": "Atoms of 2 or more different elements bonded",
+    "def": "compound"
+   },
+   {
+    "id": "seed-full-019",
+    "term": "NaCl: molecule, compound, or both?",
+    "def": "compound"
+   },
+   {
+    "id": "seed-full-020",
+    "term": "O2: molecule, compound, or both?",
+    "def": "molecule"
+   },
+   {
+    "id": "seed-full-021",
+    "term": "A dye: molecule, compound, or both?",
+    "def": "both"
+   },
+   {
+    "id": "seed-full-022",
+    "term": "CO2: best single term",
+    "def": "compound"
+   },
+   {
+    "id": "seed-full-023",
+    "term": "Why is NaCl not a molecule?",
+    "def": "ionic lattice"
+   },
+   {
+    "id": "seed-full-024",
+    "term": "Shell capacities in this class",
+    "def": "2, 8, 8"
+   },
+   {
+    "id": "seed-full-025",
+    "term": "Valence electrons for groups 13 to 18",
+    "def": "group minus 10"
+   },
+   {
+    "id": "seed-full-026",
+    "term": "Valence electrons: carbon",
+    "def": "4"
+   },
+   {
+    "id": "seed-full-027",
+    "term": "Valence electrons: nitrogen",
+    "def": "5"
+   },
+   {
+    "id": "seed-full-028",
+    "term": "Valence electrons: oxygen",
+    "def": "6"
+   },
+   {
+    "id": "seed-full-029",
+    "term": "Valence electrons: chlorine",
+    "def": "7"
+   },
+   {
+    "id": "seed-full-030",
+    "term": "Valence electrons: hydrogen",
+    "def": "1"
+   },
+   {
+    "id": "seed-full-031",
+    "term": "Unreactive elements with full shells",
+    "def": "noble gases"
+   },
+   {
+    "id": "seed-full-032",
+    "term": "Most likely to bond: He, Ne, Na, or Ar",
+    "def": "Na"
+   },
+   {
+    "id": "seed-full-033",
+    "term": "Why sodium bonds easily",
+    "def": "1 valence electron"
+   },
+   {
+    "id": "seed-full-034",
+    "term": "Atoms bond to reach how many valence electrons?",
+    "def": "8"
+   },
+   {
+    "id": "seed-full-035",
+    "term": "Name of the rule for 8 valence electrons",
+    "def": "octet rule"
+   },
+   {
+    "id": "seed-full-036",
+    "term": "Strong bonds: primary or secondary?",
+    "def": "primary"
+   },
+   {
+    "id": "seed-full-037",
+    "term": "Hydrogen bonds: primary or secondary?",
+    "def": "secondary"
+   },
+   {
+    "id": "seed-full-038",
+    "term": "Two kinds of primary bonds",
+    "def": "ionic and covalent"
+   },
+   {
+    "id": "seed-full-039",
+    "term": "Electrons transferred",
+    "def": "ionic"
+   },
+   {
+    "id": "seed-full-040",
+    "term": "Electrons shared",
+    "def": "covalent"
+   },
+   {
+    "id": "seed-full-041",
+    "term": "Ionic bonds form between a metal and a",
+    "def": "nonmetal"
+   },
+   {
+    "id": "seed-full-042",
+    "term": "Bonds in a polymer backbone",
+    "def": "covalent"
+   },
+   {
+    "id": "seed-full-043",
+    "term": "Acid dye bonds to nylon's amine end by what bond?",
+    "def": "ionic"
+   },
+   {
+    "id": "seed-full-044",
+    "term": "Electronegativity increases toward which element?",
+    "def": "fluorine"
+   },
+   {
+    "id": "seed-full-045",
+    "term": "Electronegativity direction on the table",
+    "def": "up and right"
+   },
+   {
+    "id": "seed-full-046",
+    "term": "Highest electronegativity",
+    "def": "fluorine"
+   },
+   {
+    "id": "seed-full-047",
+    "term": "Rank F, O, C, Na by electronegativity",
+    "def": "F O C Na"
+   },
+   {
+    "id": "seed-full-048",
+    "term": "Bonds carbon always forms",
+    "def": "4"
+   },
+   {
+    "id": "seed-full-049",
+    "term": "Lone pairs on carbon",
+    "def": "0"
+   },
+   {
+    "id": "seed-full-050",
+    "term": "Lone pairs on oxygen",
+    "def": "2"
+   },
+   {
+    "id": "seed-full-051",
+    "term": "Lone pairs on nitrogen",
+    "def": "1"
+   },
+   {
+    "id": "seed-full-052",
+    "term": "Lone pairs on water's O",
+    "def": "2"
+   },
+   {
+    "id": "seed-full-053",
+    "term": "Lone pairs on ammonia's N",
+    "def": "1"
+   },
+   {
+    "id": "seed-full-054",
+    "term": "Total lone pairs in O2",
+    "def": "4"
+   },
+   {
+    "id": "seed-full-055",
+    "term": "Bond between the two O's in O2",
+    "def": "double"
+   },
+   {
+    "id": "seed-full-056",
+    "term": "Skeletal structure: a carbon sits at every",
+    "def": "corner and end"
+   },
+   {
+    "id": "seed-full-057",
+    "term": "Skeletal structure: which atoms are hidden?",
+    "def": "hydrogens"
+   },
+   {
+    "id": "seed-full-058",
+    "term": "Carbons in a zigzag of 4 lines",
+    "def": "5"
+   },
+   {
+    "id": "seed-full-059",
+    "term": "Carbons in a zigzag of n lines",
+    "def": "n + 1"
+   },
+   {
+    "id": "seed-full-060",
+    "term": "Hidden H on each bare benzene carbon",
+    "def": "1"
+   },
+   {
+    "id": "seed-full-061",
+    "term": "Benzene formula",
+    "def": "C6H6"
+   },
+   {
+    "id": "seed-full-062",
+    "term": "Phenol (benzene + OH) formula",
+    "def": "C6H6O"
+   },
+   {
+    "id": "seed-full-063",
+    "term": "Toluene (benzene + CH3) formula",
+    "def": "C7H8"
+   },
+   {
+    "id": "seed-full-064",
+    "term": "Pentane formula",
+    "def": "C5H12"
+   },
+   {
+    "id": "seed-full-065",
+    "term": "Hexane formula",
+    "def": "C6H14"
+   },
+   {
+    "id": "seed-full-066",
+    "term": "All single C-C bonds",
+    "def": "alkane"
+   },
+   {
+    "id": "seed-full-067",
+    "term": "Has a C=C double bond",
+    "def": "alkene"
+   },
+   {
+    "id": "seed-full-068",
+    "term": "Has a C≡C triple bond",
+    "def": "alkyne"
+   },
+   {
+    "id": "seed-full-069",
+    "term": "Ethane: alkane, alkene, or alkyne?",
+    "def": "alkane"
+   },
+   {
+    "id": "seed-full-070",
+    "term": "Ethylene: alkane, alkene, or alkyne?",
+    "def": "alkene"
+   },
+   {
+    "id": "seed-full-071",
+    "term": "Acetylene: alkane, alkene, or alkyne?",
+    "def": "alkyne"
+   },
+   {
+    "id": "seed-full-072",
+    "term": "Ethane formula",
+    "def": "C2H6"
+   },
+   {
+    "id": "seed-full-073",
+    "term": "Ethylene formula",
+    "def": "C2H4"
+   },
+   {
+    "id": "seed-full-074",
+    "term": "Acetylene formula",
+    "def": "C2H2"
+   },
+   {
+    "id": "seed-full-075",
+    "term": "All single bonds: saturated or unsaturated?",
+    "def": "saturated"
+   },
+   {
+    "id": "seed-full-076",
+    "term": "Has a double bond: saturated or unsaturated?",
+    "def": "unsaturated"
+   },
+   {
+    "id": "seed-full-077",
+    "term": "Who proposed the Macromolecular Hypothesis?",
+    "def": "Staudinger"
+   },
+   {
+    "id": "seed-full-078",
+    "term": "Macromolecular Hypothesis: repeat units joined by what bonds?",
+    "def": "covalent"
+   },
+   {
+    "id": "seed-full-079",
+    "term": "Before Staudinger: polymers were clumps held by what forces?",
+    "def": "weak forces"
+   },
+   {
+    "id": "seed-full-080",
+    "term": "Staudinger equation: memorize it?",
+    "def": "no"
+   },
+   {
+    "id": "seed-full-081",
+    "term": "Units in a monomer",
+    "def": "1"
+   },
+   {
+    "id": "seed-full-082",
+    "term": "Units in an oligomer",
+    "def": "2 to 10"
+   },
+   {
+    "id": "seed-full-083",
+    "term": "Units in a polymer",
+    "def": "thousands"
+   },
+   {
+    "id": "seed-full-084",
+    "term": "The piece in brackets that repeats n times",
+    "def": "repeat unit"
+   },
+   {
+    "id": "seed-full-085",
+    "term": "Addition monomer template",
+    "def": "H2C=CHR"
+   },
+   {
+    "id": "seed-full-086",
+    "term": "Monomer of polyethylene",
+    "def": "ethylene"
+   },
+   {
+    "id": "seed-full-087",
+    "term": "Monomer of polypropylene",
+    "def": "propylene"
+   },
+   {
+    "id": "seed-full-088",
+    "term": "Monomer of polystyrene",
+    "def": "styrene"
+   },
+   {
+    "id": "seed-full-089",
+    "term": "Monomer of PVC",
+    "def": "vinyl chloride"
+   },
+   {
+    "id": "seed-full-090",
+    "term": "R group of ethylene",
+    "def": "H"
+   },
+   {
+    "id": "seed-full-091",
+    "term": "R group of propylene",
+    "def": "CH3"
+   },
+   {
+    "id": "seed-full-092",
+    "term": "R group of styrene",
+    "def": "benzene ring"
+   },
+   {
+    "id": "seed-full-093",
+    "term": "R group of vinyl chloride",
+    "def": "Cl"
+   },
+   {
+    "id": "seed-full-094",
+    "term": "Polymer made from H2C=CHCl",
+    "def": "PVC"
+   },
+   {
+    "id": "seed-full-095",
+    "term": "PE repeat unit formula",
+    "def": "C2H4"
+   },
+   {
+    "id": "seed-full-096",
+    "term": "PP repeat unit formula",
+    "def": "C3H6"
+   },
+   {
+    "id": "seed-full-097",
+    "term": "PS repeat unit formula",
+    "def": "C8H8"
+   },
+   {
+    "id": "seed-full-098",
+    "term": "In addition polymerization, what opens up?",
+    "def": "the double bond"
+   },
+   {
+    "id": "seed-full-099",
+    "term": "Addition polymerization: anything lost?",
+    "def": "no"
+   },
+   {
+    "id": "seed-full-100",
+    "term": "Condensation polymerization loses what?",
+    "def": "water"
+   },
+   {
+    "id": "seed-full-101",
+    "term": "Nylon-6,6: addition or condensation?",
+    "def": "condensation"
+   },
+   {
+    "id": "seed-full-102",
+    "term": "PET: addition or condensation?",
+    "def": "condensation"
+   },
+   {
+    "id": "seed-full-103",
+    "term": "Nylon-6,6 amine monomer",
+    "def": "1,6-diaminohexane"
+   },
+   {
+    "id": "seed-full-104",
+    "term": "Nylon-6,6 acid monomer",
+    "def": "adipic acid"
+   },
+   {
+    "id": "seed-full-105",
+    "term": "Carbons in each nylon-6,6 monomer",
+    "def": "6"
+   },
+   {
+    "id": "seed-full-106",
+    "term": "Nylon-6,6 link type",
+    "def": "amide"
+   },
+   {
+    "id": "seed-full-107",
+    "term": "Amide link atoms",
+    "def": "C(=O)-NH"
+   },
+   {
+    "id": "seed-full-108",
+    "term": "Nylon-6,6 repeat unit formula",
+    "def": "C12H22N2O2"
+   },
+   {
+    "id": "seed-full-109",
+    "term": "Nylon-6,6 repeat unit molar mass",
+    "def": "226.32"
+   },
+   {
+    "id": "seed-full-110",
+    "term": "PET acid monomer",
+    "def": "terephthalic acid"
+   },
+   {
+    "id": "seed-full-111",
+    "term": "PET alcohol monomer",
+    "def": "ethylene glycol"
+   },
+   {
+    "id": "seed-full-112",
+    "term": "PET link type",
+    "def": "ester"
+   },
+   {
+    "id": "seed-full-113",
+    "term": "Ester link atoms",
+    "def": "C(=O)-O"
+   },
+   {
+    "id": "seed-full-114",
+    "term": "PET repeat unit formula",
+    "def": "C10H8O4"
+   },
+   {
+    "id": "seed-full-115",
+    "term": "PET repeat unit molar mass",
+    "def": "192.16"
+   },
+   {
+    "id": "seed-full-116",
+    "term": "Nylon-6,6: homopolymer or heteropolymer?",
+    "def": "homopolymer"
+   },
+   {
+    "id": "seed-full-117",
+    "term": "Number of classification categories",
+    "def": "6"
+   },
+   {
+    "id": "seed-full-118",
+    "term": "Classification category: natural vs synthetic",
+    "def": "origin"
+   },
+   {
+    "id": "seed-full-119",
+    "term": "Classification category: homo vs hetero",
+    "def": "monomer composition"
+   },
+   {
+    "id": "seed-full-120",
+    "term": "Classification category: linear vs branched",
+    "def": "chain architecture"
+   },
+   {
+    "id": "seed-full-121",
+    "term": "Classification category: random vs block",
+    "def": "monomer arrangement"
+   },
+   {
+    "id": "seed-full-122",
+    "term": "Classification category: thermoplastic vs thermoset",
+    "def": "material behavior"
+   },
+   {
+    "id": "seed-full-123",
+    "term": "Classification category: crystalline vs amorphous",
+    "def": "crystallinity"
+   },
+   {
+    "id": "seed-full-124",
+    "term": "Cellulose origin",
+    "def": "natural"
+   },
+   {
+    "id": "seed-full-125",
+    "term": "Protein origin",
+    "def": "natural"
+   },
+   {
+    "id": "seed-full-126",
+    "term": "Polyethylene origin",
+    "def": "synthetic"
+   },
+   {
+    "id": "seed-full-127",
+    "term": "Nylon origin",
+    "def": "synthetic"
+   },
+   {
+    "id": "seed-full-128",
+    "term": "Rayon origin",
+    "def": "semi-synthetic"
+   },
+   {
+    "id": "seed-full-129",
+    "term": "Cellulose acetate origin",
+    "def": "semi-synthetic"
+   },
+   {
+    "id": "seed-full-130",
+    "term": "Rayon is made by modifying what?",
+    "def": "cellulose"
+   },
+   {
+    "id": "seed-full-131",
+    "term": "One type of repeat unit",
+    "def": "homopolymer"
+   },
+   {
+    "id": "seed-full-132",
+    "term": "Two or more types of repeat unit",
+    "def": "heteropolymer"
+   },
+   {
+    "id": "seed-full-133",
+    "term": "A protein is a heteropolymer and a",
+    "def": "biopolymer"
+   },
+   {
+    "id": "seed-full-134",
+    "term": "Copolymer: ABABAB",
+    "def": "alternating"
+   },
+   {
+    "id": "seed-full-135",
+    "term": "Copolymer: AAABBB",
+    "def": "block"
+   },
+   {
+    "id": "seed-full-136",
+    "term": "Copolymer: ABBAAB",
+    "def": "random"
+   },
+   {
+    "id": "seed-full-137",
+    "term": "Copolymer: A backbone with B side chains",
+    "def": "graft"
+   },
+   {
+    "id": "seed-full-138",
+    "term": "Chain architecture: chains tied together",
+    "def": "cross-linked"
+   },
+   {
+    "id": "seed-full-139",
+    "term": "Chain architecture: side branches off the main chain",
+    "def": "branched"
+   },
+   {
+    "id": "seed-full-140",
+    "term": "Softens when heated, re-melts",
+    "def": "thermoplastic"
+   },
+   {
+    "id": "seed-full-141",
+    "term": "Cross-linked, won't re-melt",
+    "def": "thermoset"
+   },
+   {
+    "id": "seed-full-142",
+    "term": "Stretches and snaps back",
+    "def": "elastomer"
+   },
+   {
+    "id": "seed-full-143",
+    "term": "Recyclable by melting: thermoplastic or thermoset?",
+    "def": "thermoplastic"
+   },
+   {
+    "id": "seed-full-144",
+    "term": "Ordered, tightly packed chains",
+    "def": "crystalline"
+   },
+   {
+    "id": "seed-full-145",
+    "term": "Disordered chains",
+    "def": "amorphous"
+   },
+   {
+    "id": "seed-full-146",
+    "term": "Has both crystalline and amorphous regions",
+    "def": "semi-crystalline"
+   },
+   {
+    "id": "seed-full-147",
+    "term": "Most polymers are",
+    "def": "semi-crystalline"
+   },
+   {
+    "id": "seed-full-148",
+    "term": "Milk jug polyethylene",
+    "def": "HDPE"
+   },
+   {
+    "id": "seed-full-149",
+    "term": "Plastic bag polyethylene",
+    "def": "LDPE"
+   },
+   {
+    "id": "seed-full-150",
+    "term": "More branched: HDPE or LDPE?",
+    "def": "LDPE"
+   },
+   {
+    "id": "seed-full-151",
+    "term": "More crystalline: HDPE or LDPE?",
+    "def": "HDPE"
+   },
+   {
+    "id": "seed-full-152",
+    "term": "Branching makes crystallinity go",
+    "def": "down"
+   },
+   {
+    "id": "seed-full-153",
+    "term": "Lab 1 cross-linked polymer",
+    "def": "poly(acrylic acid)"
+   },
+   {
+    "id": "seed-full-154",
+    "term": "Cross-linked polymer in solvent or base",
+    "def": "swells"
+   },
+   {
+    "id": "seed-full-155",
+    "term": "Repeat-unit molar mass: count atoms where?",
+    "def": "inside the brackets"
+   },
+   {
+    "id": "seed-full-156",
+    "term": "Atomic mass of C",
+    "def": "12.01"
+   },
+   {
+    "id": "seed-full-157",
+    "term": "Atomic mass of H",
+    "def": "1.008"
+   },
+   {
+    "id": "seed-full-158",
+    "term": "Atomic mass of N",
+    "def": "14.01"
+   },
+   {
+    "id": "seed-full-159",
+    "term": "Atomic mass of O",
+    "def": "16.00"
+   },
+   {
+    "id": "seed-full-160",
+    "term": "DP stands for",
+    "def": "degree of polymerization"
+   },
+   {
+    "id": "seed-full-161",
+    "term": "DP = polymer molar mass divided by the",
+    "def": "repeat-unit molar mass"
+   },
+   {
+    "id": "seed-full-162",
+    "term": "Polymer molar mass = DP times the",
+    "def": "repeat-unit molar mass"
+   },
+   {
+    "id": "seed-full-163",
+    "term": "DP is rounded to a",
+    "def": "whole number"
+   },
+   {
+    "id": "seed-full-164",
+    "term": "DP of 50,000 g/mol polyethylene",
+    "def": "1783"
+   },
+   {
+    "id": "seed-full-165",
+    "term": "DP of 20,000 g/mol PET",
+    "def": "104"
+   },
+   {
+    "id": "seed-full-166",
+    "term": "Tg stands for",
+    "def": "glass transition temperature"
+   },
+   {
+    "id": "seed-full-167",
+    "term": "Tm stands for",
+    "def": "melting temperature"
+   },
+   {
+    "id": "seed-full-168",
+    "term": "Glassy to rubbery",
+    "def": "Tg"
+   },
+   {
+    "id": "seed-full-169",
+    "term": "Crystalline regions melt",
+    "def": "Tm"
+   },
+   {
+    "id": "seed-full-170",
+    "term": "Tg governs which regions?",
+    "def": "amorphous"
+   },
+   {
+    "id": "seed-full-171",
+    "term": "Tm governs which regions?",
+    "def": "crystalline"
+   },
+   {
+    "id": "seed-full-172",
+    "term": "Dry spaghetti: above or below Tg?",
+    "def": "below"
+   },
+   {
+    "id": "seed-full-173",
+    "term": "Cooked spaghetti: above or below Tg?",
+    "def": "above"
+   },
+   {
+    "id": "seed-full-174",
+    "term": "Fully amorphous polymer lacks which transition?",
+    "def": "Tm"
+   },
+   {
+    "id": "seed-full-175",
+    "term": "Example polymer with Tg but no Tm",
+    "def": "polystyrene"
+   },
+   {
+    "id": "seed-full-176",
+    "term": "Dye polyester above or below Tg?",
+    "def": "above"
+   },
+   {
+    "id": "seed-full-177",
+    "term": "Free-radical mechanism on the exam?",
+    "def": "no"
+   }
+  ]
  }
 ];
+window.SEED_RETIRED = ["seed-pcc101-structures"];

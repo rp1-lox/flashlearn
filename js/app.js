@@ -36,13 +36,33 @@
     return d;
   }
 
+  // Adds built-in decks on first run. When a built-in deck ships a higher
+  // `version`, the copy in storage is replaced (cards and progress reset).
+  // A built-in deck the user deleted is not re-added.
   function seed() {
-    if (db.seeded) return;
+    var changed = false;
     (window.SEED_DECKS || []).forEach(function (s) {
-      if (!db.decks.some(function (d) { return d.id === s.id; })) db.decks.push(fixDeck(JSON.parse(JSON.stringify(s))));
+      var version = s.version || 1;
+      var existing = getDeck(s.id);
+      if (!existing) {
+        if (db.seeded) return;
+        var fresh = fixDeck(JSON.parse(JSON.stringify(s)));
+        fresh.seedVersion = version;
+        db.decks.push(fresh);
+        changed = true;
+      } else if ((existing.seedVersion || 1) < version) {
+        var copy = fixDeck(JSON.parse(JSON.stringify(s)));
+        existing.name = copy.name;
+        existing.cards = copy.cards;
+        existing.learn = copy.learn;
+        existing.cram = null;
+        existing.seedVersion = version;
+        existing.updated = Date.now();
+        changed = true;
+      }
     });
-    db.seeded = true;
-    save();
+    if (!db.seeded) { db.seeded = true; changed = true; }
+    if (changed) save();
   }
   db.decks = db.decks.map(fixDeck);
   seed();

@@ -1,0 +1,102 @@
+PCC (definition)	Applied chemistry of the composition, structure, properties, transformations, and applications of polymers and colorants (dyes and pigments)
+5 branches of chemistry + PCC example	Organic: azo dye synthesis. Inorganic: metal ions (copper) for wash fastness. Analytical: HPLC dye purity. Physical: Tg, chain mobility. Biochemistry: drug-delivery polymers
+Main branch PCC falls under	Organic chemistry (carbon-based)
+Atomic number =	Number of protons
+Neutrons =	Mass (rounded to a whole number) minus protons
+Electrons in a neutral atom =	Number of protons
+17 protons, mass 35	Chlorine. 18 neutrons, 17 electrons
+Aluminum (Z = 13, mass 26.98)	13 protons, 14 neutrons, 13 electrons
+Molecule	2 or more atoms bonded together (O2, H2O)
+Compound	Atoms of 2 or more DIFFERENT elements bonded together
+NaCl: molecule or compound?	Compound, NOT a molecule (ionic lattice, no discrete unit)
+O2: molecule or compound?	Molecule, NOT a compound (one element)
+CO2: best term?	Compound (it is also a molecule)
+Dye: molecule or compound?	Both (discrete covalent unit, several elements)
+Shell capacities (this class)	2, 8, 8
+Valence electrons (groups 13 to 18)	Group number minus 10
+Valence electrons: C, N, O, Cl, H	C 4, N 5, O 6, Cl 7, H 1
+Inert elements	Noble gases: full valence shell (octet; He has 2). Do not bond
+Reactive elements	Incomplete valence shell: alkali metals (Na), halogens (Cl, F)
+Most likely to bond: He, Ne, Na, Ar?	Na: 1 valence electron, shell far from full
+Octet rule	Atoms bond to reach 8 valence electrons (H and He: 2)
+Primary bonding	Chemical bonds, strong: ionic and covalent
+Secondary bonding	Physical interactions, weak: hydrogen bonds, van der Waals. Wash out easily
+Ionic bond	Electrons TRANSFERRED; metal + nonmetal; e.g. NaCl
+Covalent bond	Electrons SHARED; e.g. C-H, polymer backbones
+PCC ionic bond example	Acid dye (Acid Orange 7) bonds to nylon's protonated amine end (-NH3+)
+Electronegativity trend	Increases UP and to the RIGHT (toward fluorine). F highest, metals lowest
+Rank F, O, C, Na by electronegativity	F > O > C > Na
+Carbon bonds and lone pairs	Always 4 bonds, no lone pairs
+Oxygen lone pairs	2 (two bonds + two lone pairs)
+Nitrogen lone pairs	1 (three bonds + one lone pair)
+Water Lewis structure	O in center, 2 H, 2 lone pairs on O
+Ammonia Lewis structure	N in center, 3 H, 1 lone pair on N
+O2 Lewis structure	O=O double bond, 2 lone pairs on each O (4 total)
+Skeletal structure rule	A carbon at every corner and line end. Hydrogens hidden: each C gets enough H to make 4 bonds. O and N written out
+Carbons in a zigzag of n line segments	n + 1 (count the points, not the lines)
+Hidden hydrogens on a benzene ring	Each ring carbon with nothing attached has 1 hidden H
+Benzene formula	C6H6
+Benzene with -OH (phenol)	C6H6O (5 ring H + 1 on the O)
+Benzene with -CH3 (toluene)	C7H8
+Benzene can be drawn 3 ways	Alternating single/double bonds; same with double bonds shifted (resonance); hexagon with a circle inside
+Alkane	All single C-C bonds; saturated; e.g. ethane C2H6
+Alkene	At least one C=C double bond; unsaturated; e.g. ethylene C2H4
+Alkyne	C≡C triple bond; unsaturated; e.g. acetylene C2H2
+Saturated vs unsaturated	Saturated = all single bonds. Unsaturated = has a double or triple bond
+Macromolecular Hypothesis	Polymers are long chains of repeat units held together by COVALENT bonds (Staudinger, Nobel Prize)
+What people believed before Staudinger	Polymers were clumps of small molecules held by weak forces (secondary bonding)
+Staudinger equation	Shown in class; NOT to memorize
+Macromolecule	A molecule with a very large number of atoms (high molecular weight): proteins, carbohydrates, nucleic acids, polymers
+Monomer	1 unit; the small molecule that links up
+Oligomer	2 to 10 repeat units
+Polymer	Thousands of repeat units, covalently bonded
+Repeat unit	The piece inside the brackets that repeats n times
+Addition monomer template	H2C=CHR (only R changes)
+Ethylene	H2C=CH2 (R = H) -> polyethylene (PE)
+Propylene	H2C=CH-CH3 (R = CH3) -> polypropylene (PP)
+Styrene	H2C=CH-benzene (R = benzene ring) -> polystyrene (PS, Styrofoam)
+Vinyl chloride	H2C=CHCl (R = Cl) -> polyvinyl chloride (PVC)
+PE repeat unit	-[CH2-CH2]n-  (C2H4, 28.05 g/mol)
+PP repeat unit	-[CH2-CH(CH3)]n-  (C3H6, 42.08 g/mol)
+PS repeat unit	-[CH2-CH(C6H5)]n-  (C8H8, 104.14 g/mol)
+PVC repeat unit	-[CH2-CHCl]n-
+What happens to the C=C in addition polymerization	The double bond opens; its electrons form single bonds to neighboring monomers (the backbone)
+Addition vs condensation polymerization	Addition: double bond opens, nothing lost. Condensation: a small molecule (water) is lost at each link
+Nylon-6,6 monomers	1,6-diaminohexane (H2N-(CH2)6-NH2) + adipic acid (HOOC-(CH2)4-COOH). Both have 6 carbons
+Nylon-6,6 link	Amide, C(=O)-NH. Water lost (condensation)
+Nylon-6,6 repeat unit	-[NH-(CH2)6-NH-C(=O)-(CH2)4-C(=O)]-  C12H22N2O2, 226.32 g/mol
+What does "6,6" mean	Both monomers have 6 carbons
+PET monomers	Terephthalic acid (benzene ring with COOH on opposite ends) + ethylene glycol (HO-CH2-CH2-OH)
+PET link	Ester, C(=O)-O. Water lost (condensation)
+PET repeat unit	-[O-CH2-CH2-O-C(=O)-C6H4-C(=O)]-  C10H8O4, 192.16 g/mol
+Build any condensation polymer	Acid + amine (or alcohol): remove OH from acid and H from the other, join the ends
+Nylon-6,6: homopolymer or heteropolymer?	Homopolymer: the fused diamine+diacid unit is one repeat unit that repeats identically
+6 classification categories	Origin, monomer composition, chain architecture, monomer arrangement, material behavior, crystallinity
+Origin classes	Natural, synthetic, semi-synthetic (modified)
+Natural polymer examples	Cellulose (cotton), proteins
+Synthetic polymer examples	Polyethylene, nylon-6,6, PET
+Semi-synthetic examples	Rayon, cellulose acetate / triacetate (chemically modified cellulose)
+Homopolymer	One type of repeat unit
+Heteropolymer	Two or more different repeat units (includes all copolymers)
+Protein classification	Heteropolymer and biopolymer (amino acids vary)
+4 copolymer arrangements	Random (ABAABB), alternating (ABAB), block (AAABBB), graft (A backbone with B side chains)
+Chain architecture classes	Linear, branched, cross-linked, network
+Thermoplastic	Softens when heated, hardens when cooled; can re-melt and recycle
+Thermoset	Cross-linked; will not re-melt
+Elastomer	Stretches and snaps back (rubbery)
+Crystalline region	Chains ordered and tightly packed
+Amorphous region	Chains disordered
+Semi-crystalline	Has both crystalline and amorphous regions (most polymers)
+HDPE vs LDPE	HDPE: linear, packs tightly, more crystalline, stiff (milk jug). LDPE: branched, packs poorly, less crystalline, floppy (plastic bag)
+Cross-linked polymer in base (Lab 1 poly(acrylic acid))	Swells but does not dissolve; chains tied together
+Repeat-unit molar mass	Add atomic masses of atoms INSIDE the brackets only (not end groups)
+Atomic masses (C, H, N, O, Cl)	C 12.01, H 1.008, N 14.01, O 16.00, Cl 35.45
+Degree of polymerization (DP)	DP = polymer molar mass / repeat-unit molar mass. Round to a whole number
+Polymer molar mass from DP	Molar mass = DP x repeat-unit molar mass
+PE sample 50,000 g/mol: DP?	50000 / 28.05 = 1783
+Tg (glass transition temperature)	Polymer goes from rigid/glassy to soft/rubbery. Governs AMORPHOUS regions
+Tm (melting temperature)	Crystalline regions melt and lose order. Governs CRYSTALLINE regions
+Tg spaghetti analogy	Dry spaghetti = below Tg (rigid). Cooked spaghetti = above Tg (flexible)
+Polymer with Tg but no Tm	A fully amorphous polymer, e.g. polystyrene
+Why dye polyester above Tg	Amorphous chains become mobile and open up so dye can get in
+Free-radical polymerization mechanism	NOT on the exam

@@ -1,0 +1,11 @@
+{
+  "name": "flashlearn",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Self-hosted Quizlet-style flashcards with Learn and Cram modes. No build step: open index.html.",
+  "scripts": {
+    "test": "node --test test/core.test.js",
+    "seed": "node tools/build-seed.js",
+    "serve": "python -m http.server 8000"
+  }
+}

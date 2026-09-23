@@ -1,0 +1,33 @@
+Structure 01 (add image 01.png): Name it. Count lone pairs.	Methane, CH₄. Carbon: 4 bonds, 0 lone pairs.
+Structure 02 (add image 02.png): Name it. Count lone pairs.	Water, H₂O. 2 lone pairs on O.
+Structure 03 (add image 03.png): Name it. Count lone pairs.	Ammonia, NH₃. 1 lone pair on N.
+Structure 04 (add image 04.png): Name it. Count lone pairs.	Oxygen gas, O₂. Double bond, 4 lone pairs total.
+Structure 05 (add image 05.png): Name it. Alkane, alkene, or alkyne?	Ethane, C₂H₆. Alkane (single bond, saturated).
+Structure 06 (add image 06.png): Name it. Alkane, alkene, or alkyne?	Ethylene, C₂H₄. Alkene (double bond, unsaturated). The monomer of polyethylene.
+Structure 07 (add image 07.png): Name it. Alkane, alkene, or alkyne?	Acetylene, C₂H₂. Alkyne (triple bond, unsaturated).
+Structure 08 (add image 08.png): Skeletal. How many C and H? Name it.	Ethane, C₂H₆. One line = two carbons (one at each end).
+Structure 09 (add image 09.png): Skeletal. How many C and H? Name it.	Ethylene, C₂H₄.
+Structure 10 (add image 10.png): Skeletal. How many C and H? Name it.	Acetylene, C₂H₂.
+Structure 11 (add image 11.png): Skeletal. Molecular formula?	Pentane, C₅H₁₂. 4 lines, 5 points. Ends get 3 H, middles 2 H.
+Structure 12 (add image 12.png): Skeletal. Molecular formula?	Hexane, C₆H₁₄. 5 lines, 6 points.
+Structure 13 (add image 13.png): Name it. Formula?	Benzene, C₆H₆. One hidden H on each carbon.
+Structure 14 (add image 14.png): Same molecule? Formula?	Yes, benzene again: the hexagon-with-circle drawing. C₆H₆.
+Structure 15 (add image 15.png): Name it. Formula? Count the hidden H.	Phenol, C₆H₆O. 5 ring H + 1 H on the O.
+Structure 16 (add image 16.png): Name it. Formula? Count the hidden H.	Toluene, C₇H₈. 5 ring H + 3 on CH₃.
+Structure 17 (add image 17.png): Monomer. Name it, its R group, and its polymer.	Ethylene. R = H. Makes polyethylene (PE).
+Structure 18 (add image 18.png): Monomer. Name it, its R group, and its polymer.	Propylene. R = CH₃ (methyl). Makes polypropylene (PP).
+Structure 19 (add image 19.png): Monomer. Name it, its R group, and its polymer.	Styrene. R = benzene ring. Makes polystyrene (PS, Styrofoam).
+Structure 20 (add image 20.png): Monomer you may not have seen. Name the polymer.	Vinyl chloride. R = Cl. Makes polyvinyl chloride (PVC).
+Structure 21 (add image 21.png): Repeat unit. Which polymer? Molar mass?	Polyethylene (PE). C₂H₄, 28.05 g/mol.
+Structure 22 (add image 22.png): Repeat unit. Which polymer? Molar mass?	Polypropylene (PP). C₃H₆, 42.08 g/mol.
+Structure 23 (add image 23.png): Repeat unit. Which polymer?	Polystyrene (PS). C₈H₈, 104.14 g/mol.
+Structure 24 (add image 24.png): Repeat unit. Which polymer?	Polyvinyl chloride (PVC).
+Structure 25 (add image 25.png): Skeletal repeat unit. Which polymer?	Polypropylene: zigzag backbone with a methyl branch on every other carbon.
+Structure 26 (add image 26.png): Monomer. Name it. Which polymer uses it?	1,6-diaminohexane (hexamethylenediamine). 6 carbons, an amine on each end. Half of nylon-6,6.
+Structure 27 (add image 27.png): Monomer. Name it. Which polymer uses it?	Adipic acid. 6 carbons, an acid on each end. The other half of nylon-6,6.
+Structure 28 (add image 28.png): Monomer. Name it. Which polymer uses it?	Terephthalic acid. Benzene ring with COOH on opposite ends. Half of PET.
+Structure 29 (add image 29.png): Monomer. Name it. Which polymer uses it?	Ethylene glycol. The other half of PET.
+Structure 30 (add image 30.png): Name this link. Which polymer?	Amide link. Nylon. Forms when acid + amine lose water.
+Structure 31 (add image 31.png): Name this link. Which polymer?	Ester link. PET (polyester). Forms when acid + alcohol lose water.
+Structure 32 (add image 32.png): Repeat unit. Which polymer? Its two monomers? What was lost?	Nylon-6,6. 1,6-diaminohexane + adipic acid. Water lost; amide links. C₁₂H₂₂N₂O₂, 226.32 g/mol.
+Structure 33 (add image 33.png): Repeat unit. Which polymer? Its two monomers? What was lost?	PET (polyethylene terephthalate, polyester). Ethylene glycol + terephthalic acid. Water lost; ester links. C₁₀H₈O₄, 192.16 g/mol.

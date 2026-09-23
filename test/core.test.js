@@ -356,12 +356,19 @@ test('cleanFakes drops fakes equal to the answer or graded correct', () => {
   assert.deepEqual(FL.cleanFakes(['CH4', 'C2H6'], 'CH₄').fakes, ['C2H6']);
 });
 
-test('buildChoices never offers a fake that grades as the answer', () => {
-  const card = { id: 'f', term: 'Q', def: 'methane', fakes: ['Methane', 'methan', 'ethane', 'propane', 'butane'] };
+test('buildChoices never offers a fake that is the answer', () => {
+  const card = { id: 'f', term: 'Q', def: 'methane', fakes: ['Methane', 'METHANE!', 'ethane', 'propane', 'butane'] };
   for (let i = 0; i < 20; i++) {
     const opts = FL.buildChoices(card, [card], 'def', 4, Math.random, {});
-    assert.equal(opts.filter((o) => FL.normalize(o.text).startsWith('methan')).length, 1);
+    assert.equal(opts.filter((o) => FL.normalize(o.text) === 'methane').length, 1);
   }
+});
+
+test('a one-letter-off fake is kept as a choice and graded wrong when typed', () => {
+  const r = FL.cleanFakes(['alkene', 'alkyne', 'Alkane'], 'alkane');
+  assert.deepEqual(r.fakes, ['alkene', 'alkyne']);
+  assert.equal(FL.grade('alkene', 'alkane', r.fakes).correct, false);
+  assert.equal(FL.grade('alkanne', 'alkane', r.fakes).correct, true);
 });
 
 // ---------- true / false ----------
@@ -515,4 +522,43 @@ test('grade: a typo that is as close to a known wrong answer is not accepted', (
   assert.equal(r.close, true);
   assert.equal(FL.grade('alkanne', 'alkane', ['alkene', 'alkyne']).correct, true);
   assert.equal(FL.grade('alkane', 'alkane', ['alkene']).correct, true);
+});
+
+// ---------- grading: typed the way a student types ----------
+test('grade accepts natural rewordings of the right answer', () => {
+  const ok = (g, a) => assert.equal(FL.grade(g, a).correct, true, g + ' for ' + a);
+  ok('colorants and polymers', 'polymers and colorants');   // list order
+  ok('covalent and ionic', 'ionic and covalent');
+  ok('double bond', 'the double bond');                     // articles
+  ok('up and to the right', 'up and right');                // filler words
+  ok('one valence electron', '1 valence electron');         // number words
+  ok('zero', '0');
+  ok('sodium', 'Na');                                       // element names
+  ok('chlorine', 'Cl');
+  ok('hydrogen', 'H');
+  ok('2-10', '2 to 10');                                    // ranges
+  ok('226', '226.32');                                      // rounding
+  ok('16', '16.00');
+  ok('1,783', '1783');
+  ok('semisynthetic', 'semi-synthetic');                    // spacing
+  ok('crosslinked', 'cross-linked');
+  ok('polyacrylic acid', 'poly(acrylic acid)');
+  ok('conh', 'C(=O)-NH');
+  ok('h2c=chr', 'H2C=CHR');
+  ok('hydrogen', 'hydrogens');                              // plurals
+  ok('n+1', 'n + 1');
+  ok('2 8 8', '2, 8, 8');
+});
+
+test('grade rejects answers that only look close', () => {
+  const no = (g, a) => assert.equal(FL.grade(g, a).correct, false, g + ' for ' + a);
+  no('n - 1', 'n + 1');
+  no('F C O Na', 'F O C Na');            // ranking order matters
+  no('poly', 'poly(acrylic acid)');     // parentheses in the answer itself are kept
+  no('C NH', 'C(=O)-NH');
+  no('227', '226.32');
+  no('17', '16.00');
+  no('1782', '1783');
+  no('K', 'Na');
+  no('2 8 18', '2, 8, 8');
 });

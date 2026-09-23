@@ -49,8 +49,8 @@ const structures = FL.parseImport(read('pcc101-structures.txt'), '	').map((c, i)
 // Bump a deck's version whenever its cards change, so browsers that already
 // have the old copy pick up the new cards (progress on unchanged cards is kept).
 const seed = [
-  { id: 'seed-pcc101-exam1', version: 4, name: 'PCC 101 Exam 1', folder: 'PCC 101', cards: core.concat(structures) },
-  { id: 'seed-pcc101-exam1-full', version: 2, name: 'PCC 101 Exam 1 (all 177 text cards)', folder: 'PCC 101', cards: full },
+  { id: 'seed-pcc101-exam1', version: 5, name: 'PCC 101 Exam 1', folder: 'PCC 101', cards: core.concat(structures) },
+  { id: 'seed-pcc101-exam1-full', version: 3, name: 'PCC 101 Exam 1 (all 177 text cards)', folder: 'PCC 101', cards: full },
 ];
 
 // Built-in decks that no longer ship. Removed from storage if still present.

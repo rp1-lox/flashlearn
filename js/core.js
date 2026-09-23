@@ -82,10 +82,73 @@
     s = s.toLowerCase()
       .replace(/[→⟶]/g, ' to ')
       .replace(/&/g, ' and ')
-      .replace(/[^\p{L}\p{N}\s]/gu, ' ')
+      .replace(/\+/g, ' plus ')                       // "n + 1" must not equal "n - 1"
+      .replace(/[×*]/g, ' times ')
+      .replace(/(\d),(\d{3})(?!\d)/g, '$1$2')          // 1,783 -> 1783 (but "2,8,8" stays a list)
+      .replace(/(\d)\s*[-–—]\s*(\d)/g, '$1 to $2')     // 2-10 -> 2 to 10
+      .replace(/(\d)\.(\d)/g, '$1\u0001$2')            // keep decimal points
+      .replace(/[^\p{L}\p{N}\s\u0001]/gu, ' ')
+      .replace(/\u0001/g, '.')
       .replace(/\s+/g, ' ')
       .trim();
     return s;
+  }
+
+  // Words that carry no meaning in a short answer ("up and to the right" = "up and right").
+  var FILLER = { the: 1, a: 1, an: 1, to: 1, of: 1, and: 1, or: 1, by: 1 };
+  var NUMBER_WORDS = { zero: '0', none: '0', one: '1', two: '2', three: '3', four: '4', five: '5', six: '6',
+    seven: '7', eight: '8', nine: '9', ten: '10', eleven: '11', twelve: '12' };
+  // Element names typed for symbols ("sodium" for "Na").
+  var ELEMENTS = { hydrogen: 'h', helium: 'he', carbon: 'c', nitrogen: 'n', oxygen: 'o', fluorine: 'f', neon: 'ne',
+    sodium: 'na', aluminum: 'al', aluminium: 'al', sulfur: 's', chlorine: 'cl', argon: 'ar', potassium: 'k', iron: 'fe' };
+  var KEEP_S = { plus: 1, this: 1, thus: 1, less: 1, gas: 1, has: 1, was: 1, yes: 1, its: 1, is: 1, as: 1 };
+
+  function isNum(t) { return /^\d+(\.\d+)?$/.test(t); }
+
+  /** Canonical answer tokens: normalized, filler dropped, plurals and number/element words unified. */
+  function tokensOf(s) {
+    return normalize(s).split(' ').filter(Boolean).map(function (t) {
+      if (NUMBER_WORDS[t]) return NUMBER_WORDS[t];
+      if (t.length > 3 && /s$/.test(t) && !/ss$/.test(t) && !KEEP_S[t] && !isNum(t)) t = t.slice(0, -1);
+      return ELEMENTS[t] || t;
+    }).filter(function (t) { return !FILLER[t]; });
+  }
+
+  /** A typed number matches if equal, or if it is the answer rounded to fewer decimals (226 for 226.32). */
+  function numbersMatch(g, a) {
+    if (parseFloat(g) === parseFloat(a)) return true;
+    var dg = (g.split('.')[1] || '').length, da = (a.split('.')[1] || '').length;
+    return dg < da && parseFloat(a).toFixed(dg) === parseFloat(g).toFixed(dg);
+  }
+
+  /**
+   * Compare typed tokens G with answer tokens A. Returns {ok, d} where d is the
+   * number of forgiven typos. Numbers, anything containing a digit, and short
+   * tokens (symbols like Na, Cl) must match exactly; longer words get typo room.
+   */
+  function tokenMatch(G, A, listy) {
+    var gj = G.join(' '), aj = A.join(' ');
+    if (!aj) return { ok: false, d: Infinity };
+    if (gj === aj || G.join('') === A.join('')) return { ok: true, d: 0 };
+    if (listy && G.length === A.length && G.slice().sort().join(' ') === A.slice().sort().join(' ')) return { ok: true, d: 0 };
+    if (G.length === A.length) {
+      var d = 0;
+      for (var i = 0; i < A.length; i++) {
+        var a = A[i], g = G[i];
+        if (g === a) continue;
+        if (isNum(a) && isNum(g)) { if (numbersMatch(g, a)) continue; return { ok: false, d: Infinity }; }
+        if (/\d/.test(a) || /\d/.test(g) || a.length < 4) return { ok: false, d: Infinity };
+        var di = levenshtein(g, a);
+        if (di > typoTolerance(a.length)) return { ok: false, d: Infinity };
+        d += di;
+      }
+      return { ok: true, d: d };
+    }
+    // Different word counts: allow spacing differences plus typos on long answers.
+    var gs = G.join(''), as = A.join('');
+    if (as.length < 8 || digitsOf(gs) !== digitsOf(as)) return { ok: false, d: Infinity };
+    var ds = levenshtein(gs, as);
+    return ds <= typoTolerance(as.length) ? { ok: true, d: ds } : { ok: false, d: Infinity };
   }
 
   function levenshtein(a, b) {
@@ -115,13 +178,22 @@
     return Math.min(6, Math.floor(len / 6));
   }
 
-  /** Accepted forms of an answer: full text, and text with (parentheticals) removed. */
+  /**
+   * Accepted forms of an answer: the full text, and the text without a
+   * spaced-off aside like "organic chemistry (carbon-based)". Parentheses that
+   * are part of the answer itself, as in "C(=O)-NH" or "poly(acrylic acid)",
+   * are never dropped.
+   */
   function answerVariants(answer) {
-    var out = [normalize(answer)];
-    var noParen = normalize(String(answer || '').replace(/\([^)]*\)/g, ' '));
-    if (noParen && out.indexOf(noParen) === -1) out.push(noParen);
-    return out.filter(Boolean);
+    var raw = String(answer || '');
+    var out = [raw];
+    var noAside = raw.replace(/\s\([^)]*\)/g, ' ').trim();
+    if (noAside && noAside !== raw) out.push(noAside);
+    return out;
   }
+
+  // Answers that are unordered lists ("polymers and colorants", "ionic and covalent").
+  function isListy(answer) { return /\s(and|or)\s|,|&/i.test(answer) && !/\d/.test(answer); }
 
   function digitsOf(s) { return (s.match(/\d+/g) || []).join(','); }
 
@@ -133,24 +205,29 @@
    * close to one of them as to the answer is not accepted ("alkene" for "alkane").
    */
   function grade(given, answer, wrongs) {
-    var g = normalize(given);
+    var G = tokensOf(given);
+    if (!normalize(given)) return { correct: false, close: false };
     var variants = answerVariants(answer);
-    if (!g) return { correct: false, close: false };
+    var listy = isListy(answer);
     var best = Infinity, bestLen = 1;
     for (var i = 0; i < variants.length; i++) {
-      var v = variants[i];
-      var d = levenshtein(g, v);
-      var tol = digitsOf(g) === digitsOf(v) ? typoTolerance(v.length) : 0;
-      if (d <= tol) {
-        if (d > 0 && wrongs && wrongs.length) {
+      var A = tokensOf(variants[i]);
+      var m = tokenMatch(G, A, listy);
+      if (m.ok) {
+        if (m.d > 0 && wrongs && wrongs.length) {
+          var aj = A.join(' ');
           for (var j = 0; j < wrongs.length; j++) {
-            var w = normalize(wrongs[j]);
-            if (w && w !== v && levenshtein(g, w) <= d) return { correct: false, close: true, wrong: wrongs[j] };
+            var W = tokensOf(wrongs[j]);
+            if (!W.length || W.join(' ') === aj) continue;
+            var mw = tokenMatch(G, W, isListy(wrongs[j]));
+            if (mw.ok && mw.d <= m.d) return { correct: false, close: true, wrong: wrongs[j] };
           }
         }
-        return { correct: true, close: false, typo: d > 0 };
+        return { correct: true, close: false, typo: m.d > 0 };
       }
-      if (d < best) { best = d; bestLen = v.length; }
+      var gj = G.join(' '), vj = A.join(' ');
+      var dd = levenshtein(gj, vj);
+      if (dd < best) { best = dd; bestLen = vj.length; }
     }
     return { correct: false, close: best <= Math.max(3, bestLen * 0.4) };
   }
@@ -242,7 +319,9 @@
       f = String(f == null ? '' : f).trim();
       if (!f) return;
       var n = normalize(f);
-      if (!n || (nAns && (n === nAns || grade(f, answer).correct))) { dropped++; return; }
+      // A fake that is only a typo away from the answer ("alkene" for "alkane")
+      // is kept: the written grader rejects it because it is a known wrong answer.
+      if (!n || (nAns && (n === nAns || grade(f, answer, [f]).correct))) { dropped++; return; }
       if (seen[n]) { dupes++; return; }
       seen[n] = true;
       out.push(f);
@@ -564,7 +643,7 @@
     DAY: DAY, NEW: NEW, FAMILIAR: FAMILIAR, MASTERED: MASTERED,
     uid: uid, shuffle: shuffle,
     parseImport: parseImport, splitSets: splitSets, stripImageNote: stripImageNote, exportText: exportText,
-    normalize: normalize, levenshtein: levenshtein, typoTolerance: typoTolerance, grade: grade,
+    normalize: normalize, tokensOf: tokensOf, levenshtein: levenshtein, typoTolerance: typoTolerance, grade: grade,
     buildChoices: buildChoices, plausibility: plausibility, deckDistractors: deckDistractors,
     cleanFakes: cleanFakes, pickFakes: pickFakes, noteFakesShown: noteFakesShown, hasFakes: hasFakes,
     trueFalseAllowed: trueFalseAllowed, trueFalseCandidate: trueFalseCandidate,

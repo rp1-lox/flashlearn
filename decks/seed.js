@@ -2,7 +2,7 @@
 window.SEED_DECKS = [
  {
   "id": "seed-pcc101-exam1",
-  "version": 4,
+  "version": 5,
   "name": "PCC 101 Exam 1",
   "folder": "PCC 101",
   "cards": [
@@ -42,7 +42,10 @@ window.SEED_DECKS = [
     "def": "F O C Na",
     "fakes": [
      "Na O C F",
+     "F C O Na",
+     "O F C Na",
      "F O Na C",
+     "C O F Na",
      "Na C O F",
      "O C F Na",
      "Na F O C"
@@ -143,6 +146,8 @@ window.SEED_DECKS = [
     "term": "All single C-C bonds",
     "def": "alkane",
     "fakes": [
+     "alkene",
+     "alkyne",
      "aromatic",
      "polymer",
      "monomer",
@@ -156,6 +161,8 @@ window.SEED_DECKS = [
     "term": "Has a C=C double bond",
     "def": "alkene",
     "fakes": [
+     "alkane",
+     "alkyne",
      "aromatic",
      "polymer",
      "monomer",
@@ -169,6 +176,8 @@ window.SEED_DECKS = [
     "term": "Has a C≡C triple bond",
     "def": "alkyne",
     "fakes": [
+     "alkane",
+     "alkene",
      "aromatic",
      "polymer",
      "monomer",
@@ -182,6 +191,7 @@ window.SEED_DECKS = [
     "term": "Has a double bond: saturated or unsaturated?",
     "def": "unsaturated",
     "fakes": [
+     "saturated",
      "aromatic",
      "partially saturated",
      "crystalline",
@@ -394,6 +404,8 @@ window.SEED_DECKS = [
      "ester",
      "ether",
      "urethane",
+     "imide",
+     "amine",
      "carbonate",
      "anhydride",
      "hydrogen bond"
@@ -425,6 +437,7 @@ window.SEED_DECKS = [
      "1,6-hexanediol",
      "glycerol",
      "ethylene oxide",
+     "diethylene glycol",
      "terephthalic acid"
     ]
    },
@@ -808,12 +821,14 @@ window.SEED_DECKS = [
     "term": "More branched: HDPE or LDPE?",
     "def": "LDPE",
     "fakes": [
+     "HDPE",
      "both equally",
      "neither",
      "PP",
      "PET",
      "PVC",
-     "PS"
+     "PS",
+     "LLDPE"
     ]
    },
    {
@@ -821,6 +836,7 @@ window.SEED_DECKS = [
     "term": "More crystalline: HDPE or LDPE?",
     "def": "HDPE",
     "fakes": [
+     "LDPE",
      "both equally",
      "neither",
      "PP",
@@ -850,6 +866,7 @@ window.SEED_DECKS = [
     "term": "Repeat-unit molar mass: count atoms where?",
     "def": "inside the brackets",
     "fakes": [
+     "outside the brackets",
      "across the whole chain",
      "at the chain ends",
      "in the side groups only",
@@ -915,7 +932,8 @@ window.SEED_DECKS = [
      "growth temperature",
      "gel point temperature",
      "glassy tensile strength",
-     "global temperature"
+     "global temperature",
+     "grain transition temperature"
     ]
    },
    {
@@ -1029,6 +1047,7 @@ window.SEED_DECKS = [
     "def": "methane",
     "termImg": "decks/pcc-structures/01.png",
     "fakes": [
+     "ethane",
      "methanol",
      "ammonia",
      "water",
@@ -1092,12 +1111,14 @@ window.SEED_DECKS = [
     "def": "ethane",
     "termImg": "decks/pcc-structures/05.png",
     "fakes": [
+     "methane",
      "ethylene",
      "propane",
      "acetylene",
      "methanol",
      "ethanol",
-     "butane"
+     "butane",
+     "ethene"
     ]
    },
    {
@@ -1138,6 +1159,7 @@ window.SEED_DECKS = [
     "def": "ethane",
     "termImg": "decks/pcc-structures/08.png",
     "fakes": [
+     "methane",
      "ethylene",
      "propane",
      "acetylene",
@@ -1255,7 +1277,8 @@ window.SEED_DECKS = [
      "C5H6O",
      "C6H4O",
      "C7H6O",
-     "C6H10O"
+     "C6H10O",
+     "C6H6"
     ]
    },
    {
@@ -1268,6 +1291,7 @@ window.SEED_DECKS = [
      "C7H10",
      "C6H6",
      "C8H10",
+     "C7H8O",
      "C6H8",
      "C8H8",
      "C7H9"
@@ -1477,6 +1501,7 @@ window.SEED_DECKS = [
      "1,6-diaminohexane",
      "methanol",
      "glycerol",
+     "diethylene glycol",
      "ethanol"
     ]
    },
@@ -1489,8 +1514,10 @@ window.SEED_DECKS = [
      "ester",
      "ether",
      "urethane",
+     "imide",
      "anhydride",
      "carbonate",
+     "amine",
      "carboxylic acid"
     ]
    },
@@ -1546,7 +1573,7 @@ window.SEED_DECKS = [
  },
  {
   "id": "seed-pcc101-exam1-full",
-  "version": 2,
+  "version": 3,
   "name": "PCC 101 Exam 1 (all 177 text cards)",
   "folder": "PCC 101",
   "cards": [
@@ -1615,6 +1642,7 @@ window.SEED_DECKS = [
     "term": "Branch: copper ions that improve wash fastness",
     "def": "inorganic",
     "fakes": [
+     "organic",
      "physical",
      "analytical",
      "biochemistry",
@@ -1689,10 +1717,12 @@ window.SEED_DECKS = [
     "term": "Neutrons =",
     "def": "mass minus protons",
     "fakes": [
+     "mass plus protons",
      "protons minus mass",
      "atomic number minus mass",
      "mass divided by protons",
      "protons plus mass",
+     "mass times protons",
      "electrons minus protons",
      "electrons times mass"
     ]
@@ -2243,7 +2273,10 @@ window.SEED_DECKS = [
     "def": "F O C Na",
     "fakes": [
      "Na O C F",
+     "F C O Na",
+     "O F C Na",
      "F O Na C",
+     "C O F Na",
      "Na C O F",
      "O C F Na",
      "Na F O C"
@@ -2420,8 +2453,10 @@ window.SEED_DECKS = [
     "def": "n + 1",
     "fakes": [
      "n",
+     "n - 1",
      "n + 2",
      "2n",
+     "n / 2",
      "n + 3",
      "2n + 1"
     ]
@@ -2521,6 +2556,8 @@ window.SEED_DECKS = [
     "term": "All single C-C bonds",
     "def": "alkane",
     "fakes": [
+     "alkene",
+     "alkyne",
      "aromatic",
      "polymer",
      "monomer",
@@ -2534,6 +2571,8 @@ window.SEED_DECKS = [
     "term": "Has a C=C double bond",
     "def": "alkene",
     "fakes": [
+     "alkane",
+     "alkyne",
      "aromatic",
      "polymer",
      "monomer",
@@ -2547,6 +2586,8 @@ window.SEED_DECKS = [
     "term": "Has a C≡C triple bond",
     "def": "alkyne",
     "fakes": [
+     "alkane",
+     "alkene",
      "aromatic",
      "polymer",
      "monomer",
@@ -2560,6 +2601,8 @@ window.SEED_DECKS = [
     "term": "Ethane: alkane, alkene, or alkyne?",
     "def": "alkane",
     "fakes": [
+     "alkene",
+     "alkyne",
      "aromatic",
      "none of these",
      "alkane and alkene",
@@ -2573,6 +2616,8 @@ window.SEED_DECKS = [
     "term": "Ethylene: alkane, alkene, or alkyne?",
     "def": "alkene",
     "fakes": [
+     "alkane",
+     "alkyne",
      "aromatic",
      "none of these",
      "alkene and alkyne",
@@ -2586,6 +2631,8 @@ window.SEED_DECKS = [
     "term": "Acetylene: alkane, alkene, or alkyne?",
     "def": "alkyne",
     "fakes": [
+     "alkane",
+     "alkene",
      "aromatic",
      "alcohol",
      "cycloalkane",
@@ -2644,6 +2691,7 @@ window.SEED_DECKS = [
     "term": "All single bonds: saturated or unsaturated?",
     "def": "saturated",
     "fakes": [
+     "unsaturated",
      "aromatic",
      "crystalline",
      "amorphous",
@@ -2658,6 +2706,7 @@ window.SEED_DECKS = [
     "term": "Has a double bond: saturated or unsaturated?",
     "def": "unsaturated",
     "fakes": [
+     "saturated",
      "aromatic",
      "partially saturated",
      "crystalline",
@@ -2828,6 +2877,7 @@ window.SEED_DECKS = [
      "propane",
      "butylene",
      "propylene glycol",
+     "propyne",
      "isobutylene"
     ]
    },
@@ -3109,6 +3159,8 @@ window.SEED_DECKS = [
      "ester",
      "ether",
      "urethane",
+     "imide",
+     "amine",
      "carbonate",
      "anhydride",
      "hydrogen bond"
@@ -3125,7 +3177,8 @@ window.SEED_DECKS = [
      "C(=O)-NH2",
      "N-H",
      "C(=O)-Cl",
-     "C-O-C"
+     "C-O-C",
+     "C(=O)-OH"
     ]
    },
    {
@@ -3184,6 +3237,7 @@ window.SEED_DECKS = [
      "1,6-hexanediol",
      "glycerol",
      "ethylene oxide",
+     "diethylene glycol",
      "terephthalic acid"
     ]
    },
@@ -3209,6 +3263,8 @@ window.SEED_DECKS = [
     "fakes": [
      "C(=O)-NH",
      "O-C-O",
+     "C(=O)-OH",
+     "C-O-C",
      "C(=O)-Cl",
      "N-H",
      "C(=O)-NH2",
@@ -3730,6 +3786,7 @@ window.SEED_DECKS = [
     "term": "Milk jug polyethylene",
     "def": "HDPE",
     "fakes": [
+     "LDPE",
      "LLDPE",
      "PP",
      "PET",
@@ -3744,6 +3801,7 @@ window.SEED_DECKS = [
     "term": "Plastic bag polyethylene",
     "def": "LDPE",
     "fakes": [
+     "HDPE",
      "polycarbonate",
      "PP",
      "PET",
@@ -3758,12 +3816,14 @@ window.SEED_DECKS = [
     "term": "More branched: HDPE or LDPE?",
     "def": "LDPE",
     "fakes": [
+     "HDPE",
      "both equally",
      "neither",
      "PP",
      "PET",
      "PVC",
-     "PS"
+     "PS",
+     "LLDPE"
     ]
    },
    {
@@ -3771,6 +3831,7 @@ window.SEED_DECKS = [
     "term": "More crystalline: HDPE or LDPE?",
     "def": "HDPE",
     "fakes": [
+     "LDPE",
      "both equally",
      "neither",
      "PP",
@@ -3830,6 +3891,7 @@ window.SEED_DECKS = [
     "term": "Repeat-unit molar mass: count atoms where?",
     "def": "inside the brackets",
     "fakes": [
+     "outside the brackets",
      "across the whole chain",
      "at the chain ends",
      "in the side groups only",
@@ -3860,7 +3922,6 @@ window.SEED_DECKS = [
     "def": "1.008",
     "fakes": [
      "2.016",
-     "1.01",
      "4.003",
      "12.01",
      "0.008",
@@ -4000,7 +4061,8 @@ window.SEED_DECKS = [
      "growth temperature",
      "gel point temperature",
      "glassy tensile strength",
-     "global temperature"
+     "global temperature",
+     "grain transition temperature"
     ]
    },
    {
@@ -4009,6 +4071,7 @@ window.SEED_DECKS = [
     "def": "melting temperature",
     "fakes": [
      "glass transition temperature",
+     "mixing temperature",
      "molar temperature",
      "maximum temperature",
      "melt time",

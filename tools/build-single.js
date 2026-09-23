@@ -13,10 +13,10 @@ fs.readdirSync(imgDir).filter((f) => f.endsWith('.png')).forEach((f) => {
 
 const inline = (code) => '<script>\n' + code.replace(/<\/script/gi, '<\/script') + '\n</script>';
 let html = read('index.html')
-  .replace('<link rel="stylesheet" href="css/style.css">', () => '<style>\n' + read('css/style.css') + '\n</style>')
-  .replace('<script src="js/core.js"></script>', () => inline(read('js/core.js')))
-  .replace('<script src="decks/seed.js"></script>', () => inline(read('decks/seed.js') + '\nwindow.SEED_IMAGES = ' + JSON.stringify(images) + ';'))
-  .replace('<script src="js/app.js"></script>', () => inline(read('js/app.js')));
+  .replace(/<link rel="stylesheet" href="css\/style\.css(\?v=[^"]*)?">/, () => '<style>\n' + read('css/style.css') + '\n</style>')
+  .replace(/<script src="js\/core\.js(\?v=[^"]*)?"><\/script>/, () => inline(read('js/core.js')))
+  .replace(/<script src="decks\/seed\.js(\?v=[^"]*)?"><\/script>/, () => inline(read('decks/seed.js') + '\nwindow.SEED_IMAGES = ' + JSON.stringify(images) + ';'))
+  .replace(/<script src="js\/app\.js(\?v=[^"]*)?"><\/script>/, () => inline(read('js/app.js')));
 if (/src="(js|decks)\//.test(html) || html.includes('css/style.css')) throw new Error('an asset was not inlined');
 fs.mkdirSync(path.join(root, 'dist'), { recursive: true });
 fs.writeFileSync(path.join(root, 'dist/flashlearn.html'), html, 'utf8');

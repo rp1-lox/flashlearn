@@ -6,6 +6,7 @@
   "scripts": {
     "test": "node --test test/core.test.js",
     "seed": "node tools/build-seed.js",
-    "serve": "python -m http.server 8000"
+    "serve": "python -m http.server 8000",
+    "build": "node tools/build-seed.js && node tools/stamp.js && node tools/build-single.js"
   }
 }

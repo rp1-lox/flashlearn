@@ -5929,45 +5929,52 @@ window.SEED_IMAGES = {"decks/pcc-structures/01.png":"data:image/png;base64,iVBOR
       var wrongs = (sd.a === 'def' ? card.fakes || [] : []).concat(opts.scope.filter(function (c) { return c.id !== card.id; }).map(function (c) { return c[sd.a]; }));
       var g = FL.grade(given, card[sd.a], wrongs);
       var ans = '<div class="answer-box"><div class="small muted">Correct answer</div><div class="answer-text">' + esc(card[sd.a]) + '</div>' + imgTag(card[sd.a + 'Img']) + '</div>';
-      if (g.correct) {
+      // Like Quizlet: after a miss, a "Don't know", or a misspelling, type the
+      // correct answer once before moving on. A misspelling still counts as right.
+      var canRetype = opts.deck.settings.retype !== false && String(card[sd.a] || '').trim() !== '';
+      if (g.correct && !(g.typo && canRetype)) {
         $('#fb').innerHTML = '<div class="fb good">' + (g.typo ? 'Correct (small typo) ✓' : 'Correct ✓') + '</div>' + ans + continueBtn();
         wireContinue(function () { opts.onDone(true); });
         if (!g.typo) later(function () { opts.onDone(true); }, 1400);
-      } else {
-        // Like Quizlet: after a miss, type the correct answer once before moving on.
-        var retype = opts.deck.settings.retype !== false && String(card[sd.a] || '').trim() !== '';
-        $('#fb').innerHTML = '<div class="fb bad">' + (dontKnow ? 'No problem — study this one.' : g.close ? 'Close, but not quite.' : 'Not quite.') + '</div>' +
-          (dontKnow ? '' : '<div class="small muted">You wrote</div><div class="yours">' + esc(given) + '</div>') + ans +
-          (retype ? '<form id="rform" autocomplete="off"><label class="small muted" for="rans">Type the correct answer to continue</label>' +
-            '<textarea id="rans" rows="2" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done" placeholder="Copy the answer above"></textarea>' +
-            '<div id="rmsg" class="small muted" aria-live="polite"></div></form>' : '') +
-          '<div class="row gap wrap">' + (dontKnow ? '' : '<button class="btn" id="override">I was right</button>') + '<div class="grow"></div>' +
-          (retype ? '<button class="btn primary" id="rcheck" type="button">Check <span class="kbd">Enter</span></button>' : continueBtn(true)) + '</div>';
-        on('#override', 'click', function () { finish(true); });
-        revealFeedback();
-        if (!retype) { wireContinue(function () { finish(false); }); return; }
-        var rin = $('#rans');
-        // focus after the Enter that submitted the first answer has been released
-        setTimeout(function () { rin.focus({ preventScroll: true }); }, 60);
-        function check() {
-          if (finished) return;
-          var v = rin.value;
-          if (!v.trim()) { rin.focus(); return; }
-          if (FL.grade(v, card[sd.a]).correct) {
-            rin.readOnly = true;
-            $('#rmsg').innerHTML = '<span class="good-text">Got it ✓</span>';
-            later(function () { finish(false); }, 500);
-          } else {
-            $('#rmsg').textContent = 'Not quite. Copy the answer above.';
-            rin.select();
-          }
-        }
-        rin.addEventListener('keydown', function (e) {
-          if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); e.stopPropagation(); check(); }
-        });
-        on('#rcheck', 'click', check);
-        on('#rform', 'submit', function (e) { e.preventDefault(); check(); });
+        return;
       }
+      var head = g.correct
+        ? '<div class="fb good">Correct, but check the spelling ✓</div>'
+        : '<div class="fb bad">' + (dontKnow ? 'No problem — study this one.' : g.close ? 'Close, but not quite.' : 'Not quite.') + '</div>';
+      var result = !!g.correct;
+      $('#fb').innerHTML = head +
+        (dontKnow ? '' : '<div class="small muted">You wrote</div><div class="yours">' + esc(given) + '</div>') + ans +
+        (canRetype ? '<form id="rform" autocomplete="off"><label class="small muted" for="rans">Type the correct answer to continue</label>' +
+          '<textarea id="rans" rows="2" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done" placeholder="Copy the answer above"></textarea>' +
+          '<div id="rmsg" class="small muted" aria-live="polite"></div></form>' : '') +
+        '<div class="row gap wrap">' + (dontKnow || g.correct ? '' : '<button class="btn" id="override">I was right</button>') + '<div class="grow"></div>' +
+        (canRetype ? '<button class="btn primary" id="rcheck" type="button">Check <span class="kbd">Enter</span></button>' : continueBtn(true)) + '</div>';
+      on('#override', 'click', function () { finish(true); });
+      revealFeedback();
+      if (!canRetype) { wireContinue(function () { finish(result); }); return; }
+      var rin = $('#rans');
+      // focus after the Enter that submitted the first answer has been released
+      setTimeout(function () { rin.focus({ preventScroll: true }); }, 60);
+      function check() {
+        if (finished) return;
+        var v = rin.value;
+        if (!v.trim()) { rin.focus(); return; }
+        // The copy must be spelled right: exact after normalization, no typo allowance.
+        var copy = FL.grade(v, card[sd.a]);
+        if (copy.correct && !copy.typo) {
+          rin.readOnly = true;
+          $('#rmsg').innerHTML = '<span class="good-text">Got it ✓</span>';
+          later(function () { finish(result); }, 500);
+        } else {
+          $('#rmsg').textContent = copy.correct ? 'Almost. Check the spelling against the answer above.' : 'Not quite. Copy the answer above.';
+          rin.select();
+        }
+      }
+      rin.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); e.stopPropagation(); check(); }
+      });
+      on('#rcheck', 'click', check);
+      on('#rform', 'submit', function (e) { e.preventDefault(); check(); });
     }
     var finished = false;
     function finish(ok) { if (finished) return; finished = true; opts.onDone(ok); }

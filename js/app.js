@@ -124,7 +124,9 @@
     });
   }
 
-  function imgTag(src, cls) { return src ? '<img class="' + (cls || 'card-img') + '" src="' + esc(src) + '" alt="">' : ''; }
+  // The single-file build (dist/) embeds the seed images; map their relative paths to data URLs.
+  function imgSrc(src) { return (window.SEED_IMAGES && window.SEED_IMAGES[src]) || src; }
+  function imgTag(src, cls) { return src ? '<img class="' + (cls || 'card-img') + '" src="' + esc(imgSrc(src)) + '" alt="">' : ''; }
 
   // ================= modal =================
   function modal(html, onMount) {

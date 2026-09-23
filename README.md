@@ -6,8 +6,10 @@ A self-hosted, Quizlet-style flashcard app with **Learn** and **Cram** modes. Pl
 
 - **Laptop:** double-click `index.html` (opens in Chrome or Edge from `file://`). That's it.
 - **Hosted:** any static host works (GitHub Pages, Netlify, `python -m http.server`).
-- **Phone:** open the hosted URL (GitHub Pages, see below), then use the browser's "Add to Home screen".
-  Without hosting: on the laptop run `python -m http.server 8000` in this folder, then on a phone on the same Wi-Fi open `http://<laptop-ip>:8000`.
+- **Phone**, pick one:
+  - **Wi-Fi from the laptop:** double-click `serve-phone.cmd` (needs Python), then on the phone (same Wi-Fi) open `http://<laptop IP>:8000` and "Add to Home screen". Keep the laptop window open while studying.
+  - **Single file:** `dist/flashlearn.html` is the whole app in one file (images included). Put it on the phone (Drive → download). Android Chrome opens it from Downloads; iPhone Safari cannot run local HTML files, so use the Wi-Fi option or a host there.
+  - **Hosted:** any static host (GitHub Pages on a public repo or paid plan, Netlify Drop, Cloudflare Pages). This repo is private, and GitHub Pages for private repos needs a paid plan.
 
 Two decks come pre-loaded on first run: **PCC 101 Exam 1** (102 cards) and **PCC 101 Structures** (33 cards, each with a structure image).
 
@@ -70,6 +72,7 @@ Quizlet separates long-term spaced study from test-prep cramming: its engineerin
 ```
 npm test          # node --test, pure logic in js/core.js
 npm run seed      # rebuild decks/seed.js from decks/src/*.txt
+node tools/build-single.js   # rebuild dist/flashlearn.html after changing the app
 ```
 
 - `js/core.js`: grading, import parsing, distractors, Learn and Cram scheduling (pure, tested).

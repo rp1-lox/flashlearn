@@ -394,7 +394,7 @@
 
   // ---------- Learn ----------
   function defaultSettings() {
-    return { answerWith: 'def', mc: true, tf: true, written: true, starredOnly: false, roundSize: 7 };
+    return { answerWith: 'def', mc: true, tf: true, written: true, retype: true, starredOnly: false, roundSize: 7 };
   }
 
   function cardState(progress, id) {

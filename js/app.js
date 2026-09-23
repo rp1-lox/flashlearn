@@ -622,6 +622,7 @@
       '<label class="check"><input type="checkbox" id="stMc"' + (s.mc ? ' checked' : '') + '> Multiple choice</label>' +
       '<label class="check"><input type="checkbox" id="stTf"' + (s.tf !== false ? ' checked' : '') + '> True / false</label>' +
       '<label class="check"><input type="checkbox" id="stWr"' + (s.written ? ' checked' : '') + '> Written</label></fieldset>' +
+      '<label class="check"><input type="checkbox" id="stRetype"' + (s.retype !== false ? ' checked' : '') + '> After a wrong written answer, type the correct one to continue</label>' +
       '<label class="check"><input type="checkbox" id="stStar"' + (s.starredOnly ? ' checked' : '') + '> Study starred cards only</label>' +
       '<label>Cards per round<input id="stSize" type="number" min="3" max="30" value="' + s.roundSize + '"></label>' +
       '<div class="stack"><button class="btn" id="stReset">' + (mode === 'cram' ? 'Restart Cram' : 'Reset Learn progress') + '</button></div>' +
@@ -631,6 +632,7 @@
         $('#stSave', w).addEventListener('click', function () {
           var ns = {
             answerWith: $('#stAns', w).value, mc: $('#stMc', w).checked, tf: $('#stTf', w).checked, written: $('#stWr', w).checked,
+            retype: $('#stRetype', w).checked,
             starredOnly: $('#stStar', w).checked, roundSize: Math.max(3, Math.min(30, parseInt($('#stSize', w).value, 10) || 7)),
           };
           if (!ns.mc && !ns.tf && !ns.written) ns.mc = true;
@@ -776,12 +778,39 @@
         wireContinue(function () { opts.onDone(true); });
         if (!g.typo) later(function () { opts.onDone(true); }, 1400);
       } else {
+        // Like Quizlet: after a miss, type the correct answer once before moving on.
+        var retype = opts.deck.settings.retype !== false && String(card[sd.a] || '').trim() !== '';
         $('#fb').innerHTML = '<div class="fb bad">' + (dontKnow ? 'No problem — study this one.' : g.close ? 'Close, but not quite.' : 'Not quite.') + '</div>' +
           (dontKnow ? '' : '<div class="small muted">You wrote</div><div class="yours">' + esc(given) + '</div>') + ans +
-          '<div class="row gap wrap">' + (dontKnow ? '' : '<button class="btn" id="override">I was right</button>') + '<div class="grow"></div>' + continueBtn(true) + '</div>';
+          (retype ? '<form id="rform" autocomplete="off"><label class="small muted" for="rans">Type the correct answer to continue</label>' +
+            '<textarea id="rans" rows="2" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done" placeholder="Copy the answer above"></textarea>' +
+            '<div id="rmsg" class="small muted" aria-live="polite"></div></form>' : '') +
+          '<div class="row gap wrap">' + (dontKnow ? '' : '<button class="btn" id="override">I was right</button>') + '<div class="grow"></div>' +
+          (retype ? '<button class="btn primary" id="rcheck" type="button">Check <span class="kbd">Enter</span></button>' : continueBtn(true)) + '</div>';
         on('#override', 'click', function () { finish(true); });
         revealFeedback();
-        wireContinue(function () { finish(false); });
+        if (!retype) { wireContinue(function () { finish(false); }); return; }
+        var rin = $('#rans');
+        // focus after the Enter that submitted the first answer has been released
+        setTimeout(function () { rin.focus({ preventScroll: true }); }, 60);
+        function check() {
+          if (finished) return;
+          var v = rin.value;
+          if (!v.trim()) { rin.focus(); return; }
+          if (FL.grade(v, card[sd.a]).correct) {
+            rin.readOnly = true;
+            $('#rmsg').innerHTML = '<span class="good-text">Got it ✓</span>';
+            later(function () { finish(false); }, 500);
+          } else {
+            $('#rmsg').textContent = 'Not quite. Copy the answer above.';
+            rin.select();
+          }
+        }
+        rin.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); e.stopPropagation(); check(); }
+        });
+        on('#rcheck', 'click', check);
+        on('#rform', 'submit', function (e) { e.preventDefault(); check(); });
       }
     }
     var finished = false;

@@ -1,0 +1,2102 @@
+{
+ "PCC studies the chemistry of which two things?": [
+  "monomers and pigments",
+  "resins and dyes",
+  "plastics and paints",
+  "fibers and colorants",
+  "polymers and metals",
+  "colorants and adhesives",
+  "polymers and coatings",
+  "dyes and solvents"
+ ],
+ "Colorants include which two things?": [
+  "dyes and polymers",
+  "pigments and monomers",
+  "dyes and solvents",
+  "pigments and resins",
+  "inks and dyes",
+  "pigments and catalysts",
+  "dyes and additives",
+  "pigments and plasticizers"
+ ],
+ "Main branch of chemistry PCC falls under": [
+  "inorganic",
+  "physical",
+  "analytical",
+  "biochemistry",
+  "polymer",
+  "environmental",
+  "nuclear",
+  "quantum"
+ ],
+ "Branch: synthesizing an azo dye": [
+  "inorganic",
+  "physical",
+  "analytical",
+  "biochemistry",
+  "nuclear",
+  "environmental",
+  "quantum",
+  "polymer"
+ ],
+ "Branch: copper ions that improve wash fastness": [
+  "organic",
+  "physical",
+  "analytical",
+  "biochemistry",
+  "nuclear",
+  "environmental",
+  "quantum",
+  "polymer"
+ ],
+ "Branch: HPLC to check dye purity": [
+  "organic",
+  "inorganic",
+  "physical",
+  "biochemistry",
+  "nuclear",
+  "environmental",
+  "quantum",
+  "polymer"
+ ],
+ "Branch: Tg and chain mobility": [
+  "organic",
+  "inorganic",
+  "analytical",
+  "biochemistry",
+  "nuclear",
+  "environmental",
+  "quantum",
+  "polymer"
+ ],
+ "Branch: polymers for drug delivery": [
+  "organic",
+  "inorganic",
+  "physical",
+  "analytical",
+  "nuclear",
+  "environmental",
+  "quantum",
+  "polymer"
+ ],
+ "Atomic number equals the number of": [
+  "neutrons",
+  "protons plus neutrons",
+  "protons plus electrons",
+  "nucleons",
+  "valence electrons",
+  "isotopes",
+  "mass units",
+  "the group number"
+ ],
+ "Neutrons =": [
+  "mass plus protons",
+  "protons minus mass",
+  "atomic number minus mass",
+  "mass divided by protons",
+  "protons plus mass",
+  "mass times protons",
+  "electrons minus protons",
+  "electrons times mass"
+ ],
+ "Round the mass before subtracting?": [
+  "no",
+  "only for isotopes",
+  "only for metals",
+  "only sometimes",
+  "no, always exact",
+  "only for heavy elements",
+  "no, use decimals",
+  "only in organic chemistry"
+ ],
+ "Electrons in a neutral atom equal the number of": [
+  "neutrons",
+  "protons plus neutrons",
+  "mass number",
+  "valence shells",
+  "isotopes",
+  "nucleons",
+  "protons minus neutrons",
+  "atomic mass"
+ ],
+ "Element with 17 protons": [
+  "fluorine",
+  "sulfur",
+  "phosphorus",
+  "argon",
+  "bromine",
+  "silicon",
+  "potassium",
+  "sodium"
+ ],
+ "Neutrons in chlorine (mass 35)": [
+  "17",
+  "19",
+  "16",
+  "35",
+  "20",
+  "15",
+  "34",
+  "36"
+ ],
+ "Neutrons in aluminum (Z 13, mass 26.98)": [
+  "13",
+  "15",
+  "27",
+  "12",
+  "26",
+  "16",
+  "11",
+  "17"
+ ],
+ "Neutrons in iron (Z 26, mass 55.85)": [
+  "26",
+  "29",
+  "56",
+  "31",
+  "28",
+  "25",
+  "55",
+  "32"
+ ],
+ "2 or more atoms bonded together": [
+  "element",
+  "ion",
+  "isotope",
+  "mixture",
+  "alloy",
+  "atom",
+  "solution",
+  "catalyst"
+ ],
+ "Atoms of 2 or more different elements bonded": [
+  "molecule",
+  "element",
+  "mixture",
+  "isotope",
+  "alloy",
+  "ion",
+  "solvent",
+  "catalyst"
+ ],
+ "NaCl: molecule, compound, or both?": [
+  "molecule",
+  "both",
+  "element",
+  "ion",
+  "mixture",
+  "neither",
+  "alloy",
+  "polymer"
+ ],
+ "O2: molecule, compound, or both?": [
+  "compound",
+  "both",
+  "salt",
+  "ion",
+  "mixture",
+  "neither",
+  "alloy",
+  "isotope"
+ ],
+ "A dye: molecule, compound, or both?": [
+  "neither",
+  "element",
+  "mixture",
+  "ion",
+  "alloy",
+  "isotope",
+  "salt",
+  "solution"
+ ],
+ "CO2: best single term": [
+  "molecule",
+  "both",
+  "element",
+  "mixture",
+  "ion",
+  "alloy",
+  "isotope",
+  "polymer"
+ ],
+ "Why is NaCl not a molecule?": [
+  "covalent network",
+  "metallic bonding",
+  "hydrogen bonding",
+  "van der Waals forces",
+  "crystalline polymer",
+  "molecular lattice",
+  "covalent lattice",
+  "amorphous solid"
+ ],
+ "Shell capacities in this class": [
+  "2, 8, 18",
+  "2, 6, 8",
+  "2, 8, 8, 18",
+  "2, 4, 8",
+  "8, 8, 8",
+  "2, 8, 10",
+  "2, 10, 8",
+  "2, 8, 6"
+ ],
+ "Valence electrons for groups 13 to 18": [
+  "group minus 8",
+  "group plus 10",
+  "group minus 12",
+  "group divided by 2",
+  "group minus 2",
+  "group plus 8",
+  "group minus 18",
+  "group times 2"
+ ],
+ "Valence electrons: carbon": [
+  "2",
+  "3",
+  "5",
+  "6",
+  "8",
+  "1",
+  "12",
+  "14"
+ ],
+ "Valence electrons: nitrogen": [
+  "3",
+  "4",
+  "6",
+  "7",
+  "2",
+  "8",
+  "15",
+  "1"
+ ],
+ "Valence electrons: oxygen": [
+  "4",
+  "5",
+  "7",
+  "8",
+  "2",
+  "16",
+  "3",
+  "1"
+ ],
+ "Valence electrons: chlorine": [
+  "5",
+  "6",
+  "8",
+  "17",
+  "1",
+  "3",
+  "4",
+  "2"
+ ],
+ "Valence electrons: hydrogen": [
+  "2",
+  "3",
+  "4",
+  "7",
+  "8",
+  "0",
+  "6",
+  "5"
+ ],
+ "Unreactive elements with full shells": [
+  "alkali metals",
+  "halogens",
+  "transition metals",
+  "alkaline earth metals",
+  "metalloids",
+  "lanthanides",
+  "actinides",
+  "rare earths"
+ ],
+ "Most likely to bond: He, Ne, Na, or Ar": [
+  "He",
+  "Ne",
+  "Ar",
+  "all equally",
+  "none of them",
+  "He and Ne",
+  "Ar and Ne",
+  "none, all stable"
+ ],
+ "Why sodium bonds easily": [
+  "8 valence electrons",
+  "full outer shell",
+  "7 valence electrons",
+  "high electronegativity",
+  "2 valence electrons",
+  "large atomic radius only",
+  "noble gas structure",
+  "negative charge"
+ ],
+ "Atoms bond to reach how many valence electrons?": [
+  "2",
+  "6",
+  "10",
+  "4",
+  "18",
+  "16",
+  "1",
+  "12"
+ ],
+ "Name of the rule for 8 valence electrons": [
+  "duet rule",
+  "valence rule",
+  "shell rule",
+  "quartet rule",
+  "bonding rule",
+  "electron rule",
+  "decet rule",
+  "stability rule"
+ ],
+ "Strong bonds: primary or secondary?": [
+  "secondary",
+  "both equally",
+  "neither",
+  "tertiary",
+  "ionic only",
+  "covalent only",
+  "hydrogen bonds",
+  "van der Waals"
+ ],
+ "Hydrogen bonds: primary or secondary?": [
+  "primary",
+  "both equally",
+  "neither",
+  "tertiary",
+  "ionic",
+  "covalent",
+  "metallic",
+  "van der Waals only"
+ ],
+ "Two kinds of primary bonds": [
+  "ionic and metallic",
+  "covalent and hydrogen",
+  "metallic and covalent",
+  "ionic and van der Waals",
+  "hydrogen and van der Waals",
+  "covalent and dipole",
+  "metallic and hydrogen",
+  "ionic and dipole"
+ ],
+ "Electrons transferred": [
+  "covalent",
+  "metallic",
+  "hydrogen",
+  "van der Waals",
+  "dipole",
+  "coordinate",
+  "nonpolar covalent",
+  "polar covalent"
+ ],
+ "Electrons shared": [
+  "ionic",
+  "metallic",
+  "hydrogen",
+  "van der Waals",
+  "dipole",
+  "electrostatic",
+  "coordinate ionic",
+  "ionic-covalent"
+ ],
+ "Ionic bonds form between a metal and a": [
+  "metal",
+  "metalloid",
+  "noble gas",
+  "transition metal",
+  "actinide",
+  "another metal",
+  "polymer",
+  "semiconductor"
+ ],
+ "Bonds in a polymer backbone": [
+  "ionic",
+  "metallic",
+  "hydrogen",
+  "van der Waals",
+  "dipole",
+  "electrostatic",
+  "coordinate",
+  "ionic-covalent"
+ ],
+ "Acid dye bonds to nylon's amine end by what bond?": [
+  "covalent",
+  "hydrogen",
+  "van der Waals",
+  "metallic",
+  "dipole",
+  "coordinate covalent",
+  "amide",
+  "ester"
+ ],
+ "Electronegativity increases toward which element?": [
+  "chlorine",
+  "nitrogen",
+  "carbon",
+  "francium",
+  "hydrogen",
+  "sodium",
+  "neon",
+  "argon"
+ ],
+ "Electronegativity direction on the table": [
+  "down and left",
+  "up and left",
+  "down and right",
+  "left to right only",
+  "top to bottom only",
+  "diagonal down-right",
+  "center outward",
+  "right to left"
+ ],
+ "Highest electronegativity": [
+  "oxygen",
+  "chlorine",
+  "nitrogen",
+  "francium",
+  "cesium",
+  "carbon",
+  "hydrogen",
+  "neon"
+ ],
+ "Rank F, O, C, Na by electronegativity": [
+  "Na O C F",
+  "F C O Na",
+  "O F C Na",
+  "F O Na C",
+  "C O F Na",
+  "Na C O F",
+  "O C F Na",
+  "Na F O C"
+ ],
+ "Bonds carbon always forms": [
+  "2",
+  "3",
+  "5",
+  "6",
+  "8",
+  "1",
+  "7",
+  "0"
+ ],
+ "Lone pairs on carbon": [
+  "1",
+  "2",
+  "3",
+  "4",
+  "6",
+  "8",
+  "5",
+  "7"
+ ],
+ "Lone pairs on oxygen": [
+  "1",
+  "3",
+  "0",
+  "4",
+  "6",
+  "5",
+  "8",
+  "7"
+ ],
+ "Lone pairs on nitrogen": [
+  "2",
+  "0",
+  "3",
+  "4",
+  "6",
+  "5",
+  "8",
+  "7"
+ ],
+ "Lone pairs on water's O": [
+  "1",
+  "3",
+  "0",
+  "4",
+  "6",
+  "5",
+  "8",
+  "7"
+ ],
+ "Lone pairs on ammonia's N": [
+  "2",
+  "0",
+  "3",
+  "4",
+  "6",
+  "5",
+  "8",
+  "7"
+ ],
+ "Total lone pairs in O2": [
+  "2",
+  "6",
+  "8",
+  "3",
+  "5",
+  "0",
+  "1",
+  "7"
+ ],
+ "Bond between the two O's in O2": [
+  "single",
+  "triple",
+  "ionic",
+  "hydrogen",
+  "coordinate",
+  "aromatic",
+  "van der Waals",
+  "metallic"
+ ],
+ "Skeletal structure: a carbon sits at every": [
+  "corner only",
+  "end only",
+  "intersection only",
+  "vertex and center",
+  "bend only",
+  "line midpoint",
+  "every atom shown",
+  "double bond only"
+ ],
+ "Skeletal structure: which atoms are hidden?": [
+  "carbons",
+  "oxygens",
+  "nitrogens",
+  "all heteroatoms",
+  "halogens",
+  "lone pairs",
+  "double bonds",
+  "all atoms"
+ ],
+ "Carbons in a zigzag of 4 lines": [
+  "4",
+  "3",
+  "6",
+  "7",
+  "8",
+  "2",
+  "9",
+  "10"
+ ],
+ "Carbons in a zigzag of n lines": [
+  "n",
+  "n - 1",
+  "n + 2",
+  "2n",
+  "n / 2",
+  "n + 3",
+  "2n + 1",
+  "n - 2"
+ ],
+ "Hidden H on each bare benzene carbon": [
+  "2",
+  "3",
+  "4",
+  "0",
+  "6",
+  "5",
+  "8",
+  "7"
+ ],
+ "Benzene formula": [
+  "C6H12",
+  "C6H14",
+  "C5H6",
+  "C7H8",
+  "C6H5",
+  "C6H10",
+  "C4H6",
+  "C8H6"
+ ],
+ "Phenol (benzene + OH) formula": [
+  "C6H4O2",
+  "C6H7O",
+  "C7H6O",
+  "C6H6O2",
+  "C5H4O",
+  "C6H8O2",
+  "C6H5O",
+  "C7H8O"
+ ],
+ "Toluene (benzene + CH3) formula": [
+  "C6H8",
+  "C7H6",
+  "C8H10",
+  "C7H10",
+  "C6H6",
+  "C8H8",
+  "C7H14",
+  "C6H10"
+ ],
+ "Pentane formula": [
+  "C5H10",
+  "C4H10",
+  "C6H12",
+  "C5H14",
+  "C6H14",
+  "C5H8",
+  "C4H12",
+  "C5H16"
+ ],
+ "Hexane formula": [
+  "C6H12",
+  "C5H12",
+  "C7H16",
+  "C6H16",
+  "C6H10",
+  "C7H14",
+  "C5H14",
+  "C6H18"
+ ],
+ "All single C-C bonds": [
+  "alkene",
+  "alkyne",
+  "aromatic",
+  "polymer",
+  "monomer",
+  "diene",
+  "unsaturated hydrocarbon",
+  "aromatic ring"
+ ],
+ "Has a C=C double bond": [
+  "alkane",
+  "alkyne",
+  "aromatic",
+  "polymer",
+  "monomer",
+  "diene only",
+  "saturated hydrocarbon",
+  "cycloalkane"
+ ],
+ "Has a C≡C triple bond": [
+  "alkane",
+  "alkene",
+  "aromatic",
+  "polymer",
+  "monomer",
+  "diene",
+  "saturated hydrocarbon",
+  "cycloalkane"
+ ],
+ "Ethane: alkane, alkene, or alkyne?": [
+  "alkene",
+  "alkyne",
+  "aromatic",
+  "none of these",
+  "alkane and alkene",
+  "cycloalkane",
+  "diene",
+  "saturated alkene"
+ ],
+ "Ethylene: alkane, alkene, or alkyne?": [
+  "alkane",
+  "alkyne",
+  "aromatic",
+  "none of these",
+  "alkene and alkyne",
+  "cycloalkane",
+  "diene",
+  "saturated alkane"
+ ],
+ "Acetylene: alkane, alkene, or alkyne?": [
+  "alkane",
+  "alkene",
+  "aromatic",
+  "alcohol",
+  "cycloalkane",
+  "diene",
+  "saturated hydrocarbon",
+  "alkyl halide"
+ ],
+ "Ethane formula": [
+  "C2H4",
+  "C2H2",
+  "CH4",
+  "C3H8",
+  "C2H5",
+  "C3H6",
+  "C4H10",
+  "CH2"
+ ],
+ "Ethylene formula": [
+  "C2H6",
+  "C2H2",
+  "C3H6",
+  "CH4",
+  "C2H5",
+  "C4H8",
+  "C3H4",
+  "C2H3"
+ ],
+ "Acetylene formula": [
+  "C2H4",
+  "C2H6",
+  "C3H4",
+  "CH2",
+  "C2H3",
+  "C4H2",
+  "C3H6",
+  "CH4"
+ ],
+ "All single bonds: saturated or unsaturated?": [
+  "unsaturated",
+  "aromatic",
+  "crystalline",
+  "amorphous",
+  "conjugated",
+  "cross-linked",
+  "polar",
+  "ionic"
+ ],
+ "Has a double bond: saturated or unsaturated?": [
+  "saturated",
+  "aromatic",
+  "partially saturated",
+  "crystalline",
+  "amorphous",
+  "conjugated",
+  "cross-linked",
+  "branched"
+ ],
+ "Who proposed the Macromolecular Hypothesis?": [
+  "Carothers",
+  "Ziegler",
+  "Natta",
+  "Flory",
+  "Avogadro",
+  "Dalton",
+  "Mendeleev",
+  "Pauling"
+ ],
+ "Macromolecular Hypothesis: repeat units joined by what bonds?": [
+  "ionic",
+  "hydrogen",
+  "metallic",
+  "van der Waals",
+  "dipole-dipole",
+  "weak forces",
+  "coordinate",
+  "London dispersion"
+ ],
+ "Before Staudinger: polymers were clumps held by what forces?": [
+  "covalent bonds",
+  "ionic bonds",
+  "strong forces",
+  "metallic bonds",
+  "coordinate bonds",
+  "amide bonds",
+  "ester bonds",
+  "peptide bonds"
+ ],
+ "Staudinger equation: memorize it?": [
+  "yes",
+  "only sometimes",
+  "only partly",
+  "only the variables",
+  "only for nylon",
+  "only qualitatively",
+  "only approximately",
+  "only the units"
+ ],
+ "Units in a monomer": [
+  "2",
+  "10",
+  "100",
+  "thousands",
+  "0",
+  "3",
+  "2 to 10",
+  "50"
+ ],
+ "Units in an oligomer": [
+  "1",
+  "10 to 100",
+  "thousands",
+  "100 to 1000",
+  "1 to 2",
+  "20 to 50",
+  "50 to 100",
+  "12 to 20"
+ ],
+ "Units in a polymer": [
+  "hundreds",
+  "2 to 10",
+  "1",
+  "tens",
+  "millions",
+  "10 to 100",
+  "dozens",
+  "100"
+ ],
+ "The piece in brackets that repeats n times": [
+  "monomer",
+  "oligomer",
+  "end group",
+  "side chain",
+  "backbone",
+  "functional group",
+  "degree of polymerization",
+  "copolymer"
+ ],
+ "Addition monomer template": [
+  "HC≡CR",
+  "H2C-CH2R",
+  "RHC=CHR",
+  "H2N-R-COOH",
+  "HOOC-R-COOH",
+  "H2C=CR2",
+  "RCH2-CH2R",
+  "HO-R-OH"
+ ],
+ "Monomer of polyethylene": [
+  "propylene",
+  "styrene",
+  "vinyl chloride",
+  "acetylene",
+  "ethane",
+  "butylene",
+  "ethylene glycol",
+  "ethanol"
+ ],
+ "Monomer of polypropylene": [
+  "ethylene",
+  "styrene",
+  "vinyl chloride",
+  "propane",
+  "butylene",
+  "propylene glycol",
+  "propyne",
+  "isobutylene"
+ ],
+ "Monomer of polystyrene": [
+  "ethylene",
+  "propylene",
+  "vinyl chloride",
+  "benzene",
+  "toluene",
+  "phenol",
+  "butadiene",
+  "vinyl acetate"
+ ],
+ "Monomer of PVC": [
+  "ethylene",
+  "propylene",
+  "styrene",
+  "vinyl acetate",
+  "vinylidene chloride",
+  "chloroethane",
+  "ethylene dichloride",
+  "vinyl fluoride"
+ ],
+ "R group of ethylene": [
+  "CH3",
+  "Cl",
+  "benzene ring",
+  "OH",
+  "C2H5",
+  "CH2",
+  "F",
+  "NH2"
+ ],
+ "R group of propylene": [
+  "H",
+  "Cl",
+  "benzene ring",
+  "C2H5",
+  "OH",
+  "CH2",
+  "C3H7",
+  "F"
+ ],
+ "R group of styrene": [
+  "CH3",
+  "Cl",
+  "H",
+  "phenol group",
+  "naphthalene ring",
+  "OH",
+  "C2H5",
+  "cyclohexane ring"
+ ],
+ "R group of vinyl chloride": [
+  "H",
+  "CH3",
+  "benzene ring",
+  "F",
+  "Br",
+  "OH",
+  "NH2",
+  "C2H5"
+ ],
+ "Polymer made from H2C=CHCl": [
+  "PE",
+  "PP",
+  "PS",
+  "PET",
+  "nylon-6,6",
+  "PVA",
+  "PTFE",
+  "PVDC"
+ ],
+ "PE repeat unit formula": [
+  "C3H6",
+  "C2H6",
+  "C8H8",
+  "C2H2",
+  "C4H8",
+  "C2H5",
+  "C3H4",
+  "C5H10"
+ ],
+ "PP repeat unit formula": [
+  "C2H4",
+  "C3H8",
+  "C8H8",
+  "C3H4",
+  "C2H6",
+  "C4H8",
+  "C3H7",
+  "C4H6"
+ ],
+ "PS repeat unit formula": [
+  "C2H4",
+  "C3H6",
+  "C6H6",
+  "C8H10",
+  "C7H8",
+  "C6H5",
+  "C9H10",
+  "C8H6"
+ ],
+ "In addition polymerization, what opens up?": [
+  "the triple bond",
+  "the ring",
+  "the ester bond",
+  "the amide bond",
+  "a single bond",
+  "the benzene ring",
+  "the hydroxyl group",
+  "the carbonyl group"
+ ],
+ "Addition polymerization: anything lost?": [
+  "yes",
+  "water",
+  "HCl",
+  "byproduct",
+  "only sometimes",
+  "yes, a small molecule",
+  "alcohol",
+  "ammonia"
+ ],
+ "Condensation polymerization loses what?": [
+  "HCl",
+  "ammonia",
+  "nothing",
+  "oxygen",
+  "ethylene glycol",
+  "methanol",
+  "carbon dioxide",
+  "hydrogen"
+ ],
+ "Nylon-6,6: addition or condensation?": [
+  "addition",
+  "chain-growth",
+  "free-radical",
+  "ring-opening",
+  "neither",
+  "both",
+  "thermoset",
+  "anionic polymerization"
+ ],
+ "PET: addition or condensation?": [
+  "addition",
+  "chain-growth",
+  "free-radical",
+  "ring-opening",
+  "neither",
+  "both",
+  "thermoset",
+  "anionic polymerization"
+ ],
+ "Nylon-6,6 amine monomer": [
+  "1,4-diaminobutane",
+  "1,8-diaminooctane",
+  "ethylenediamine",
+  "adipic acid",
+  "terephthalic acid",
+  "1,6-hexanediol",
+  "1,5-diaminopentane",
+  "ethylene glycol"
+ ],
+ "Nylon-6,6 acid monomer": [
+  "terephthalic acid",
+  "sebacic acid",
+  "succinic acid",
+  "1,6-diaminohexane",
+  "ethylene glycol",
+  "oxalic acid",
+  "glutaric acid",
+  "phthalic acid"
+ ],
+ "Carbons in each nylon-6,6 monomer": [
+  "4",
+  "5",
+  "7",
+  "8",
+  "10",
+  "2",
+  "12",
+  "3"
+ ],
+ "Nylon-6,6 link type": [
+  "ester",
+  "ether",
+  "urethane",
+  "imide",
+  "amine",
+  "carbonate",
+  "anhydride",
+  "hydrogen bond"
+ ],
+ "Amide link atoms": [
+  "C(=O)-O",
+  "C(=O)-O-C",
+  "O-C-O",
+  "C(=O)-NH2",
+  "N-H",
+  "C(=O)-Cl",
+  "C-O-C",
+  "C(=O)-OH"
+ ],
+ "Nylon-6,6 repeat unit formula": [
+  "C12H24N2O2",
+  "C10H18N2O2",
+  "C12H22N2O3",
+  "C14H26N2O2",
+  "C12H20N2O2",
+  "C10H20N2O2",
+  "C12H22N2O",
+  "C12H22NO2"
+ ],
+ "Nylon-6,6 repeat unit molar mass": [
+  "212.16",
+  "192.16",
+  "254.37",
+  "216.32",
+  "236.32",
+  "200.32",
+  "246.32",
+  "208.32"
+ ],
+ "PET acid monomer": [
+  "adipic acid",
+  "phthalic acid",
+  "isophthalic acid",
+  "benzoic acid",
+  "oxalic acid",
+  "succinic acid",
+  "sebacic acid",
+  "ethylene glycol"
+ ],
+ "PET alcohol monomer": [
+  "propylene glycol",
+  "methanol",
+  "ethanol",
+  "1,6-hexanediol",
+  "glycerol",
+  "ethylene oxide",
+  "diethylene glycol",
+  "terephthalic acid"
+ ],
+ "PET link type": [
+  "amide",
+  "ether",
+  "urethane",
+  "imide",
+  "carbonate",
+  "anhydride",
+  "hydrogen bond",
+  "amine"
+ ],
+ "Ester link atoms": [
+  "C(=O)-NH",
+  "O-C-O",
+  "C(=O)-OH",
+  "C-O-C",
+  "C(=O)-Cl",
+  "N-H",
+  "C(=O)-NH2",
+  "C-N-C"
+ ],
+ "PET repeat unit formula": [
+  "C10H10O4",
+  "C8H6O4",
+  "C10H8O3",
+  "C12H10O4",
+  "C10H8O5",
+  "C9H8O4",
+  "C10H6O4",
+  "C10H8O2"
+ ],
+ "PET repeat unit molar mass": [
+  "194.16",
+  "176.16",
+  "226.32",
+  "180.16",
+  "206.16",
+  "164.16",
+  "212.16",
+  "198.16"
+ ],
+ "Nylon-6,6: homopolymer or heteropolymer?": [
+  "heteropolymer",
+  "copolymer",
+  "block copolymer",
+  "random copolymer",
+  "alternating copolymer",
+  "biopolymer",
+  "graft copolymer",
+  "cross-linked polymer"
+ ],
+ "Number of classification categories": [
+  "4",
+  "5",
+  "7",
+  "8",
+  "3",
+  "10",
+  "2",
+  "9"
+ ],
+ "Classification category: natural vs synthetic": [
+  "chain architecture",
+  "monomer composition",
+  "monomer arrangement",
+  "material behavior",
+  "crystallinity",
+  "molecular weight",
+  "tacticity",
+  "morphology"
+ ],
+ "Classification category: homo vs hetero": [
+  "origin",
+  "chain architecture",
+  "monomer arrangement",
+  "material behavior",
+  "crystallinity",
+  "molecular weight",
+  "tacticity",
+  "morphology"
+ ],
+ "Classification category: linear vs branched": [
+  "origin",
+  "monomer composition",
+  "monomer arrangement",
+  "material behavior",
+  "crystallinity",
+  "molecular weight",
+  "tacticity",
+  "morphology"
+ ],
+ "Classification category: random vs block": [
+  "origin",
+  "monomer composition",
+  "chain architecture",
+  "material behavior",
+  "crystallinity",
+  "molecular weight",
+  "tacticity",
+  "morphology"
+ ],
+ "Classification category: thermoplastic vs thermoset": [
+  "origin",
+  "monomer composition",
+  "chain architecture",
+  "monomer arrangement",
+  "crystallinity",
+  "molecular weight",
+  "tacticity",
+  "morphology"
+ ],
+ "Classification category: crystalline vs amorphous": [
+  "origin",
+  "monomer composition",
+  "chain architecture",
+  "monomer arrangement",
+  "material behavior",
+  "molecular weight",
+  "tacticity",
+  "morphology"
+ ],
+ "Cellulose origin": [
+  "synthetic",
+  "semi-synthetic",
+  "man-made",
+  "petroleum-based",
+  "artificial",
+  "lab-synthesized",
+  "engineered",
+  "industrial"
+ ],
+ "Protein origin": [
+  "synthetic",
+  "semi-synthetic",
+  "man-made",
+  "petroleum-based",
+  "artificial",
+  "lab-synthesized",
+  "engineered",
+  "industrial"
+ ],
+ "Polyethylene origin": [
+  "natural",
+  "semi-synthetic",
+  "biological",
+  "plant-derived",
+  "animal-derived",
+  "fermented",
+  "naturally occurring",
+  "bio-based"
+ ],
+ "Nylon origin": [
+  "natural",
+  "semi-synthetic",
+  "biological",
+  "plant-derived",
+  "animal-derived",
+  "fermented",
+  "naturally occurring",
+  "bio-based"
+ ],
+ "Rayon origin": [
+  "natural",
+  "synthetic",
+  "biopolymer",
+  "fully synthetic",
+  "man-made",
+  "petroleum-based",
+  "naturally occurring",
+  "animal-derived"
+ ],
+ "Cellulose acetate origin": [
+  "natural",
+  "synthetic",
+  "biopolymer",
+  "fully synthetic",
+  "man-made",
+  "petroleum-based",
+  "naturally occurring",
+  "animal-derived"
+ ],
+ "Rayon is made by modifying what?": [
+  "starch",
+  "protein",
+  "petroleum",
+  "ethylene",
+  "collagen",
+  "chitin",
+  "lignin",
+  "keratin"
+ ],
+ "One type of repeat unit": [
+  "heteropolymer",
+  "copolymer",
+  "block copolymer",
+  "random copolymer",
+  "alternating copolymer",
+  "graft copolymer",
+  "biopolymer",
+  "oligomer"
+ ],
+ "Two or more types of repeat unit": [
+  "homopolymer",
+  "monomer",
+  "oligomer",
+  "biopolymer",
+  "cross-linked polymer",
+  "thermoplastic",
+  "thermoset",
+  "branched polymer"
+ ],
+ "A protein is a heteropolymer and a": [
+  "homopolymer",
+  "thermoplastic",
+  "thermoset",
+  "monomer",
+  "oligomer",
+  "synthetic polymer",
+  "cross-linked polymer",
+  "elastomer"
+ ],
+ "Copolymer: ABABAB": [
+  "block",
+  "random",
+  "graft",
+  "homopolymer",
+  "branched",
+  "cross-linked",
+  "star",
+  "comb"
+ ],
+ "Copolymer: AAABBB": [
+  "alternating",
+  "random",
+  "graft",
+  "homopolymer",
+  "branched",
+  "cross-linked",
+  "star",
+  "linear"
+ ],
+ "Copolymer: ABBAAB": [
+  "alternating",
+  "block",
+  "graft",
+  "homopolymer",
+  "branched",
+  "cross-linked",
+  "star",
+  "linear"
+ ],
+ "Copolymer: A backbone with B side chains": [
+  "alternating",
+  "block",
+  "random",
+  "cross-linked",
+  "star",
+  "linear",
+  "homopolymer",
+  "thermoset"
+ ],
+ "Chain architecture: chains tied together": [
+  "branched",
+  "linear",
+  "graft",
+  "star",
+  "random",
+  "alternating",
+  "block",
+  "ladder"
+ ],
+ "Chain architecture: side branches off the main chain": [
+  "linear",
+  "cross-linked",
+  "star",
+  "random",
+  "alternating",
+  "block",
+  "ladder",
+  "network"
+ ],
+ "Softens when heated, re-melts": [
+  "thermoset",
+  "crystalline",
+  "amorphous",
+  "elastomer",
+  "cross-linked",
+  "biopolymer",
+  "copolymer",
+  "homopolymer"
+ ],
+ "Cross-linked, won't re-melt": [
+  "thermoplastic",
+  "elastomer",
+  "semi-crystalline",
+  "amorphous",
+  "crystalline",
+  "copolymer",
+  "homopolymer",
+  "monomer"
+ ],
+ "Stretches and snaps back": [
+  "thermoset",
+  "thermoplastic",
+  "crystalline",
+  "amorphous",
+  "semi-crystalline",
+  "copolymer",
+  "homopolymer",
+  "plasticizer"
+ ],
+ "Recyclable by melting: thermoplastic or thermoset?": [
+  "thermoset",
+  "elastomer",
+  "only thermoset",
+  "both types",
+  "neither type",
+  "only PVC",
+  "only polyester",
+  "depends on the additive"
+ ],
+ "Ordered, tightly packed chains": [
+  "amorphous",
+  "semi-crystalline",
+  "thermoset",
+  "elastomer",
+  "branched",
+  "cross-linked",
+  "thermoplastic",
+  "glassy"
+ ],
+ "Disordered chains": [
+  "crystalline",
+  "semi-crystalline",
+  "cross-linked",
+  "thermoset",
+  "helical",
+  "linear",
+  "thermoplastic",
+  "elastomeric"
+ ],
+ "Has both crystalline and amorphous regions": [
+  "crystalline",
+  "amorphous",
+  "thermoset",
+  "elastomer",
+  "copolymer",
+  "homopolymer",
+  "cross-linked",
+  "glassy"
+ ],
+ "Most polymers are": [
+  "fully crystalline",
+  "fully amorphous",
+  "thermosets",
+  "elastomers",
+  "cross-linked",
+  "homopolymers",
+  "copolymers",
+  "glassy"
+ ],
+ "Milk jug polyethylene": [
+  "LDPE",
+  "LLDPE",
+  "PP",
+  "PET",
+  "PVC",
+  "PS",
+  "nylon-6,6",
+  "UHMWPE"
+ ],
+ "Plastic bag polyethylene": [
+  "HDPE",
+  "polycarbonate",
+  "PP",
+  "PET",
+  "PVC",
+  "PS",
+  "nylon-6,6",
+  "UHMWPE"
+ ],
+ "More branched: HDPE or LDPE?": [
+  "HDPE",
+  "both equally",
+  "neither",
+  "PP",
+  "PET",
+  "PVC",
+  "PS",
+  "LLDPE"
+ ],
+ "More crystalline: HDPE or LDPE?": [
+  "LDPE",
+  "both equally",
+  "neither",
+  "PP",
+  "PET",
+  "PVC",
+  "PS",
+  "LLDPE"
+ ],
+ "Branching makes crystallinity go": [
+  "up",
+  "stay the same",
+  "up then down",
+  "to zero",
+  "up sharply",
+  "unpredictably",
+  "down then up",
+  "to 100%"
+ ],
+ "Lab 1 cross-linked polymer": [
+  "polyethylene",
+  "polystyrene",
+  "poly(vinyl alcohol)",
+  "nylon-6,6",
+  "PET",
+  "polypropylene",
+  "poly(acrylamide)",
+  "PVC"
+ ],
+ "Cross-linked polymer in solvent or base": [
+  "dissolves",
+  "melts",
+  "shrinks",
+  "crystallizes",
+  "evaporates",
+  "decomposes",
+  "hardens",
+  "liquefies"
+ ],
+ "Repeat-unit molar mass: count atoms where?": [
+  "outside the brackets",
+  "across the whole chain",
+  "at the chain ends",
+  "in the side groups only",
+  "in the backbone only",
+  "per monomer pair",
+  "outside the parentheses",
+  "at the crosslink points"
+ ],
+ "Atomic mass of C": [
+  "14.01",
+  "16.00",
+  "1.008",
+  "12.00",
+  "13.01",
+  "10.81",
+  "11.01",
+  "24.02"
+ ],
+ "Atomic mass of H": [
+  "2.016",
+  "1.01",
+  "4.003",
+  "12.01",
+  "0.008",
+  "1.80",
+  "16.00",
+  "1.16"
+ ],
+ "Atomic mass of N": [
+  "12.01",
+  "16.00",
+  "15.01",
+  "14.00",
+  "28.02",
+  "7.01",
+  "13.01",
+  "10.01"
+ ],
+ "Atomic mass of O": [
+  "14.01",
+  "18.00",
+  "8.00",
+  "20.00",
+  "32.00",
+  "12.01",
+  "17.00",
+  "6.00"
+ ],
+ "DP stands for": [
+  "degree of polydispersity",
+  "dispersion percentage",
+  "density of polymer",
+  "degree of plasticity",
+  "dipole potential",
+  "polymerization rate",
+  "doubling point",
+  "depolymerization"
+ ],
+ "DP = polymer molar mass divided by the": [
+  "monomer count",
+  "number of chains",
+  "total molar mass",
+  "molecular weight of solvent",
+  "DP squared",
+  "number of repeat units",
+  "Avogadro's number",
+  "chain length"
+ ],
+ "Polymer molar mass = DP times the": [
+  "monomer count",
+  "number of chains",
+  "Avogadro's number",
+  "DP squared",
+  "degree of crystallinity",
+  "molecular weight of solvent",
+  "chain length",
+  "number of repeat units"
+ ],
+ "DP is rounded to a": [
+  "decimal",
+  "percentage",
+  "fraction",
+  "power of ten",
+  "nearest hundred",
+  "nearest thousand",
+  "negative number",
+  "ratio"
+ ],
+ "DP of 50,000 g/mol polyethylene": [
+  "1428",
+  "1250",
+  "892",
+  "3571",
+  "2000",
+  "1000",
+  "500",
+  "3566"
+ ],
+ "DP of 20,000 g/mol PET": [
+  "52",
+  "208",
+  "96",
+  "120",
+  "200",
+  "80",
+  "156",
+  "41"
+ ],
+ "Tg stands for": [
+  "melting temperature",
+  "gelation temperature",
+  "glass transformation time",
+  "growth temperature",
+  "gel point temperature",
+  "glassy tensile strength",
+  "global temperature",
+  "grain transition temperature"
+ ],
+ "Tm stands for": [
+  "glass transition temperature",
+  "mixing temperature",
+  "molar temperature",
+  "maximum temperature",
+  "melt time",
+  "mechanical toughness",
+  "monomer temperature",
+  "minimum temperature"
+ ],
+ "Glassy to rubbery": [
+  "Tm",
+  "Td",
+  "Tc",
+  "Tb",
+  "Tx",
+  "boiling point",
+  "melting point",
+  "flash point"
+ ],
+ "Crystalline regions melt": [
+  "Tg",
+  "Td",
+  "Tc",
+  "Tb",
+  "Tx",
+  "boiling point",
+  "glass transition",
+  "decomposition point"
+ ],
+ "Tg governs which regions?": [
+  "crystalline",
+  "semi-crystalline",
+  "cross-linked",
+  "both regions",
+  "neither region",
+  "linear regions",
+  "branched regions",
+  "elastomeric regions"
+ ],
+ "Tm governs which regions?": [
+  "amorphous",
+  "semi-crystalline",
+  "cross-linked",
+  "both regions",
+  "neither region",
+  "glassy regions only",
+  "branched regions",
+  "elastomeric regions"
+ ],
+ "Dry spaghetti: above or below Tg?": [
+  "above",
+  "at",
+  "near",
+  "well above",
+  "equal to",
+  "unrelated to",
+  "above Tm",
+  "at Tm"
+ ],
+ "Cooked spaghetti: above or below Tg?": [
+  "below",
+  "at",
+  "near",
+  "well below",
+  "equal to",
+  "unrelated to",
+  "below Tm",
+  "at Tm"
+ ],
+ "Fully amorphous polymer lacks which transition?": [
+  "Tg",
+  "Td",
+  "Tc",
+  "Tb",
+  "Tx",
+  "boiling point",
+  "decomposition point",
+  "flash point"
+ ],
+ "Example polymer with Tg but no Tm": [
+  "polyethylene",
+  "polypropylene",
+  "PET",
+  "nylon-6,6",
+  "HDPE",
+  "LDPE",
+  "UHMWPE",
+  "PP"
+ ],
+ "Dye polyester above or below Tg?": [
+  "below",
+  "at",
+  "near",
+  "well below",
+  "equal to",
+  "unrelated to",
+  "below Tm",
+  "at Tm"
+ ],
+ "Free-radical mechanism on the exam?": [
+  "yes",
+  "only for addition polymers",
+  "only for PE",
+  "sometimes",
+  "only on the final",
+  "only for condensation",
+  "yes but briefly",
+  "only in lab"
+ ],
+ "Structure 01 (add image 01.png): Name this molecule": [
+  "ethane",
+  "methanol",
+  "ammonia",
+  "water",
+  "propane",
+  "methylene",
+  "formaldehyde",
+  "ethylene"
+ ],
+ "Structure 02 (add image 02.png): Name this molecule": [
+  "methane",
+  "ammonia",
+  "hydrogen peroxide",
+  "methanol",
+  "oxygen",
+  "ethanol",
+  "carbon dioxide",
+  "hydronium"
+ ],
+ "Structure 03 (add image 03.png): Name this molecule": [
+  "methane",
+  "water",
+  "methylamine",
+  "hydrazine",
+  "nitrogen",
+  "amine",
+  "urea",
+  "hydroxylamine"
+ ],
+ "Structure 04 (add image 04.png): Name this molecule": [
+  "nitrogen",
+  "ozone",
+  "water",
+  "hydrogen",
+  "carbon dioxide",
+  "methane",
+  "hydrogen peroxide",
+  "sulfur dioxide"
+ ],
+ "Structure 05 (add image 05.png): Name this molecule": [
+  "methane",
+  "ethylene",
+  "propane",
+  "acetylene",
+  "methanol",
+  "ethanol",
+  "butane",
+  "ethene"
+ ],
+ "Structure 06 (add image 06.png): Name this molecule": [
+  "ethane",
+  "acetylene",
+  "propylene",
+  "methane",
+  "ethanol",
+  "butylene",
+  "propane",
+  "vinyl chloride"
+ ],
+ "Structure 07 (add image 07.png): Name this molecule": [
+  "ethylene",
+  "ethane",
+  "propyne",
+  "methane",
+  "butyne",
+  "propylene",
+  "benzene",
+  "ethanol"
+ ],
+ "Structure 08 (add image 08.png): Skeletal. Name it": [
+  "methane",
+  "ethylene",
+  "propane",
+  "acetylene",
+  "methanol",
+  "butane",
+  "ethanol",
+  "propylene"
+ ],
+ "Structure 09 (add image 09.png): Skeletal. Name it": [
+  "ethane",
+  "acetylene",
+  "propylene",
+  "methane",
+  "butylene",
+  "propane",
+  "vinyl chloride",
+  "ethanol"
+ ],
+ "Structure 10 (add image 10.png): Skeletal. Name it": [
+  "ethylene",
+  "ethane",
+  "propyne",
+  "methane",
+  "butyne",
+  "propylene",
+  "benzene",
+  "ethanol"
+ ],
+ "Structure 11 (add image 11.png): Skeletal. Formula?": [
+  "C5H10",
+  "C5H14",
+  "C4H10",
+  "C6H14",
+  "C5H11",
+  "C6H12",
+  "C4H8",
+  "C5H13"
+ ],
+ "Structure 12 (add image 12.png): Skeletal. Formula?": [
+  "C6H12",
+  "C6H16",
+  "C5H12",
+  "C7H16",
+  "C6H13",
+  "C7H14",
+  "C5H10",
+  "C6H15"
+ ],
+ "Structure 13 (add image 13.png): Name it": [
+  "cyclohexane",
+  "toluene",
+  "naphthalene",
+  "phenol",
+  "cyclohexene",
+  "styrene",
+  "xylene",
+  "pyridine"
+ ],
+ "Structure 14 (add image 14.png): Name it": [
+  "cyclohexane",
+  "toluene",
+  "naphthalene",
+  "phenol",
+  "cyclohexene",
+  "styrene",
+  "xylene",
+  "pyridine"
+ ],
+ "Structure 15 (add image 15.png): Formula? (count hidden H)": [
+  "C6H8O",
+  "C7H8O",
+  "C6H6O2",
+  "C5H6O",
+  "C6H4O",
+  "C7H6O",
+  "C6H10O",
+  "C6H6"
+ ],
+ "Structure 16 (add image 16.png): Formula? (count hidden H)": [
+  "C7H6",
+  "C7H10",
+  "C6H6",
+  "C8H10",
+  "C7H8O",
+  "C6H8",
+  "C8H8",
+  "C7H9"
+ ],
+ "Structure 17 (add image 17.png): Polymer this monomer makes": [
+  "polypropylene",
+  "polystyrene",
+  "PVC",
+  "PET",
+  "nylon-6,6",
+  "polybutylene",
+  "polyisobutylene",
+  "poly(vinyl acetate)"
+ ],
+ "Structure 18 (add image 18.png): Polymer this monomer makes": [
+  "polyethylene",
+  "polystyrene",
+  "PVC",
+  "PET",
+  "nylon-6,6",
+  "polybutylene",
+  "poly(vinyl acetate)",
+  "polyisoprene"
+ ],
+ "Structure 19 (add image 19.png): Polymer this monomer makes": [
+  "polyethylene",
+  "polypropylene",
+  "PVC",
+  "PET",
+  "nylon-6,6",
+  "poly(vinyl acetate)",
+  "polybutadiene",
+  "polyisoprene"
+ ],
+ "Structure 20 (add image 20.png): Polymer this monomer makes": [
+  "polyethylene",
+  "polypropylene",
+  "polystyrene",
+  "PET",
+  "nylon-6,6",
+  "poly(vinylidene chloride)",
+  "poly(vinyl acetate)",
+  "PTFE"
+ ],
+ "Structure 21 (add image 21.png): Which polymer?": [
+  "polypropylene",
+  "polystyrene",
+  "PVC",
+  "PET",
+  "nylon-6,6",
+  "polybutylene",
+  "poly(vinyl acetate)",
+  "PTFE"
+ ],
+ "Structure 22 (add image 22.png): Which polymer?": [
+  "polyethylene",
+  "polystyrene",
+  "PVC",
+  "PET",
+  "nylon-6,6",
+  "polybutylene",
+  "poly(vinyl acetate)",
+  "polyisobutylene"
+ ],
+ "Structure 23 (add image 23.png): Which polymer?": [
+  "polyethylene",
+  "polypropylene",
+  "PVC",
+  "PET",
+  "nylon-6,6",
+  "poly(vinyl acetate)",
+  "polybutadiene",
+  "polyisoprene"
+ ],
+ "Structure 24 (add image 24.png): Which polymer?": [
+  "polyethylene",
+  "polypropylene",
+  "polystyrene",
+  "PET",
+  "nylon-6,6",
+  "poly(vinylidene chloride)",
+  "poly(vinyl acetate)",
+  "PTFE"
+ ],
+ "Structure 25 (add image 25.png): Skeletal repeat unit. Which polymer?": [
+  "polyethylene",
+  "polystyrene",
+  "PVC",
+  "PET",
+  "nylon-6,6",
+  "polybutylene",
+  "poly(vinyl acetate)",
+  "polyisobutylene"
+ ],
+ "Structure 26 (add image 26.png): Name this monomer": [
+  "1,4-diaminobutane",
+  "1,2-diaminoethane",
+  "1,8-diaminooctane",
+  "caprolactam",
+  "adipic acid",
+  "terephthalic acid",
+  "ethylene glycol",
+  "sebacic acid"
+ ],
+ "Structure 27 (add image 27.png): Name this monomer": [
+  "terephthalic acid",
+  "sebacic acid",
+  "1,6-diaminohexane",
+  "ethylene glycol",
+  "succinic acid",
+  "oxalic acid",
+  "caprolactam",
+  "malonic acid"
+ ],
+ "Structure 28 (add image 28.png): Name this monomer": [
+  "adipic acid",
+  "isophthalic acid",
+  "ethylene glycol",
+  "1,6-diaminohexane",
+  "benzoic acid",
+  "phthalic acid",
+  "sebacic acid",
+  "caprolactam"
+ ],
+ "Structure 29 (add image 29.png): Name this monomer": [
+  "propylene glycol",
+  "adipic acid",
+  "terephthalic acid",
+  "1,6-diaminohexane",
+  "methanol",
+  "glycerol",
+  "diethylene glycol",
+  "ethanol"
+ ],
+ "Structure 30 (add image 30.png): Name this link": [
+  "ester",
+  "ether",
+  "urethane",
+  "imide",
+  "anhydride",
+  "carbonate",
+  "amine",
+  "carboxylic acid"
+ ],
+ "Structure 31 (add image 31.png): Name this link": [
+  "amide",
+  "ether",
+  "urethane",
+  "imide",
+  "anhydride",
+  "carbonate",
+  "carboxylic acid",
+  "amine"
+ ],
+ "Structure 32 (add image 32.png): Which polymer?": [
+  "nylon-6",
+  "PET",
+  "polystyrene",
+  "polyethylene",
+  "Kevlar",
+  "polypropylene",
+  "PVC",
+  "polyurethane"
+ ],
+ "Structure 33 (add image 33.png): Which polymer?": [
+  "nylon-6,6",
+  "polystyrene",
+  "polyethylene",
+  "PVC",
+  "polypropylene",
+  "PBT",
+  "polycarbonate",
+  "poly(vinyl acetate)"
+ ]
+}

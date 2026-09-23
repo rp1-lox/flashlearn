@@ -5,9 +5,8 @@ A self-hosted, Quizlet-style flashcard app with **Learn** and **Cram** modes. Pl
 ## Open it
 
 - **Laptop:** double-click `index.html` (opens in Chrome or Edge from `file://`). That's it.
-- **Hosted:** any static host works (GitHub Pages, Netlify, `python -m http.server`).
 - **Phone**, pick one:
-  - **Wi-Fi from the laptop:** double-click `serve-phone.cmd` (needs Python), then on the phone (same Wi-Fi) open `http://<laptop IP>:8000` and "Add to Home screen". Keep the laptop window open while studying.
+  - **Wi-Fi from the laptop:** double-click `serve-phone.cmd` (needs Python), then on the phone (same Wi-Fi) open `http://<laptop IP>:8000` and "Add to Home screen". Keep the laptop window open while studying. If Windows asks whether Python may use the network, allow Private networks.
   - **Single file:** `dist/flashlearn.html` is the whole app in one file (images included). Put it on the phone (Drive → download). Android Chrome opens it from Downloads; iPhone Safari cannot run local HTML files, so use the Wi-Fi option or a host there.
   - **Hosted:** any static host (GitHub Pages on a public repo or paid plan, Netlify Drop, Cloudflare Pages). This repo is private, and GitHub Pages for private repos needs a paid plan.
 

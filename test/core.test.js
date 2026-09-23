@@ -133,11 +133,12 @@ test('buildRound prioritizes familiar cards, then new', () => {
 });
 
 test('question type: new -> mc, familiar -> written, respects settings', () => {
-  const s = FL.defaultSettings();
+  const s = Object.assign(FL.defaultSettings(), { tf: false });
   assert.equal(FL.questionType({ stage: 0 }, s), 'mc');
   assert.equal(FL.questionType({ stage: 1 }, s), 'written');
-  assert.equal(FL.questionType({ stage: 0 }, { mc: false, written: true }), 'written');
-  assert.equal(FL.questionType({ stage: 1 }, { mc: true, written: false }), 'mc');
+  assert.equal(FL.questionType({ stage: 0 }, { mc: false, tf: false, written: true }), 'written');
+  assert.equal(FL.questionType({ stage: 1 }, { mc: true, tf: false, written: false }), 'mc');
+  assert.equal(FL.questionType({ stage: 0 }, { mc: false, tf: false, written: false }), 'mc');
 });
 
 test('learnAnswer: correct promotes New -> Familiar -> Mastered with SRS', () => {
@@ -241,7 +242,7 @@ test('cram: a miss comes back within 2 questions', () => {
 
 test('cram: mc correct then written required', () => {
   const cards = deck(3);
-  const s = FL.defaultSettings();
+  const s = Object.assign(FL.defaultSettings(), { tf: false });
   const st = FL.cramInit(cards, s, rng);
   const q = FL.cramNext(st, s);
   assert.equal(q.type, 'mc');
@@ -255,7 +256,7 @@ test('cram: mc correct then written required', () => {
 
 test('cram: written-only setting clears on one written answer', () => {
   const cards = deck(3);
-  const s = Object.assign(FL.defaultSettings(), { mc: false });
+  const s = Object.assign(FL.defaultSettings(), { mc: false, tf: false });
   const st = FL.cramInit(cards, s, rng);
   for (let i = 0; i < 3; i++) { const q = FL.cramNext(st, s); assert.equal(q.type, 'written'); FL.cramAnswer(st, q.id, q.type, true, s, rng); }
   assert.equal(st.phase, 'final');
@@ -278,4 +279,240 @@ test('buildChoices skips distractors that contain or are contained in the answer
     { id: 'c', term: '3', def: 'Ethane' }, { id: 'd', term: '4', def: 'Propane' }, { id: 'e', term: '5', def: 'Butane' },
   ];
   for (let i = 0; i < 10; i++) assert.ok(!FL.buildChoices(cards[0], cards, 'def', 4).some((o) => o.id === 'b'));
+});
+
+// ---------- per-card fake answers ----------
+function fakeCard(n) {
+  return { id: 'f', term: 'Q', def: 'polymers and colorants', fakes: Array.from({ length: n }, (_, i) => 'fake answer ' + i) };
+}
+function fakesOf(opts) { return opts.filter((o) => o.fake).map((o) => o.fake); }
+
+test('buildChoices uses 3 of the card fakes when it has at least 3', () => {
+  const card = fakeCard(8);
+  const cards = [card].concat(deck(10));
+  const opts = FL.buildChoices(card, cards, 'def', 4, rng, {});
+  assert.equal(opts.length, 4);
+  assert.equal(opts.filter((o) => o.id === 'f').length, 1);
+  assert.equal(fakesOf(opts).length, 3);
+  opts.filter((o) => o.id !== 'f').forEach((o) => assert.ok(card.fakes.includes(o.text)));
+});
+
+test('buildChoices rotates through the least-shown fakes', () => {
+  const card = fakeCard(8);
+  const shown = {};
+  const firstTwo = [];
+  for (let i = 0; i < 2; i++) {
+    const f = fakesOf(FL.buildChoices(card, [card], 'def', 4, Math.random, shown));
+    FL.noteFakesShown(shown, f);
+    firstTwo.push(...f);
+  }
+  assert.equal(new Set(firstTwo).size, 6, 'no fake repeats while unseen ones remain');
+  const unseen = card.fakes.filter((f) => !shown[f]);
+  assert.equal(unseen.length, 2);
+  const third = fakesOf(FL.buildChoices(card, [card], 'def', 4, Math.random, shown));
+  unseen.forEach((f) => assert.ok(third.includes(f), 'the never-shown fakes come next'));
+  FL.noteFakesShown(shown, third);
+  // 8 asks x 3 fakes = 24 slots over 8 fakes: every fake shown exactly 3 times
+  for (let i = 0; i < 5; i++) FL.noteFakesShown(shown, fakesOf(FL.buildChoices(card, [card], 'def', 4, Math.random, shown)));
+  assert.deepEqual(card.fakes.map((f) => shown[f]), [3, 3, 3, 3, 3, 3, 3, 3]);
+});
+
+test('pickFakes breaks ties randomly and prefers least shown', () => {
+  const fakes = ['a', 'b', 'c', 'd', 'e', 'f'];
+  const firsts = new Set();
+  for (let i = 0; i < 60; i++) firsts.add(FL.pickFakes(fakes, { a: 1 }, 1)[0]);
+  assert.ok(firsts.size > 2);
+  assert.ok(!firsts.has('a'));
+});
+
+test('buildChoices fills with deck distractors when the card has fewer than 3 fakes', () => {
+  const card = fakeCard(1);
+  const cards = [card].concat(deck(10));
+  const opts = FL.buildChoices(card, cards, 'def', 4, rng, {});
+  assert.equal(opts.length, 4);
+  assert.equal(fakesOf(opts).length, 1);
+  assert.equal(opts.filter((o) => /^c\d$/.test(o.id)).length, 2);
+  assert.equal(new Set(opts.map((o) => o.text)).size, 4);
+  const none = FL.buildChoices({ id: 'f', term: 'Q', def: 'polymers and colorants' }, cards, 'def', 4, rng, {});
+  assert.equal(none.filter((o) => /^c\d$/.test(o.id)).length, 3);
+});
+
+test('buildChoices ignores fakes when answering with the term', () => {
+  const card = fakeCard(8);
+  const cards = [card].concat(deck(10));
+  const opts = FL.buildChoices(card, cards, 'term', 4, rng, {});
+  assert.equal(fakesOf(opts).length, 0);
+  opts.filter((o) => o.id !== 'f').forEach((o) => assert.match(o.text, /^term \d$/));
+});
+
+test('cleanFakes drops fakes equal to the answer or graded correct', () => {
+  const r = FL.cleanFakes(['Polymers and colorants!', 'polymers and colorant', 'polymers & colorants', '  ', 'dyes and pigments', 'Dyes and pigments', 'resins'], 'polymers and colorants');
+  assert.deepEqual(r.fakes, ['dyes and pigments', 'resins']);
+  assert.equal(r.dropped, 3);
+  assert.equal(r.dupes, 1);
+  // the grader accepts the answer without its parenthetical, so that fake goes too
+  assert.deepEqual(FL.cleanFakes(['organic chemistry', 'physical chemistry'], 'Organic chemistry (carbon-based)').fakes, ['physical chemistry']);
+  // subscripts normalize to digits
+  assert.deepEqual(FL.cleanFakes(['CH4', 'C2H6'], 'CH₄').fakes, ['C2H6']);
+});
+
+test('buildChoices never offers a fake that grades as the answer', () => {
+  const card = { id: 'f', term: 'Q', def: 'methane', fakes: ['Methane', 'methan', 'ethane', 'propane', 'butane'] };
+  for (let i = 0; i < 20; i++) {
+    const opts = FL.buildChoices(card, [card], 'def', 4, Math.random, {});
+    assert.equal(opts.filter((o) => FL.normalize(o.text).startsWith('methan')).length, 1);
+  }
+});
+
+// ---------- true / false ----------
+test('trueFalseCandidate: about half true; false ones are the card fakes, least shown first', () => {
+  const card = fakeCard(4);
+  const cards = [card].concat(deck(10));
+  const shown = {};
+  let trues = 0;
+  for (let i = 0; i < 400; i++) {
+    const c = FL.trueFalseCandidate(card, cards, 'def', shown);
+    if (c.isTrue) { trues++; assert.equal(c.text, card.def); continue; }
+    assert.ok(card.fakes.includes(c.text), 'false candidate is one of the card fakes, never another card');
+    FL.noteFakesShown(shown, [c.fake]);
+    const counts = card.fakes.map((f) => shown[f] || 0);
+    assert.ok(Math.max(...counts) - Math.min(...counts) <= 1, 'rotates least shown first');
+  }
+  assert.ok(trues > 150 && trues < 250, 'roughly half true, got ' + trues);
+});
+
+test('trueFalseCandidate falls back to another card answer when the card has no fakes', () => {
+  const cards = deck(10);
+  let falses = 0;
+  for (let i = 0; i < 100; i++) {
+    const c = FL.trueFalseCandidate(cards[0], cards, 'def', {});
+    if (!c.isTrue) { falses++; assert.notEqual(c.text, cards[0].def); assert.ok(cards.some((x) => x.id === c.otherId && x.def === c.text)); }
+  }
+  assert.ok(falses > 20);
+  // term side ignores fakes
+  const card = fakeCard(8);
+  for (let i = 0; i < 50; i++) {
+    const c = FL.trueFalseCandidate(card, [card].concat(deck(5)), 'term', {});
+    assert.ok(c.isTrue ? c.text === 'Q' : /^term \d$/.test(c.text));
+  }
+});
+
+test('trueFalseAllowed: a card with fakes needs at least 2 usable ones', () => {
+  assert.equal(FL.trueFalseAllowed(fakeCard(2), 'def'), true);
+  assert.equal(FL.trueFalseAllowed(fakeCard(1), 'def'), false);
+  assert.equal(FL.trueFalseAllowed({ id: 'x', term: 'a', def: 'methane', fakes: ['Methane', 'ethane'] }, 'def'), false);
+  assert.equal(FL.trueFalseAllowed({ id: 'x', term: 'a', def: 'b' }, 'def'), true);
+  assert.equal(FL.trueFalseAllowed(fakeCard(1), 'term'), true);
+});
+
+test('question type mixes true/false into recognition about 1 in 3', () => {
+  const s = FL.defaultSettings();
+  let tf = 0;
+  for (let i = 0; i < 900; i++) {
+    const t = FL.questionType({ stage: 0 }, s);
+    assert.ok(t === 'mc' || t === 'tf');
+    if (t === 'tf') tf++;
+  }
+  assert.ok(tf > 220 && tf < 380, 'got ' + tf);
+  for (let i = 0; i < 50; i++) assert.equal(FL.questionType({ stage: 1 }, s), 'written');
+  assert.equal(FL.questionType({ stage: 0 }, { mc: false, tf: true, written: true }), 'tf');
+});
+
+test('learn: true/false moves New -> Familiar; mastery still needs a written answer', () => {
+  const s = FL.defaultSettings();
+  const progress = {};
+  const round = { queue: ['c0'], done: [], missed: [], answered: 0, correct: 0 };
+  assert.equal(FL.questionType(FL.cardState(progress, 'c0'), s, 0, () => 0.1), 'tf');
+  FL.learnAnswer(round, progress, 'c0', true, 0);
+  assert.equal(progress.c0.stage, FL.FAMILIAR);
+  assert.equal(FL.questionType(progress.c0, s, 0, () => 0.1), 'written');
+});
+
+test('cram: a correct true/false answer counts as recognition, then written', () => {
+  const cards = deck(3);
+  const s = FL.defaultSettings();
+  const st = FL.cramInit(cards, s, rng);
+  const q = FL.cramNext(st, s, () => 0.1);
+  assert.equal(q.type, 'tf');
+  FL.cramAnswer(st, q.id, 'tf', true, s, rng);
+  assert.equal(st.stage[q.id], 1);
+});
+
+// ---------- seed upgrades ----------
+test('mergeSeedDeck keeps progress for unchanged cards and resets changed ones', () => {
+  const oldDeck = {
+    id: 'seed-x', name: 'Old name', folder: 'Mine', settings: { answerWith: 'term', mc: true, tf: false, written: true, roundSize: 9 },
+    cards: [
+      { id: 'seed-a', term: 'A', def: 'a', starred: true },
+      { id: 'seed-b', term: 'B', def: 'b', starred: true },
+      { id: 'seed-gone', term: 'G', def: 'g' },
+      { id: 'c_user', term: 'U', def: 'u' },
+    ],
+    learn: {
+      progress: { 'seed-a': { stage: 2, misses: 1, seen: 3 }, 'seed-b': { stage: 1, misses: 0, seen: 1 }, 'seed-gone': { stage: 1 }, c_user: { stage: 1, misses: 0, seen: 1 } },
+      fakeShown: { 'seed-a': { x: 2 }, 'seed-b': { y: 1 } },
+      round: { queue: ['seed-gone', 'seed-a'], ids: ['seed-gone', 'seed-a'], done: [], missed: [], answered: 0, correct: 0, size: 2 }, roundNo: 4,
+    },
+    cram: { phase: 'final', stage: { 'seed-a': 2, 'seed-b': 2 }, misses: { 'seed-a': 3, 'seed-b': 1 }, active: [], pending: [], final: ['seed-a', 'seed-b'], finalDone: [], total: 2, answered: 9, correct: 5, windowSize: 7 },
+  };
+  const incoming = {
+    id: 'seed-x', name: 'New name', version: 2,
+    cards: [
+      { id: 'seed-a', term: 'A', def: 'a', fakes: ['f1', 'f2', 'f3'], starred: false },
+      { id: 'seed-b', term: 'B', def: 'b changed', starred: false },
+      { id: 'seed-new', term: 'N', def: 'n', starred: false },
+    ],
+  };
+  const settingsBefore = JSON.parse(JSON.stringify(oldDeck.settings));
+  const d = FL.mergeSeedDeck(oldDeck, incoming);
+  assert.deepEqual(d.cards.map((c) => c.id), ['seed-a', 'seed-b', 'seed-new', 'c_user']);
+  assert.deepEqual(d.cards[0].fakes, ['f1', 'f2', 'f3']);
+  assert.equal(d.cards[1].def, 'b changed');
+  assert.equal(d.cards[0].starred, true);
+  assert.equal(d.cards[1].starred, true);
+  assert.deepEqual(d.learn.progress, { 'seed-a': { stage: 2, misses: 1, seen: 3 }, c_user: { stage: 1, misses: 0, seen: 1 } });
+  assert.deepEqual(d.learn.fakeShown, { 'seed-a': { x: 2 } });
+  assert.deepEqual(d.learn.round.queue, ['seed-a']);
+  assert.equal(d.learn.roundNo, 4);
+  assert.deepEqual(d.settings, settingsBefore);
+  assert.equal(d.folder, 'Mine');
+  assert.equal(d.name, 'New name');
+  assert.deepEqual(d.cram.stage, { 'seed-a': 2 });
+  assert.deepEqual(d.cram.misses, { 'seed-a': 3 });
+  assert.equal(d.cram.phase, 'drill');
+  ['seed-b', 'seed-new', 'c_user'].forEach((id) => assert.ok(d.cram.active.includes(id), id + ' queued for drilling'));
+  assert.deepEqual(d.upgrade, { kept: 2, fresh: 2 });
+});
+
+test('mergeSeedDeck with only fakes added keeps every card, all progress and the whole cram', () => {
+  const cards = deck(3).map((c) => Object.assign(c, { id: 'seed-' + c.id }));
+  const s = FL.defaultSettings();
+  const cram = FL.cramInit(cards, s, rng);
+  FL.cramAnswer(cram, cram.active[0], 'mc', true, s, rng);
+  const before = JSON.parse(JSON.stringify(cram));
+  const progress = { 'seed-c0': { stage: 1, misses: 0, seen: 1 } };
+  const oldDeck = { cards: cards.map((c) => Object.assign({}, c)), learn: { progress: progress, round: null, roundNo: 1 }, cram: cram };
+  const incoming = { name: 'X', cards: cards.map((c) => Object.assign({}, c, { fakes: ['p', 'q', 'r'] })) };
+  const d = FL.mergeSeedDeck(oldDeck, incoming);
+  assert.deepEqual(d.learn.progress, { 'seed-c0': { stage: 1, misses: 0, seen: 1 } });
+  assert.deepEqual(d.cram, before);
+  assert.ok(d.cards.every((c) => c.fakes.length === 3));
+  assert.deepEqual(d.upgrade, { kept: 3, fresh: 0 });
+});
+
+test('grade: a different number is never a typo', () => {
+  assert.equal(FL.grade('C2H4', 'C2H6').correct, false);
+  assert.equal(FL.grade('14.01', '12.01').correct, false);
+  assert.equal(FL.grade('2, 8, 18', '2, 8, 8').correct, false);
+  assert.equal(FL.grade('C2H6', 'C₂H₆').correct, true);
+  assert.equal(FL.grade('polyethylen 6', 'polyethylene 6').correct, true);
+});
+
+test('grade: a typo that is as close to a known wrong answer is not accepted', () => {
+  assert.equal(FL.grade('alkene', 'alkane').correct, true); // without context the grader forgives one letter
+  const r = FL.grade('alkene', 'alkane', ['alkene', 'alkyne']);
+  assert.equal(r.correct, false);
+  assert.equal(r.close, true);
+  assert.equal(FL.grade('alkanne', 'alkane', ['alkene', 'alkyne']).correct, true);
+  assert.equal(FL.grade('alkane', 'alkane', ['alkene']).correct, true);
 });

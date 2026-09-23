@@ -123,8 +123,16 @@
     return out.filter(Boolean);
   }
 
-  /** Returns {correct, close, expected}. close = near miss worth showing an override for. */
-  function grade(given, answer) {
+  function digitsOf(s) { return (s.match(/\d+/g) || []).join(','); }
+
+  /**
+   * Returns {correct, close, typo}. close = near miss worth showing an override for.
+   * Typos are forgiven by length, except in numbers: "C2H4" is not "C2H6", and
+   * "12.01" is not "14.01". `wrongs` (optional) lists known wrong answers (the
+   * card's fakes, other cards' answers): a typo-level match that is at least as
+   * close to one of them as to the answer is not accepted ("alkene" for "alkane").
+   */
+  function grade(given, answer, wrongs) {
     var g = normalize(given);
     var variants = answerVariants(answer);
     if (!g) return { correct: false, close: false };
@@ -132,7 +140,16 @@
     for (var i = 0; i < variants.length; i++) {
       var v = variants[i];
       var d = levenshtein(g, v);
-      if (d <= typoTolerance(v.length)) return { correct: true, close: false, typo: d > 0 };
+      var tol = digitsOf(g) === digitsOf(v) ? typoTolerance(v.length) : 0;
+      if (d <= tol) {
+        if (d > 0 && wrongs && wrongs.length) {
+          for (var j = 0; j < wrongs.length; j++) {
+            var w = normalize(wrongs[j]);
+            if (w && w !== v && levenshtein(g, w) <= d) return { correct: false, close: true, wrong: wrongs[j] };
+          }
+        }
+        return { correct: true, close: false, typo: d > 0 };
+      }
       if (d < best) { best = d; bestLen = v.length; }
     }
     return { correct: false, close: best <= Math.max(3, bestLen * 0.4) };
@@ -157,18 +174,15 @@
   }
 
   /**
-   * Build MC options for card `card` answering with `side` ('def' or 'term').
-   * Returns array of {id, text, img} (length <= n) including the correct one.
-   * Distractors come from the same deck, favoring plausible ones.
+   * Deck-based distractors for `card` on `side`: up to `need` other cards'
+   * answers, favoring plausible ones. `seen` holds keys already used
+   * (normalized text + '|' + image) and is updated.
    */
-  function buildChoices(card, cards, side, n, rng) {
-    rng = rng || Math.random;
-    n = n || 4;
+  function deckDistractors(card, cards, side, need, rng, seen) {
+    if (need <= 0) return [];
     var imgKey = side === 'term' ? 'termImg' : 'defImg';
     var ans = card[side];
-    var seen = {};
     var nAns = normalize(ans);
-    seen[nAns + '|' + (card[imgKey] || '')] = true;
     var pool = [];
     cards.forEach(function (c) {
       if (c.id === card.id) return;
@@ -182,10 +196,111 @@
     });
     pool.sort(function (a, b) { return b.s - a.s; });
     // take from the top plausible slice, randomized so options vary between asks
-    var top = shuffle(pool.slice(0, n), rng).slice(0, n - 1);
-    var opts = top.map(function (p) { return { id: p.c.id, text: p.c[side], img: p.c[imgKey] || null }; });
+    var top = shuffle(pool.slice(0, need + 1), rng).slice(0, need);
+    return top.map(function (p) { return { id: p.c.id, text: p.c[side], img: p.c[imgKey] || null }; });
+  }
+
+  /**
+   * Build MC options for card `card` answering with `side` ('def' or 'term').
+   * Returns array of {id, text, img} (length <= n) including the correct one.
+   * When answering with the definition and the card has fake answers, the
+   * least-shown fakes fill the wrong options first (option.fake = the fake's
+   * text; `shown` maps fake text -> times shown). Remaining slots come from
+   * the same deck, favoring plausible ones.
+   */
+  function buildChoices(card, cards, side, n, rng, shown) {
+    rng = rng || Math.random;
+    n = n || 4;
+    var imgKey = side === 'term' ? 'termImg' : 'defImg';
+    var ans = card[side];
+    var seen = {};
+    seen[normalize(ans) + '|' + (card[imgKey] || '')] = true;
+    var opts = [];
+    if (side === 'def') {
+      pickFakes(cleanFakes(card.fakes, ans).fakes, shown, n - 1, rng).forEach(function (f, i) {
+        var key = normalize(f) + '|';
+        if (seen[key]) return;
+        seen[key] = true;
+        opts.push({ id: card.id + '#fake' + i, text: f, img: null, fake: f });
+      });
+    }
+    opts = opts.concat(deckDistractors(card, cards, side, n - 1 - opts.length, rng, seen));
     opts.push({ id: card.id, text: ans, img: card[imgKey] || null });
     return shuffle(opts, rng);
+  }
+
+  // ---------- per-card fake answers ----------
+  /**
+   * Clean a card's fake answers: trim, drop blanks and duplicates, and drop
+   * any fake that normalizes to the answer or that the written grader would
+   * accept as the answer. Returns {fakes, dropped, dupes}.
+   */
+  function cleanFakes(fakes, answer) {
+    var out = [], seen = {}, dropped = 0, dupes = 0;
+    var nAns = normalize(answer);
+    (Array.isArray(fakes) ? fakes : []).forEach(function (f) {
+      f = String(f == null ? '' : f).trim();
+      if (!f) return;
+      var n = normalize(f);
+      if (!n || (nAns && (n === nAns || grade(f, answer).correct))) { dropped++; return; }
+      if (seen[n]) { dupes++; return; }
+      seen[n] = true;
+      out.push(f);
+    });
+    return { fakes: out, dropped: dropped, dupes: dupes };
+  }
+
+  /** Up to k fakes, least shown first (shown: fake text -> count), ties broken randomly. */
+  function pickFakes(fakes, shown, k, rng) {
+    shown = shown || {};
+    return shuffle(fakes || [], rng || Math.random)
+      .map(function (f) { return { f: f, n: shown[f] || 0 }; })
+      .sort(function (a, b) { return a.n - b.n; }) // stable sort keeps the shuffled order within ties
+      .slice(0, Math.max(0, k))
+      .map(function (x) { return x.f; });
+  }
+
+  /** Record that these fakes were shown. shown: fake text -> count (mutated). */
+  function noteFakesShown(shown, list) {
+    (list || []).forEach(function (f) { if (f) shown[f] = (shown[f] || 0) + 1; });
+    return shown;
+  }
+
+  function hasFakes(card) {
+    return Array.isArray(card.fakes) && card.fakes.some(function (f) { return String(f || '').trim(); });
+  }
+
+  /**
+   * Whether a true/false question suits this card. Answering with the
+   * definition, a card that has fakes needs at least 2 usable ones (its false
+   * statements come only from its own fakes). Cards without fakes, and the
+   * term side, use other cards' answers.
+   */
+  function trueFalseAllowed(card, side) {
+    if (side !== 'def' || !hasFakes(card)) return true;
+    return cleanFakes(card.fakes, card.def).fakes.length >= 2;
+  }
+
+  /**
+   * True/false candidate for `card` answering with `side`. About half the time
+   * the real answer. Otherwise, answering with the definition, one of the
+   * card's fakes (least shown first) when it has any; cards without fakes,
+   * and the term side, use another card's answer from the deck.
+   * Returns {text, img, isTrue, fake?, otherId?}.
+   */
+  function trueFalseCandidate(card, cards, side, shown, rng) {
+    rng = rng || Math.random;
+    var imgKey = side === 'term' ? 'termImg' : 'defImg';
+    var real = { text: card[side], img: card[imgKey] || null, isTrue: true };
+    if (rng() < 0.5) return real;
+    if (side === 'def' && hasFakes(card)) {
+      var f = pickFakes(cleanFakes(card.fakes, card[side]).fakes, shown, 1, rng)[0];
+      return f ? { text: f, img: null, isTrue: false, fake: f } : real;
+    }
+    var seen = {};
+    seen[normalize(card[side]) + '|' + (card[imgKey] || '')] = true;
+    var o = deckDistractors(card, cards, side, 1, rng, seen)[0];
+    return o ? { text: o.text, img: o.img, isTrue: false, otherId: o.id } : real;
   }
 
   // ---------- spaced review (SM-2 style, applied to mastered cards) ----------
@@ -200,7 +315,7 @@
 
   // ---------- Learn ----------
   function defaultSettings() {
-    return { answerWith: 'def', mc: true, written: true, starredOnly: false, roundSize: 7 };
+    return { answerWith: 'def', mc: true, tf: true, written: true, starredOnly: false, roundSize: 7 };
   }
 
   function cardState(progress, id) {
@@ -250,12 +365,24 @@
     return { queue: shuffle(ids, rng), size: ids.length, done: [], missed: [], answered: 0, correct: 0 };
   }
 
+  /**
+   * Recognition question type (multiple choice or true/false) given settings,
+   * or null if both are off. With both on, about 1 in 3 is true/false.
+   */
+  function recognitionType(settings, rng) {
+    var mc = settings.mc !== false, tf = settings.tf !== false;
+    if (mc && tf) return (rng || Math.random)() < 1 / 3 ? 'tf' : 'mc';
+    return mc ? 'mc' : tf ? 'tf' : null;
+  }
+
+  function isRecognition(type) { return type === 'mc' || type === 'tf'; }
+
   /** Question type for a card given its stage and enabled types. */
-  function questionType(st, settings, now) {
-    var mc = settings.mc !== false, wr = settings.written !== false;
-    if (!mc && !wr) mc = true;
-    if (st.stage === NEW) return mc ? 'mc' : 'written';
-    return wr ? 'written' : 'mc'; // familiar, or mastered-and-due review
+  function questionType(st, settings, now, rng) {
+    var wr = settings.written !== false;
+    var rec = recognitionType(settings, rng) || (wr ? null : 'mc');
+    if (st.stage === NEW) return rec || 'written';
+    return wr ? 'written' : rec; // familiar, or mastered-and-due review
   }
 
   /**
@@ -306,14 +433,14 @@
     };
   }
 
-  function cramNext(state, settings) {
+  function cramNext(state, settings, rng) {
     var id = state.phase === 'drill' ? state.active[0] : state.phase === 'final' ? state.final[0] : null;
     if (!id) return null;
-    var mc = settings.mc !== false, wr = settings.written !== false;
-    if (!mc && !wr) mc = true;
+    var wr = settings.written !== false;
+    var rec = recognitionType(settings, rng) || (wr ? null : 'mc');
     var type;
-    if (state.phase === 'final') type = wr ? 'written' : 'mc';
-    else type = (state.stage[id] || 0) === 0 && mc ? 'mc' : (wr ? 'written' : 'mc');
+    if (state.phase === 'final') type = wr ? 'written' : rec;
+    else type = (state.stage[id] || 0) === 0 && rec ? rec : (wr ? 'written' : rec);
     return { id: id, type: type };
   }
 
@@ -333,8 +460,8 @@
       q.splice(q.indexOf(id), 1);
       var s = state.stage[id] || 0;
       if (correct) {
-        // MC correct -> needs written next (if written enabled); written correct -> cleared
-        s = (type === 'mc' && wr) ? 1 : 2;
+        // recognition (MC or true/false) correct -> needs written next (if written enabled); written correct -> cleared
+        s = (isRecognition(type) && wr) ? 1 : 2;
       } else {
         s = 0; // back to recognition
       }
@@ -375,12 +502,73 @@
     return state;
   }
 
+  // ---------- built-in (seed) deck upgrades ----------
+  /**
+   * Upgrade a stored built-in deck to a newer seed version without wiping
+   * progress. `incoming` is the new seed deck (cards already normalized).
+   * Cards whose id, term and def are unchanged keep their Learn progress,
+   * fake-shown counts and Cram state; changed or new cards start fresh.
+   * Stars (by card id), settings and folder are kept. Cards the user added
+   * themselves (ids not starting with "seed-") are kept at the end.
+   * Mutates and returns `existing`; existing.upgrade = {kept, fresh}.
+   */
+  function mergeSeedDeck(existing, incoming) {
+    var old = {}, inSeed = {}, kept = {}, fresh = [];
+    (existing.cards || []).forEach(function (c) { old[c.id] = c; });
+    var cards = incoming.cards.map(function (c) {
+      inSeed[c.id] = true;
+      var o = old[c.id], n = Object.assign({}, c);
+      if (o) n.starred = !!o.starred;
+      if (o && o.term === c.term && o.def === c.def) kept[c.id] = true;
+      else fresh.push(c.id);
+      return n;
+    });
+    (existing.cards || []).forEach(function (c) {
+      if (!inSeed[c.id] && !/^seed-/.test(c.id)) { cards.push(c); kept[c.id] = true; }
+    });
+    function pick(obj) {
+      var out = {};
+      Object.keys(obj || {}).forEach(function (id) { if (kept[id]) out[id] = obj[id]; });
+      return out;
+    }
+    function keep(id) { return kept[id]; }
+    var present = {};
+    cards.forEach(function (c) { present[c.id] = true; });
+    function has(id) { return present[id]; }
+    var L = existing.learn || {};
+    var round = L.round || null;
+    if (round) {
+      round.queue = (round.queue || []).filter(has);
+      if (round.ids) round.ids = round.ids.filter(has);
+    }
+    existing.learn = { progress: pick(L.progress), fakeShown: pick(L.fakeShown), round: round, roundNo: L.roundNo || 0 };
+    var C = existing.cram;
+    if (C) {
+      C.active = (C.active || []).filter(keep);
+      C.pending = (C.pending || []).filter(keep);
+      C.final = (C.final || []).filter(keep);
+      C.finalDone = (C.finalDone || []).filter(keep);
+      C.stage = pick(C.stage);
+      C.misses = pick(C.misses);
+      // new or changed cards need drilling; cramSync adds them to the drill queue
+      if (fresh.length && C.phase !== 'drill') C.phase = 'drill';
+      cramSync(C, cards);
+    }
+    existing.cards = cards;
+    existing.name = incoming.name;
+    existing.upgrade = { kept: Object.keys(kept).length, fresh: fresh.length };
+    return existing;
+  }
+
   return {
     DAY: DAY, NEW: NEW, FAMILIAR: FAMILIAR, MASTERED: MASTERED,
     uid: uid, shuffle: shuffle,
     parseImport: parseImport, splitSets: splitSets, stripImageNote: stripImageNote, exportText: exportText,
     normalize: normalize, levenshtein: levenshtein, typoTolerance: typoTolerance, grade: grade,
-    buildChoices: buildChoices, plausibility: plausibility,
+    buildChoices: buildChoices, plausibility: plausibility, deckDistractors: deckDistractors,
+    cleanFakes: cleanFakes, pickFakes: pickFakes, noteFakesShown: noteFakesShown, hasFakes: hasFakes,
+    trueFalseAllowed: trueFalseAllowed, trueFalseCandidate: trueFalseCandidate,
+    recognitionType: recognitionType, isRecognition: isRecognition, mergeSeedDeck: mergeSeedDeck,
     srsOnMastered: srsOnMastered, srsOnReview: srsOnReview,
     defaultSettings: defaultSettings, cardState: cardState, scopeCards: scopeCards, isDue: isDue,
     learnCounts: learnCounts, buildRound: buildRound, questionType: questionType, learnAnswer: learnAnswer,

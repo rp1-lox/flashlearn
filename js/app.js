@@ -26,18 +26,22 @@
     d.name = d.name || 'Untitled deck';
     d.folder = d.folder || '';
     d.cards = (d.cards || []).map(function (c) {
-      return { id: c.id || FL.uid('c'), term: c.term || '', def: c.def || '', termImg: c.termImg || null, defImg: c.defImg || null, starred: !!c.starred };
+      var fakes = Array.isArray(c.fakes) ? c.fakes.map(function (f) { return String(f == null ? '' : f).trim(); }).filter(Boolean) : [];
+      return { id: c.id || FL.uid('c'), term: c.term || '', def: c.def || '', termImg: c.termImg || null, defImg: c.defImg || null, starred: !!c.starred, fakes: fakes };
     });
     d.settings = Object.assign(FL.defaultSettings(), d.settings || {});
     d.learn = d.learn || { progress: {}, round: null, roundNo: 0 };
     d.learn.progress = d.learn.progress || {};
+    d.learn.fakeShown = d.learn.fakeShown || {};
     d.cram = d.cram || null;
     d.updated = d.updated || Date.now();
     return d;
   }
 
   // Adds each built-in deck once. When a built-in deck ships a higher
-  // `version`, the copy in storage is replaced (cards and progress reset).
+  // `version`, the stored copy takes the new cards; progress, stars and
+  // settings are kept for every card whose id, term and def are unchanged
+  // (FL.mergeSeedDeck).
   // A built-in deck the user deleted is not re-added. Retired built-in decks
   // are removed.
   function seed() {
@@ -66,10 +70,9 @@
         changed = true;
       } else if ((existing.seedVersion || 1) < version) {
         var copy = fixDeck(JSON.parse(JSON.stringify(s)));
-        existing.name = copy.name;
-        existing.cards = copy.cards;
-        existing.learn = copy.learn;
-        existing.cram = null;
+        FL.mergeSeedDeck(existing, copy);
+        fixDeck(existing);
+        delete existing.upgrade;
         existing.seedVersion = version;
         existing.updated = Date.now();
         changed = true;
@@ -345,7 +348,7 @@
           var sets = collect();
           if (!sets.length) { toast('Nothing to import yet.'); return; }
           if (targetDeck) {
-            sets.forEach(function (s) { s.cards.forEach(function (c) { targetDeck.cards.push({ id: FL.uid('c'), term: c.term, def: c.def, termImg: null, defImg: null, starred: false }); }); });
+            sets.forEach(function (s) { s.cards.forEach(function (c) { targetDeck.cards.push({ id: FL.uid('c'), term: c.term, def: c.def, termImg: null, defImg: null, starred: false, fakes: [] }); }); });
             touch(targetDeck);
             closeModal(); toast('Cards added.'); render();
             return;
@@ -447,7 +450,7 @@
     renderCards(deck);
 
     function addCard() {
-      deck.cards.push({ id: FL.uid('c'), term: '', def: '', termImg: null, defImg: null, starred: false });
+      deck.cards.push({ id: FL.uid('c'), term: '', def: '', termImg: null, defImg: null, starred: false, fakes: [] });
       touch(deck);
       cardFilter = '';
       var si = $('#cardSearch'); if (si) si.value = '';
@@ -476,7 +479,7 @@
         '<div class="row between"><span class="muted small">' + n + '</span><div class="row">' +
         '<button class="btn ghost icon star' + (c.starred ? ' on' : '') + '" data-act="star" aria-label="Star">' + (c.starred ? '★' : '☆') + '</button>' +
         '<button class="btn ghost icon" data-act="del" aria-label="Delete card">🗑</button></div></div>' +
-        side(c, 'term', 'Term') + side(c, 'def', 'Definition') + '</div>';
+        side(c, 'term', 'Term') + side(c, 'def', 'Definition') + fakesBox(c) + '</div>';
     }).join('') || '<p class="muted center">No cards match.</p>';
 
     function side(c, key, label) {
@@ -487,19 +490,30 @@
         '<button class="btn ghost small" data-act="img" data-side="' + key + '">' + (img ? 'Replace image' : '+ Image') + '</button></div></div>';
     }
 
+    function fakesBox(c) {
+      var n = (c.fakes || []).length;
+      return '<details class="fakes"><summary class="small muted">Fake answers' + (n ? ' (' + n + ')' : '') + '</summary>' +
+        '<textarea rows="3" data-fakes placeholder="Wrong answers for multiple choice and true/false, one per line">' + esc((c.fakes || []).join('\n')) + '</textarea></details>';
+    }
+
     $$('textarea', list).forEach(autoGrow);
+    $$('details.fakes', list).forEach(function (d) { d.addEventListener('toggle', function () { if (d.open) autoGrow($('textarea', d)); }); });
     list.oninput = function (e) {
       var ta = e.target;
       if (ta.tagName !== 'TEXTAREA') return;
       var card = cardOf(ta);
-      card[ta.getAttribute('data-side')] = ta.value;
+      if (ta.hasAttribute('data-fakes')) {
+        card.fakes = ta.value.split('\n').map(function (f) { return f.trim(); }).filter(Boolean);
+        var sum = ta.closest('details').querySelector('summary');
+        sum.textContent = 'Fake answers' + (card.fakes.length ? ' (' + card.fakes.length + ')' : '');
+      } else card[ta.getAttribute('data-side')] = ta.value;
       autoGrow(ta);
       clearTimeout(ta._t);
       ta._t = setTimeout(function () { touch(deck); }, 400);
     };
     list.onpaste = function (e) {
       var ta = e.target;
-      if (ta.tagName !== 'TEXTAREA') return;
+      if (ta.tagName !== 'TEXTAREA' || !ta.hasAttribute('data-side')) return;
       var items = (e.clipboardData && e.clipboardData.items) || [];
       for (var i = 0; i < items.length; i++) {
         if (items[i].kind === 'file' && /^image\//.test(items[i].type)) {
@@ -606,6 +620,7 @@
       '<label>Answer with<select id="stAns"><option value="def">Definition</option><option value="term">Term</option></select></label>' +
       '<fieldset><legend class="small">Question types</legend>' +
       '<label class="check"><input type="checkbox" id="stMc"' + (s.mc ? ' checked' : '') + '> Multiple choice</label>' +
+      '<label class="check"><input type="checkbox" id="stTf"' + (s.tf !== false ? ' checked' : '') + '> True / false</label>' +
       '<label class="check"><input type="checkbox" id="stWr"' + (s.written ? ' checked' : '') + '> Written</label></fieldset>' +
       '<label class="check"><input type="checkbox" id="stStar"' + (s.starredOnly ? ' checked' : '') + '> Study starred cards only</label>' +
       '<label>Cards per round<input id="stSize" type="number" min="3" max="30" value="' + s.roundSize + '"></label>' +
@@ -615,10 +630,10 @@
         $('#stAns', w).value = s.answerWith;
         $('#stSave', w).addEventListener('click', function () {
           var ns = {
-            answerWith: $('#stAns', w).value, mc: $('#stMc', w).checked, written: $('#stWr', w).checked,
+            answerWith: $('#stAns', w).value, mc: $('#stMc', w).checked, tf: $('#stTf', w).checked, written: $('#stWr', w).checked,
             starredOnly: $('#stStar', w).checked, roundSize: Math.max(3, Math.min(30, parseInt($('#stSize', w).value, 10) || 7)),
           };
-          if (!ns.mc && !ns.written) ns.mc = true;
+          if (!ns.mc && !ns.tf && !ns.written) ns.mc = true;
           var scopeChanged = ns.starredOnly !== s.starredOnly;
           deck.settings = ns;
           deck.learn.round = null; // rebuild round with new settings
@@ -641,13 +656,21 @@
     var deck = opts.deck, card = opts.card, sd = sides(deck.settings);
     var type = opts.type;
     if (type === 'written' && !card[sd.a]) type = 'mc'; // image-only answer
+    if (type === 'tf' && !FL.trueFalseAllowed(card, sd.a)) type = 'mc'; // card with fakes but fewer than 2 usable
+    // per-card counts of how often each fake answer was shown, so repeats rotate through fresh fakes
+    var fakeShown = deck.learn.fakeShown || (deck.learn.fakeShown = {});
+    function noteFakes(list) {
+      list = list.filter(Boolean);
+      if (list.length) FL.noteFakesShown(fakeShown[card.id] || (fakeShown[card.id] = {}), list);
+    }
     var box = $('#q');
     var prompt = '<div class="prompt"><div class="label small muted">' + sd.qLabel + (card.starred ? ' ★' : '') + '</div>' +
       (card[sd.q] ? '<div class="prompt-text">' + esc(card[sd.q]) + '</div>' : '') + imgTag(card[sd.q + 'Img']) + '</div>';
     var answered = false;
 
     if (type === 'mc') {
-      var choices = FL.buildChoices(card, opts.scope, sd.a, 4);
+      var choices = FL.buildChoices(card, opts.scope, sd.a, 4, null, fakeShown[card.id]);
+      noteFakes(choices.map(function (c) { return c.fake; }));
       box.innerHTML = prompt + '<div class="small muted">Choose the matching ' + sd.aLabel.toLowerCase() + '</div>' +
         '<div class="choices">' + choices.map(function (c, i) {
           return '<button class="choice" data-i="' + i + '"><span class="key">' + (i + 1) + '</span><span class="ctext">' + esc(c.text) + imgTag(c.img, 'choice-img') + '</span></button>';
@@ -680,6 +703,49 @@
       return;
     }
 
+    if (type === 'tf') {
+      var cand = FL.trueFalseCandidate(card, opts.scope, sd.a, fakeShown[card.id]);
+      noteFakes([cand.fake]);
+      var answerBox = '<div class="answer-box"><div class="small muted">Correct answer</div><div class="answer-text">' + esc(card[sd.a]) + '</div>' + imgTag(card[sd.a + 'Img']) + '</div>';
+      box.innerHTML = prompt + '<div class="small muted">True or false: this is the matching ' + sd.aLabel.toLowerCase() + '</div>' +
+        '<div class="tf-cand">' + (cand.text ? '<div class="answer-text">' + esc(cand.text) + '</div>' : '') + imgTag(cand.img, 'choice-img') + '</div>' +
+        '<div class="choices tf">' +
+        '<button class="choice" data-v="1"><span class="key">T</span><span class="ctext">True</span></button>' +
+        '<button class="choice" data-v="0"><span class="key">F</span><span class="ctext">False</span></button>' +
+        '</div><button class="linkbtn" id="dk">Don’t know?</button><div id="fb"></div>';
+      $$('.choice', box).forEach(function (b) { b.addEventListener('click', function () { tfPick(b.getAttribute('data-v') === '1'); }); });
+      on('#dk', 'click', function () { tfPick(null); });
+      keyHandler = function (e) {
+        if (answered || e.ctrlKey || e.metaKey || e.altKey) return;
+        var k = e.key.toLowerCase();
+        if (k === 't' || k === '1') { e.preventDefault(); tfPick(true); }
+        else if (k === 'f' || k === '2') { e.preventDefault(); tfPick(false); }
+      };
+      function tfPick(v) {
+        if (answered) return;
+        answered = true;
+        var right = v === cand.isTrue;
+        $$('.choice', box).forEach(function (b) {
+          var bv = b.getAttribute('data-v') === '1';
+          b.disabled = true;
+          if (bv === cand.isTrue) b.classList.add('right');
+          else if (v !== null && bv === v) b.classList.add('wrong');
+        });
+        var verdict = cand.isTrue ? 'It was true.' : 'It was false.';
+        if (right) {
+          $('#fb').innerHTML = '<div class="fb good">Nice! ✓ ' + verdict + '</div>' + answerBox + continueBtn();
+          wireContinue(function () { opts.onDone(true); });
+          // shown statement was the answer: nothing new to read, so move on
+          if (cand.isTrue) later(function () { opts.onDone(true); }, 1200);
+        } else {
+          $('#fb').innerHTML = '<div class="fb bad">' + (v === null ? 'Here’s the answer — you’ll see it again soon.' : 'Not quite — ' + verdict.toLowerCase() + ' You’ll see it again soon.') + '</div>' + answerBox + continueBtn();
+          wireContinue(function () { opts.onDone(false); });
+        }
+        revealFeedback();
+      }
+      return;
+    }
+
     // written
     box.innerHTML = prompt +
       '<form id="wform" autocomplete="off"><label class="small muted" for="wans">Type the ' + sd.aLabel.toLowerCase() + '</label>' +
@@ -701,7 +767,9 @@
       answered = true;
       input.readOnly = true;
       $('#wform .row').remove();
-      var g = FL.grade(given, card[sd.a]);
+      // known wrong answers: this card's fakes and the other cards' answers, so a near-miss typo of a wrong answer is not accepted
+      var wrongs = (sd.a === 'def' ? card.fakes || [] : []).concat(opts.scope.filter(function (c) { return c.id !== card.id; }).map(function (c) { return c[sd.a]; }));
+      var g = FL.grade(given, card[sd.a], wrongs);
       var ans = '<div class="answer-box"><div class="small muted">Correct answer</div><div class="answer-text">' + esc(card[sd.a]) + '</div>' + imgTag(card[sd.a + 'Img']) + '</div>';
       if (g.correct) {
         $('#fb').innerHTML = '<div class="fb good">' + (g.typo ? 'Correct (small typo) ✓' : 'Correct ✓') + '</div>' + ans + continueBtn();
@@ -836,7 +904,7 @@
       $('#q').innerHTML = '<div class="summary"><h2>Cram ' + scope.length + ' cards</h2>' +
         '<p>For a test that is coming up soon. No waiting between reviews:</p><ol class="steps">' +
         '<li>Small batches of about ' + deck.settings.roundSize + ' cards cycle over and over.</li>' +
-        (deck.settings.mc ? '<li>Each card starts as multiple choice, then you type it.</li>' : '<li>You type each answer.</li>') +
+        (deck.settings.mc || deck.settings.tf ? '<li>Each card starts as ' + (deck.settings.mc && deck.settings.tf ? 'multiple choice or true/false' : deck.settings.mc ? 'multiple choice' : 'true/false') + ', then you type it.</li>' : '<li>You type each answer.</li>') +
         '<li>Misses come back two questions later.</li>' +
         '<li>A card is cleared once you type it right.</li>' +
         '<li>When every card is cleared: one final shuffled pass over everything.</li></ol>' +

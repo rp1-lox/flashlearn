@@ -176,6 +176,13 @@ fieldset { border: 1px solid var(--border); border-radius: 10px; margin: 0; padd
 .answer-box { background: var(--surface); border: 2px solid var(--good); border-radius: 12px; padding: 12px 14px; }
 .answer-text { font-size: 1.1rem; white-space: pre-wrap; overflow-wrap: anywhere; }
 .yours { white-space: pre-wrap; overflow-wrap: anywhere; text-decoration: line-through; text-decoration-color: var(--bad); }
+.tf-cand { background: var(--surface-2); border: 2px dashed var(--border); border-radius: 12px; padding: 14px; }
+.choices.tf { grid-template-columns: 1fr 1fr; }
+.choices.tf .choice { justify-content: center; align-items: center; font-weight: 700; }
+.choices.tf .ctext { flex: none; }
+details.fakes { margin-top: 4px; }
+details.fakes summary { cursor: pointer; padding: 4px 0; }
+details.fakes textarea { width: 100%; margin-top: 4px; }
 #wform { display: flex; flex-direction: column; gap: 10px; }
 #wans { min-height: 64px; font-size: 1.1rem; }
 

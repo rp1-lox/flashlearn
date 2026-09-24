@@ -1,6 +1,6 @@
 # FlashLearn
 
-A self-hosted, Quizlet-style flashcard app with **Learn** and **Cram** modes. Plain HTML, CSS and JavaScript: no build step, no server, no account. Your decks and progress live in your browser.
+A self-hosted, Quizlet-style flashcard app with **Learn**, **Cram** and **Test** modes. Plain HTML, CSS and JavaScript: no build step, no server, no account. Your decks and progress live in your browser.
 
 ## Open it
 
@@ -19,6 +19,7 @@ Two decks come pre-loaded on first run: **PCC 101 Exam 1** (102 cards) and **PCC
 - **Export** a deck back to Quizlet text (tab + new line), or as JSON with progress.
 - **Card editor**: inline editing, star, search, add/delete, images on the term side and the definition side (upload, or click a text box and paste a screenshot). Images are downscaled so they fit in browser storage.
 - **Flashcards**: tap or Space to flip, arrows or swipe to move, shuffle, starred only, choose the front side, `S` stars the card.
+- **Test** (below): a practice exam graded on submit.
 - **Learn** and **Cram** (below), with options: answer with term or definition, question types (multiple choice, true/false, written), starred only, cards per round.
 - **Fake answers** per card (below): wrong answers written for that card, used in multiple choice and true/false.
 - **Keyboard**: `1`–`4` pick a choice, `T`/`F` (or `1`/`2`) answer true/false, `Enter` submits and continues, `Space` flips.
@@ -77,6 +78,13 @@ Quizlet separates long-term spaced study from test-prep cramming: its engineerin
 - The end screen lists **trouble cards** (most-missed first) with a button to star them, so you can re-drill just those with "starred only".
 - Cram progress is separate from Learn and resumes where you left off.
 
+### Test (Quizlet Test mode)
+
+- **Set up:** number of questions (default 20, or every card if fewer), answer with term or definition, question types (written, matching, multiple choice, true/false), starred only. Choices are remembered per deck.
+- **One page, graded on submit.** Questions are numbered and grouped by type; the mix is split evenly across the chosen types. Matching is one block of up to 6 cards: tap a prompt, then its answer (or focus a prompt and press the answer's letter); each pair counts as one question. Answers are saved as you go, so leaving and coming back resumes the test. **Submit test** warns about blank questions and lets you submit anyway.
+- **Results:** score (percent and count), every question with your answer and the correct one, filter **All / Incorrect only**, **I was right** on written misses (updates the score), **Retake test** (new random test, same settings), **Retake missed only**, **Star missed cards**.
+- Written answers use the same grader as Learn (fakes and other cards' answers count as known wrongs); multiple choice and true/false use the same fakes and rotation. Test results do not change Learn or Cram progress. The deck page shows the last score.
+
 ## Development
 
 ```
@@ -86,7 +94,7 @@ node tools/merge-fakes.js [dir]   # merge fakes_*.json files into decks/src/pcc1
 node tools/build-single.js   # rebuild dist/flashlearn.html after changing the app
 ```
 
-- `js/core.js`: grading, import parsing, distractors, Learn and Cram scheduling (pure, tested).
+- `js/core.js`: grading, import parsing, distractors, Learn and Cram scheduling, test generation and scoring (pure, tested).
 - `js/app.js`: the UI. `decks/seed.js`: first-run decks, embedded as JS so they load under `file://`.
 - Built-in decks: bump a deck's `version` in `tools/build-seed.js` when its cards change. Browsers then take the new cards and keep progress, stars and settings for every card whose id, term and definition are unchanged; changed or new cards start fresh. Cards you added yourself to a built-in deck are kept.
 - `pcc101-fakes.json` maps each exact source term line (structure terms with their `(add image NN.png)` note) to its fakes. The build logs how many cards got fakes, the unmatched keys, and the fakes it dropped for grading as the answer.

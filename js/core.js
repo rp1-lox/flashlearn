@@ -581,6 +581,243 @@
     return state;
   }
 
+  // ---------- Test (Quizlet Test mode) ----------
+  /*
+   * A test is generated once, answered on one page, and graded on submit.
+   * It never touches Learn or Cram progress. Items are numbered in section
+   * order: written, matching, multiple choice, true/false. Each matching pair
+   * is its own item (graded separately); its block lists the shuffled options.
+   * Choices and true/false candidates store card ids and text only, so stored
+   * tests stay small; images are read from the live cards when shown.
+   */
+  var TEST_TYPES = ['written', 'match', 'mc', 'tf'];
+  var MATCH_MAX = 6;
+
+  function testDefaults(n) {
+    return { count: Math.min(20, Math.max(1, n | 0)), answerWith: 'def', written: true, match: true, mc: true, tf: true, starredOnly: false };
+  }
+
+  /** Enabled question types in section order (multiple choice if none). */
+  function testTypes(settings) {
+    var t = TEST_TYPES.filter(function (k) { return settings[k] !== false; });
+    return t.length ? t : ['mc'];
+  }
+
+  function answerKey(card, side) {
+    var imgKey = side === 'term' ? 'termImg' : 'defImg';
+    return normalize(card[side]) + '|' + (card[imgKey] || '');
+  }
+
+  /** Whether `type` suits this card answering with `side`. */
+  function testEligible(card, type, side) {
+    if (type === 'written') return String(card[side] || '').trim() !== ''; // image-only answers cannot be typed
+    if (type === 'tf') return trueFalseAllowed(card, side);
+    return true;
+  }
+
+  /** Split n into k near-equal parts, larger parts first. */
+  function evenSplit(n, k) {
+    var out = [];
+    for (var i = 0; i < k; i++) out.push(Math.floor(n / k) + (i < n % k ? 1 : 0));
+    return out;
+  }
+
+  /**
+   * Pick the cards and question types for a test. `cards` is the deck (all
+   * complete cards are used for distractors); settings: testDefaults() shape.
+   * opts.only: card ids to draw from (retake missed). Returns
+   * {side, written:[ids], blocks:[[ids]], mc:[ids], tf:[ids]}.
+   * Types get near-equal shares; matching is one block of up to 6 cards (or
+   * several blocks when it is the only type). Cards that cannot be typed or
+   * lack enough fakes for true/false take the other types' slots.
+   */
+  function planTest(cards, settings, opts) {
+    opts = opts || {};
+    var rng = opts.rng || Math.random;
+    var side = settings.answerWith === 'term' ? 'term' : 'def';
+    var only = null;
+    if (opts.only) { only = {}; opts.only.forEach(function (id) { only[id] = true; }); }
+    var pool = scopeCards(cards, { starredOnly: !!settings.starredOnly && !only })
+      .filter(function (c) { return !only || only[c.id]; });
+    var n = Math.max(0, Math.min(pool.length, settings.count | 0 || pool.length));
+    var picked = shuffle(pool, rng).slice(0, n);
+    var types = testTypes(settings);
+    var plan = { side: side, written: [], blocks: [], mc: [], tf: [] };
+    if (!n) return plan;
+
+    var rest = types.filter(function (t) { return t !== 'match'; });
+    var matchN = 0;
+    if (types.indexOf('match') !== -1) {
+      matchN = rest.length ? Math.min(MATCH_MAX, Math.round(n / types.length)) : n;
+      if (matchN < 2) matchN = 0;
+    }
+    if (!rest.length && matchN < n) rest = ['mc']; // matching only, but too few cards to match
+
+    // matching: least flexible cards first (those that cannot take other types)
+    function flex(c) { return rest.filter(function (t) { return testEligible(c, t, side); }).length; }
+    var left = picked.slice();
+    if (matchN) {
+      var order = left.map(function (c, i) { return { c: c, f: flex(c), i: i }; })
+        .sort(function (a, b) { return a.f - b.f || a.i - b.i; });
+      var sizes = evenSplit(matchN, Math.ceil(matchN / MATCH_MAX));
+      var blocks = sizes.map(function () { return { ids: [], keys: {} }; });
+      var used = {};
+      order.forEach(function (o) {
+        var k = answerKey(o.c, side);
+        for (var b = 0; b < blocks.length; b++) {
+          // two cards with the same answer in one block would be ambiguous
+          if (blocks[b].ids.length < sizes[b] && !blocks[b].keys[k]) {
+            blocks[b].ids.push(o.c.id); blocks[b].keys[k] = true; used[o.c.id] = true; return;
+          }
+        }
+      });
+      blocks.forEach(function (b) {
+        if (b.ids.length >= 2) plan.blocks.push(b.ids);
+        else b.ids.forEach(function (id) { delete used[id]; });
+      });
+      left = left.filter(function (c) { return !used[c.id]; });
+      if (!rest.length && left.length) rest = ['mc'];
+    }
+
+    // other types: near-equal quotas, most constrained cards first
+    var quota = {};
+    evenSplit(left.length, rest.length).forEach(function (q, i) { quota[rest[i]] = q; });
+    left.map(function (c, i) { return { c: c, f: flex(c), i: i }; })
+      .sort(function (a, b) { return a.f - b.f || a.i - b.i; })
+      .forEach(function (o) {
+        var ok = rest.filter(function (t) { return testEligible(o.c, t, side); });
+        var t = null;
+        ok.forEach(function (x) { if (quota[x] > 0 && (t === null || quota[x] > quota[t])) t = x; });
+        if (t === null) t = ok.length ? ok[0] : 'mc';
+        if (quota[t]) quota[t]--;
+        plan[t].push(o.c.id);
+      });
+    // keep the random draw order inside each section
+    var pos = {};
+    picked.forEach(function (c, i) { pos[c.id] = i; });
+    ['written', 'mc', 'tf'].forEach(function (t) { plan[t].sort(function (a, b) { return pos[a] - pos[b]; }); });
+    return plan;
+  }
+
+  /**
+   * Generate a test. opts: {rng, shown (card id -> fake-shown counts), only, now}.
+   * Returns {created, settings, side, items, blocks}. items: [{key, n, type, id,
+   * choices? (mc: [{id, text, fake?}]), cand? (tf: {isTrue, text, fake?, otherId?}),
+   * block? (match: index into blocks)}]. blocks: [{ids, options}] with options
+   * the block's card ids shuffled.
+   */
+  function buildTest(cards, settings, opts) {
+    opts = opts || {};
+    var rng = opts.rng || Math.random;
+    var shown = opts.shown || {};
+    var plan = planTest(cards, settings, opts);
+    var side = plan.side;
+    var pool = scopeCards(cards, {});
+    var byId = {};
+    cards.forEach(function (c) { byId[c.id] = c; });
+    var items = [], blocks = [];
+    function add(it) { it.n = items.length + 1; it.key = 'q' + it.n; items.push(it); }
+    plan.written.forEach(function (id) { add({ type: 'written', id: id }); });
+    plan.blocks.forEach(function (ids) {
+      var b = blocks.length;
+      blocks.push({ ids: ids.slice(), options: shuffle(ids, rng) });
+      ids.forEach(function (id) { add({ type: 'match', id: id, block: b }); });
+    });
+    plan.mc.forEach(function (id) {
+      var ch = buildChoices(byId[id], pool, side, 4, rng, shown[id]);
+      add({ type: 'mc', id: id, choices: ch.map(function (o) { var x = { id: o.id, text: o.text }; if (o.fake) x.fake = o.fake; return x; }) });
+    });
+    plan.tf.forEach(function (id) {
+      var c = trueFalseCandidate(byId[id], pool, side, shown[id], rng);
+      var cand = { isTrue: c.isTrue, text: c.text };
+      if (c.fake) cand.fake = c.fake;
+      if (c.otherId) cand.otherId = c.otherId;
+      add({ type: 'tf', id: id, cand: cand });
+    });
+    var s = {};
+    Object.keys(testDefaults(1)).forEach(function (k) { s[k] = settings[k]; });
+    s.count = items.length;
+    return { created: opts.now || Date.now(), settings: s, side: side, items: items, blocks: blocks, only: opts.only ? opts.only.slice() : null };
+  }
+
+  /** Fakes a test shows, by card id, for updating fake-shown counts. */
+  function testFakes(test) {
+    var out = {};
+    test.items.forEach(function (it) {
+      var list = [];
+      if (it.choices) it.choices.forEach(function (c) { if (c.fake) list.push(c.fake); });
+      if (it.cand && it.cand.fake) list.push(it.cand.fake);
+      if (list.length) out[it.id] = list;
+    });
+    return out;
+  }
+
+  /** Drop items and matching options whose card was deleted, and renumber. Mutates and returns test. */
+  function testPrune(test, cards) {
+    var ids = {};
+    cards.forEach(function (c) { ids[c.id] = true; });
+    var before = test.items.length;
+    test.items = test.items.filter(function (it) { return ids[it.id]; });
+    test.blocks.forEach(function (b) {
+      b.ids = b.ids.filter(function (id) { return ids[id]; });
+      b.options = b.options.filter(function (id) { return ids[id]; });
+    });
+    if (test.items.length !== before) {
+      // keys stay stable (answers are stored by key); only the shown numbers change
+      test.items.forEach(function (it, i) { it.n = i + 1; });
+    }
+    return test;
+  }
+
+  function testAnswered(item, answers) {
+    var a = answers[item.key];
+    if (item.type === 'written') return typeof a === 'string' && a.trim() !== '';
+    if (item.type === 'tf') return a === true || a === false;
+    if (item.type === 'mc') return typeof a === 'number' && a >= 0;
+    return typeof a === 'string' && a !== '';
+  }
+
+  function testUnanswered(test, answers) {
+    return test.items.filter(function (it) { return !testAnswered(it, answers || {}); }).length;
+  }
+
+  /**
+   * Grade a test. answers: key -> written text | mc choice index | tf boolean |
+   * match option card id. overrides: key -> true for written answers the
+   * student marked right. Returns {items: [{key, n, type, id, correct, close,
+   * overridden, given}], correct, total, pct, missed: [card ids]}.
+   */
+  function scoreTest(test, answers, cards, overrides) {
+    answers = answers || {}; overrides = overrides || {};
+    var side = test.side, byId = {};
+    cards.forEach(function (c) { byId[c.id] = c; });
+    var pool = scopeCards(cards, {});
+    var res = [], correct = 0, missed = [];
+    test.items.forEach(function (it) {
+      var card = byId[it.id];
+      if (!card) return;
+      var a = answers[it.key], r = { key: it.key, n: it.n, type: it.type, id: it.id, given: a, correct: false, close: false, overridden: false };
+      if (it.type === 'written') {
+        var wrongs = (side === 'def' ? card.fakes || [] : []).concat(pool.filter(function (c) { return c.id !== card.id; }).map(function (c) { return c[side]; }));
+        var g = grade(typeof a === 'string' ? a : '', card[side], wrongs);
+        r.close = !!g.close;
+        r.typo = !!g.typo;
+        r.correct = !!g.correct;
+        if (!r.correct && overrides[it.key] && typeof a === 'string' && a.trim()) { r.correct = true; r.overridden = true; }
+      } else if (it.type === 'mc') {
+        r.correct = typeof a === 'number' && !!it.choices[a] && it.choices[a].id === card.id;
+      } else if (it.type === 'tf') {
+        r.correct = (a === true || a === false) && a === it.cand.isTrue;
+      } else if (it.type === 'match') {
+        var o = typeof a === 'string' ? byId[a] : null;
+        r.correct = !!o && (o.id === card.id || answerKey(o, side) === answerKey(card, side));
+      }
+      if (r.correct) correct++; else missed.push(it.id);
+      res.push(r);
+    });
+    return { items: res, correct: correct, total: res.length, pct: res.length ? Math.round(100 * correct / res.length) : 0, missed: missed };
+  }
+
   // ---------- built-in (seed) deck upgrades ----------
   /**
    * Upgrade a stored built-in deck to a newer seed version without wiping
@@ -652,5 +889,8 @@
     defaultSettings: defaultSettings, cardState: cardState, scopeCards: scopeCards, isDue: isDue,
     learnCounts: learnCounts, buildRound: buildRound, questionType: questionType, learnAnswer: learnAnswer,
     cramInit: cramInit, cramNext: cramNext, cramAnswer: cramAnswer, cramCleared: cramCleared, cramSync: cramSync,
+    TEST_TYPES: TEST_TYPES, testDefaults: testDefaults, testTypes: testTypes, testEligible: testEligible,
+    planTest: planTest, buildTest: buildTest, testFakes: testFakes, testPrune: testPrune,
+    testAnswered: testAnswered, testUnanswered: testUnanswered, scoreTest: scoreTest,
   };
 });

@@ -562,3 +562,178 @@ test('grade rejects answers that only look close', () => {
   no('K', 'Na');
   no('2 8 18', '2, 8, 8');
 });
+
+// ---------- Test mode ----------
+function fakeDeck(n) {
+  return Array.from({ length: n }, (_, i) => ({
+    id: 'k' + i, term: 'term ' + i, def: 'answer word ' + i,
+    fakes: ['wrong one ' + i, 'wrong two ' + i, 'wrong three ' + i],
+  }));
+}
+function lcg(seed) { let s = seed || 7; return () => { s = (s * 16807) % 2147483647; return s / 2147483647; }; }
+function typeCounts(t) {
+  const c = { written: 0, match: 0, mc: 0, tf: 0 };
+  t.items.forEach((it) => c[it.type]++);
+  return c;
+}
+
+test('testDefaults: 20 questions or every card if fewer', () => {
+  assert.equal(FL.testDefaults(102).count, 20);
+  assert.equal(FL.testDefaults(7).count, 7);
+  const d = FL.testDefaults(5);
+  assert.equal(d.written && d.mc && d.tf && d.match, true);
+  assert.equal(d.answerWith, 'def');
+});
+
+test('buildTest: balanced mix of four types, matching is one block of up to 6', () => {
+  const cards = fakeDeck(40);
+  const t = FL.buildTest(cards, FL.testDefaults(40), { rng: lcg() });
+  assert.equal(t.items.length, 20);
+  assert.deepEqual(typeCounts(t), { written: 5, match: 5, mc: 5, tf: 5 });
+  assert.equal(t.blocks.length, 1);
+  assert.equal(t.blocks[0].ids.length, 5);
+  assert.deepEqual(t.blocks[0].options.slice().sort(), t.blocks[0].ids.slice().sort());
+  assert.equal(new Set(t.items.map((i) => i.id)).size, 20);
+  assert.deepEqual(t.items.map((i) => i.n), Array.from({ length: 20 }, (_, i) => i + 1));
+  const order = t.items.map((i) => i.type).filter((x, i, a) => a[i - 1] !== x);
+  assert.deepEqual(order, ['written', 'match', 'mc', 'tf']);
+});
+
+test('buildTest: matching block caps at 6; the rest is split evenly', () => {
+  const t = FL.buildTest(fakeDeck(60), Object.assign(FL.testDefaults(60), { count: 40 }), { rng: lcg() });
+  const c = typeCounts(t);
+  assert.equal(c.match, 6);
+  assert.equal(c.written + c.mc + c.tf, 34);
+  assert.ok(Math.max(c.written, c.mc, c.tf) - Math.min(c.written, c.mc, c.tf) <= 1);
+});
+
+test('buildTest: a single type; matching only splits into blocks of up to 6', () => {
+  const s = Object.assign(FL.testDefaults(14), { count: 14, written: false, mc: false, tf: false });
+  const t = FL.buildTest(fakeDeck(14), s, { rng: lcg() });
+  assert.equal(t.items.length, 14);
+  assert.deepEqual(t.blocks.map((b) => b.ids.length), [5, 5, 4]);
+  const w = FL.buildTest(fakeDeck(9), Object.assign(FL.testDefaults(9), { count: 9, match: false, mc: false, tf: false }), { rng: lcg() });
+  assert.deepEqual(typeCounts(w), { written: 9, match: 0, mc: 0, tf: 0 });
+});
+
+test('buildTest: a single card with matching only becomes multiple choice', () => {
+  const t = FL.buildTest(fakeDeck(1), { count: 1, answerWith: 'def', written: false, match: true, mc: false, tf: false }, { rng: lcg() });
+  assert.deepEqual(typeCounts(t), { written: 0, match: 0, mc: 1, tf: 0 });
+});
+
+test('buildTest: image-only answers are never written; cards without enough fakes skip true/false', () => {
+  const cards = fakeDeck(12);
+  cards[0].def = ''; cards[0].defImg = 'img0.png';
+  cards[1].def = ''; cards[1].defImg = 'img1.png';
+  cards[2].fakes = ['only one fake'];
+  for (let seed = 1; seed < 30; seed++) {
+    const t = FL.buildTest(cards, Object.assign(FL.testDefaults(12), { count: 12 }), { rng: lcg(seed) });
+    t.items.forEach((it) => {
+      if (it.id === 'k0' || it.id === 'k1') assert.notEqual(it.type, 'written');
+      if (it.id === 'k2') assert.notEqual(it.type, 'tf');
+    });
+    assert.equal(t.items.length, 12);
+  }
+});
+
+test('buildTest: starred only, retake only given ids, capped at the cards in scope', () => {
+  const cards = fakeDeck(10);
+  cards[3].starred = true; cards[7].starred = true;
+  const t = FL.buildTest(cards, Object.assign(FL.testDefaults(10), { starredOnly: true }), { rng: lcg() });
+  assert.deepEqual(t.items.map((i) => i.id).sort(), ['k3', 'k7']);
+  const m = FL.buildTest(cards, Object.assign(FL.testDefaults(10), { count: 20 }), { rng: lcg(), only: ['k1', 'k2', 'k9'] });
+  assert.deepEqual(m.items.map((i) => i.id).sort(), ['k1', 'k2', 'k9']);
+  assert.deepEqual(m.only, ['k1', 'k2', 'k9']);
+});
+
+test('buildTest: multiple choice uses the least-shown card fakes; true/false candidates are stored', () => {
+  const cards = fakeDeck(8);
+  cards.forEach((c) => { c.fakes = ['f1 ' + c.id, 'f2 ' + c.id, 'f3 ' + c.id, 'f4 ' + c.id]; });
+  const shown = {};
+  cards.forEach((c) => { shown[c.id] = { ['f1 ' + c.id]: 5 }; });
+  const s = Object.assign(FL.testDefaults(8), { count: 8, written: false, match: false });
+  const t = FL.buildTest(cards, s, { rng: lcg(), shown });
+  const mcs = t.items.filter((i) => i.type === 'mc');
+  assert.equal(mcs.length, 4);
+  mcs.forEach((it) => {
+    assert.equal(it.choices.length, 4);
+    assert.equal(it.choices.filter((c) => c.id === it.id).length, 1);
+    assert.deepEqual(it.choices.filter((c) => c.fake).map((c) => c.fake).sort(), ['f2 ' + it.id, 'f3 ' + it.id, 'f4 ' + it.id]);
+  });
+  t.items.filter((i) => i.type === 'tf').forEach((it) => {
+    assert.equal(typeof it.cand.isTrue, 'boolean');
+    if (!it.cand.isTrue) assert.match(it.cand.fake, /^f[234] /);
+  });
+  const f = FL.testFakes(t);
+  mcs.forEach((it) => assert.equal(f[it.id].length, 3));
+});
+
+test('buildTest: a matching block never holds two cards with the same answer', () => {
+  const cards = fakeDeck(6).map((c, i) => Object.assign(c, { def: i < 4 ? 'same' : 'other ' + i }));
+  const t = FL.buildTest(cards, { count: 6, answerWith: 'def', written: false, match: true, mc: false, tf: false }, { rng: lcg() });
+  t.blocks.forEach((b) => {
+    const defs = b.ids.map((id) => cards.find((c) => c.id === id).def);
+    assert.equal(new Set(defs).size, defs.length);
+  });
+  assert.equal(t.items.length, 6);
+});
+
+test('scoreTest: grades every type; written uses fakes as known wrongs; overrides count', () => {
+  const cards = [
+    { id: 'a', term: 'CH4', def: 'methane', fakes: ['methanol', 'ethane'] },
+    { id: 'b', term: 'C2H6', def: 'ethane', fakes: ['ethene', 'methane'] },
+    { id: 'c', term: 'NH3', def: 'ammonia', fakes: ['ammonium', 'amine'] },
+    { id: 'd', term: 'H2O', def: 'water', fakes: ['ice', 'steam'] },
+    { id: 'e', term: 'NaCl', def: 'salt', fakes: ['sugar', 'sand'] },
+  ];
+  const t = {
+    side: 'def',
+    blocks: [{ ids: ['d', 'e'], options: ['e', 'd'] }],
+    items: [
+      { key: 'q1', n: 1, type: 'written', id: 'a' },
+      { key: 'q2', n: 2, type: 'written', id: 'c' },
+      { key: 'q3', n: 3, type: 'match', id: 'd', block: 0 },
+      { key: 'q4', n: 4, type: 'match', id: 'e', block: 0 },
+      { key: 'q5', n: 5, type: 'mc', id: 'b', choices: [{ id: 'b#fake0', text: 'ethene', fake: 'ethene' }, { id: 'b', text: 'ethane' }] },
+      { key: 'q6', n: 6, type: 'tf', id: 'c', cand: { isTrue: false, text: 'amine', fake: 'amine' } },
+    ],
+  };
+  const answers = { q1: 'methan', q2: 'amonia', q3: 'e', q4: 'e', q5: 1, q6: true };
+  let r = FL.scoreTest(t, answers, cards);
+  assert.deepEqual(r.items.map((i) => i.correct), [true, true, false, true, true, false]);
+  assert.equal(r.correct, 4);
+  assert.equal(r.total, 6);
+  assert.equal(r.pct, 67);
+  assert.deepEqual(r.missed, ['d', 'c']);
+  r = FL.scoreTest(t, { q1: 'ethane' }, cards);
+  assert.equal(r.items[0].correct, false);
+  r = FL.scoreTest(t, { q1: 'ethane', q2: '' }, cards, { q1: true, q2: true });
+  assert.equal(r.items[0].correct, true);
+  assert.equal(r.items[0].overridden, true);
+  assert.equal(r.items[1].correct, false);
+  assert.equal(FL.testUnanswered(t, { q1: 'x', q5: 0, q6: false }), 3);
+  assert.equal(FL.testUnanswered(t, {}), 6);
+});
+
+test('scoreTest: an unanswered test scores 0; testPrune drops deleted cards', () => {
+  const cards = fakeDeck(10);
+  const t = FL.buildTest(cards, Object.assign(FL.testDefaults(10), { count: 10 }), { rng: lcg() });
+  assert.equal(FL.scoreTest(t, {}, cards).correct, 0);
+  const gone = t.items[0].id;
+  const left = cards.filter((c) => c.id !== gone);
+  FL.testPrune(t, left);
+  assert.equal(t.items.length, 9);
+  assert.equal(t.items[0].n, 1);
+  t.blocks.forEach((b) => assert.equal(b.options.indexOf(gone), -1));
+  assert.equal(FL.scoreTest(t, {}, left).total, 9);
+});
+
+test('buildTest answering with the term: written asks for the term', () => {
+  const cards = fakeDeck(8);
+  const t = FL.buildTest(cards, Object.assign(FL.testDefaults(8), { answerWith: 'term', count: 8 }), { rng: lcg() });
+  assert.equal(t.side, 'term');
+  const w = t.items.find((i) => i.type === 'written');
+  const ans = {};
+  ans[w.key] = cards.find((c) => c.id === w.id).term;
+  assert.equal(FL.scoreTest(t, ans, cards).items.find((i) => i.key === w.key).correct, true);
+});

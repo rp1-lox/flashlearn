@@ -34,6 +34,9 @@
     d.learn.progress = d.learn.progress || {};
     d.learn.fakeShown = d.learn.fakeShown || {};
     d.cram = d.cram || null;
+    // Test mode: settings, the current test (in progress or graded), and the last score. Separate from Learn and Cram.
+    if (d.testSettings && typeof d.testSettings !== 'object') d.testSettings = null;
+    if (d.testRun && !(d.testRun.test && Array.isArray(d.testRun.test.items))) d.testRun = null;
     d.updated = d.updated || Date.now();
     return d;
   }
@@ -199,6 +202,7 @@
       if (parts[2] === 'learn') return viewLearn(deck);
       if (parts[2] === 'cram') return viewCram(deck);
       if (parts[2] === 'flash') return viewFlash(deck);
+      if (parts[2] === 'test') return viewTest(deck, parts[3] || '');
       return viewDeck(deck);
     }
     viewHome();
@@ -435,6 +439,7 @@
       '<div class="modes">' +
       '<a class="mode" href="#/d/' + encodeURIComponent(deck.id) + '/learn"><b>Learn</b><span>Adaptive rounds · ' + s.mastered + '/' + s.total + ' mastered' + (s.due ? ' · ' + s.due + ' due' : '') + '</span></a>' +
       '<a class="mode" href="#/d/' + encodeURIComponent(deck.id) + '/cram"><b>Cram</b><span>Test is soon · ' + cramInfo + '</span></a>' +
+      '<a class="mode" href="#/d/' + encodeURIComponent(deck.id) + '/test"><b>Test</b><span>Practice exam · ' + testInfo(deck) + '</span></a>' +
       '<a class="mode" href="#/d/' + encodeURIComponent(deck.id) + '/flash"><b>Flashcards</b><span>Flip through · ' + starred + ' starred</span></a>' +
       '</div>' +
       '<div class="row gap wrap between"><h2>Cards (' + deck.cards.length + ')</h2><button class="btn" id="addCard">+ Add card</button></div>' +
@@ -1004,6 +1009,376 @@
     on('#starTrouble', 'click', function () {
       trouble.forEach(function (id) { byId[id].starred = true; });
       touch(deck); toast(trouble.length + ' cards starred. Turn on “starred only” to drill just these.', 4000);
+    });
+  }
+
+  // ================= Test =================
+  // Quizlet-style test: set up, answer everything on one page, submit, review.
+  // Never changes Learn or Cram progress; only fake-shown counts are updated.
+  var TYPE_LABEL = { written: 'Written', match: 'Matching', mc: 'Multiple choice', tf: 'True / false' };
+  var testFilter = 'all';
+
+  function testInfo(deck) {
+    var r = deck.testRun;
+    if (r && !r.submitted) return 'In progress · ' + FL.testUnanswered(r.test, r.answers) + ' left';
+    if (deck.testLast) return 'Last test: ' + deck.testLast.pct + '%';
+    return 'Not taken yet';
+  }
+
+  function testSettingsOf(deck) {
+    var n = FL.scopeCards(deck.cards, {}).length;
+    return Object.assign(FL.testDefaults(n), deck.testSettings || {});
+  }
+
+  function viewTest(deck, sub) {
+    document.title = 'Test · ' + deck.name;
+    var run = deck.testRun;
+    if (run) FL.testPrune(run.test, deck.cards);
+    if (run && !run.test.items.length) { deck.testRun = run = null; save(); }
+    if (sub === 'new' || !run) return testSetup(deck);
+    if (sub === 'results' && run.submitted) return testResults(deck);
+    if (run.submitted) return go('#/d/' + encodeURIComponent(deck.id) + '/test/results');
+    testPage(deck);
+  }
+
+  function testHeader(deck, title, gear) {
+    return '<header class="topbar"><a class="btn ghost icon" href="#/d/' + encodeURIComponent(deck.id) + '" aria-label="Close">✕</a>' +
+      '<h1 class="truncate">' + title + '</h1><div class="grow"></div>' +
+      (gear ? '<a class="btn ghost" href="#/d/' + encodeURIComponent(deck.id) + '/test/new">New test</a>' : '') + '</header>';
+  }
+
+  function testSetup(deck) {
+    var s = testSettingsOf(deck);
+    var all = FL.scopeCards(deck.cards, {});
+    var starredN = FL.scopeCards(deck.cards, { starredOnly: true }).length;
+    var run = deck.testRun;
+    app.innerHTML = testHeader(deck, 'Test', false) + '<main class="page study"><div class="summary test-setup">' +
+      '<h2>Set up your test</h2>' +
+      (run && !run.submitted ? '<p class="small muted">You have a test in progress. <a href="#/d/' + encodeURIComponent(deck.id) + '/test">Go back to it</a>. Creating a new test replaces it.</p>' : '') +
+      '<label><span>Questions <span class="muted small" id="tsMax"></span></span><input id="tsCount" type="number" min="1" inputmode="numeric"></label>' +
+      '<label>Answer with<select id="tsAns"><option value="def">Definition</option><option value="term">Term</option></select></label>' +
+      '<fieldset><legend class="small">Question types</legend>' +
+      FL.TEST_TYPES.map(function (t) {
+        return '<label class="check"><input type="checkbox" data-type="' + t + '"' + (s[t] !== false ? ' checked' : '') + '> ' + TYPE_LABEL[t] + '</label>';
+      }).join('') + '</fieldset>' +
+      '<label class="check"><input type="checkbox" id="tsStar"' + (s.starredOnly ? ' checked' : '') + (starredN ? '' : ' disabled') + '> Starred cards only' +
+      (starredN ? ' <span class="muted small">(' + starredN + ')</span>' : ' <span class="muted small">(none starred)</span>') + '</label>' +
+      '<p class="small muted">Graded when you submit. Test results do not change Learn or Cram progress.</p>' +
+      '<div class="row end"><button class="btn primary" id="tsGo">Create test</button></div></div></main>';
+    if (!all.length) { $('.test-setup').innerHTML = emptyScope(deck); return; }
+    $('#tsAns').value = s.answerWith === 'term' ? 'term' : 'def';
+    var countEl = $('#tsCount');
+    function scopeN() { return $('#tsStar').checked ? starredN : all.length; }
+    function syncMax() {
+      var n = scopeN();
+      countEl.max = n;
+      $('#tsMax').textContent = '(max ' + n + ')';
+    }
+    countEl.value = Math.min(s.count, all.length);
+    syncMax();
+    if (s.starredOnly && starredN) countEl.value = Math.min(s.count, starredN);
+    $('#tsStar').addEventListener('change', function () {
+      syncMax();
+      countEl.value = Math.min(20, scopeN());
+    });
+    on('#tsGo', 'click', function () {
+      var ns = { answerWith: $('#tsAns').value, starredOnly: $('#tsStar').checked && starredN > 0 };
+      $$('[data-type]').forEach(function (b) { ns[b.getAttribute('data-type')] = b.checked; });
+      if (!FL.TEST_TYPES.some(function (t) { return ns[t]; })) { toast('Pick at least one question type.'); return; }
+      var n = scopeN();
+      ns.count = Math.max(1, Math.min(n, parseInt(countEl.value, 10) || Math.min(20, n)));
+      deck.testSettings = ns;
+      startTest(deck, ns, null);
+    });
+    keyHandler = function (e) { if (e.key === 'Enter' && e.target.tagName !== 'SELECT') { e.preventDefault(); $('#tsGo').click(); } };
+  }
+
+  function startTest(deck, settings, only) {
+    var shown = deck.learn.fakeShown || (deck.learn.fakeShown = {});
+    var test = FL.buildTest(deck.cards, settings, { shown: shown, only: only });
+    if (!test.items.length) { toast('No cards to test.'); return; }
+    var f = FL.testFakes(test);
+    Object.keys(f).forEach(function (id) { FL.noteFakesShown(shown[id] || (shown[id] = {}), f[id]); });
+    deck.testRun = { test: test, answers: {}, overrides: {}, submitted: false };
+    touch(deck);
+    testFilter = 'all';
+    go('#/d/' + encodeURIComponent(deck.id) + '/test');
+  }
+
+  // Card text + image for one side, as shown in a test.
+  function sideHtml(card, key, textCls, imgCls) {
+    if (!card) return '';
+    return (card[key] ? '<div class="' + textCls + '">' + esc(card[key]) + '</div>' : '') + imgTag(card[key + 'Img'], imgCls);
+  }
+
+  function byIdOf(deck) {
+    var m = {};
+    deck.cards.forEach(function (c) { m[c.id] = c; });
+    return m;
+  }
+
+  // A multiple-choice option or true/false candidate: live card text/image when the card still exists.
+  function optionHtml(o, byId, a, imgCls) {
+    var c = !o.fake && byId[o.id || o.otherId];
+    if (c) return sideHtml(c, a, 'otext', imgCls || 'choice-img');
+    return '<div class="otext">' + esc(o.text || o.fake || '') + '</div>';
+  }
+
+  function testPage(deck) {
+    var run = deck.testRun, t = run.test, A = run.answers;
+    var sd = sides({ answerWith: t.side === 'term' ? 'term' : 'def' });
+    var byId = byIdOf(deck), total = t.items.length;
+    var letters = 'ABCDEFGHIJKL';
+    var sections = [];
+    t.items.forEach(function (it) {
+      var last = sections[sections.length - 1];
+      if (!last || last.type !== it.type) sections.push(last = { type: it.type, items: [] });
+      last.items.push(it);
+    });
+    var html = sections.map(function (sec) {
+      var body;
+      if (sec.type === 'match') {
+        var blocks = {};
+        sec.items.forEach(function (it) { (blocks[it.block] = blocks[it.block] || []).push(it); });
+        body = Object.keys(blocks).map(function (b) {
+          var its = blocks[b], opts = t.blocks[b].options;
+          return '<div class="match" data-block="' + b + '">' +
+            '<p class="small muted">Tap a ' + sd.qLabel.toLowerCase() + ', then its matching ' + sd.aLabel.toLowerCase() + '. Tap a match again to clear it.</p>' +
+            '<div class="match-grid"><div class="mcol">' + its.map(function (it) {
+              return '<button type="button" class="mprompt" data-key="' + it.key + '" aria-pressed="false">' +
+                '<span class="mhead"><span class="tnum">' + it.n + '.</span><span class="mslot" data-slot="' + it.key + '"></span></span>' +
+                sideHtml(byId[it.id], sd.q, 'otext', 'match-img') + '</button>';
+            }).join('') + '</div><div class="mcol">' + opts.map(function (id, i) {
+              return '<button type="button" class="mopt" data-opt="' + esc(id) + '" data-letter="' + letters[i] + '">' +
+                '<span class="mhead"><span class="key show">' + letters[i] + '</span><span class="mused small muted"></span></span>' +
+                sideHtml(byId[id], sd.a, 'otext', 'match-img') + '</button>';
+            }).join('') + '</div></div></div>';
+        }).join('');
+      } else {
+        body = sec.items.map(function (it) {
+          var card = byId[it.id];
+          var head = '<div class="tq-head small muted"><span class="tnum">' + it.n + '</span> of ' + total + ' · ' + sd.qLabel + '</div>' +
+            '<div class="prompt-text">' + esc(card[sd.q]) + '</div>' + imgTag(card[sd.q + 'Img']);
+          var input;
+          if (it.type === 'written') {
+            input = '<textarea class="tw" data-key="' + it.key + '" rows="2" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="next" placeholder="Type the ' + sd.aLabel.toLowerCase() + '" aria-label="Answer to question ' + it.n + '">' + esc(A[it.key] || '') + '</textarea>';
+          } else if (it.type === 'mc') {
+            input = '<div class="choices" role="radiogroup">' + it.choices.map(function (o, i) {
+              return '<button type="button" class="choice tc" role="radio" data-key="' + it.key + '" data-v="' + i + '" aria-checked="' + (A[it.key] === i) + '"><span class="key">' + (i + 1) + '</span><span class="ctext">' + optionHtml(o, byId, sd.a) + '</span></button>';
+            }).join('') + '</div>';
+          } else {
+            input = '<div class="tf-cand">' + (it.cand.isTrue ? sideHtml(card, sd.a, 'answer-text', 'choice-img') : optionHtml(it.cand, byId, sd.a)) + '</div>' +
+              '<div class="choices tf" role="radiogroup">' +
+              '<button type="button" class="choice tc" role="radio" data-key="' + it.key + '" data-v="true" aria-checked="' + (A[it.key] === true) + '"><span class="ctext">True</span></button>' +
+              '<button type="button" class="choice tc" role="radio" data-key="' + it.key + '" data-v="false" aria-checked="' + (A[it.key] === false) + '"><span class="ctext">False</span></button></div>';
+          }
+          return '<div class="tq" id="tq-' + it.key + '">' + head + input + '</div>';
+        }).join('');
+      }
+      return '<section class="tsec"><h2>' + TYPE_LABEL[sec.type] + ' <span class="muted small">(' + sec.items.length + ')</span></h2>' +
+        (sec.type === 'tf' ? '<p class="small muted">Is this the matching ' + sd.aLabel.toLowerCase() + '?</p>' : sec.type === 'mc' ? '<p class="small muted">Choose the matching ' + sd.aLabel.toLowerCase() + '.</p>' : '') +
+        body + '</section>';
+    }).join('');
+
+    app.innerHTML = testHeader(deck, 'Test', true) + '<main class="page study test">' +
+      '<div class="small muted">' + total + ' questions · answer with ' + sd.aLabel.toLowerCase() + '</div>' + html +
+      '<div class="test-foot"><span class="small muted" id="tLeft"></span><button class="btn primary wide" id="tSubmit">Submit test</button></div></main>';
+
+    var saveT;
+    function persist(now) { clearTimeout(saveT); if (now) save(); else saveT = setTimeout(save, 400); }
+    function refreshLeft() {
+      var left = FL.testUnanswered(t, A);
+      $('#tLeft').textContent = left ? (total - left) + ' of ' + total + ' answered' : 'All ' + total + ' answered';
+    }
+
+    // written
+    $$('.tw').forEach(function (ta) {
+      autoGrow(ta);
+      ta.addEventListener('input', function () {
+        A[ta.getAttribute('data-key')] = ta.value; autoGrow(ta); refreshLeft(); persist();
+      });
+      ta.addEventListener('keydown', function (e) {
+        if (e.key !== 'Enter' || e.shiftKey) return;
+        e.preventDefault();
+        var all = $$('.tw'), i = all.indexOf(ta);
+        if (all[i + 1]) all[i + 1].focus();
+        else { var nx = $('.mprompt, .tc'); if (nx) nx.focus(); else $('#tSubmit').focus(); }
+      });
+    });
+
+    // multiple choice and true/false
+    $$('.tc').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var key = b.getAttribute('data-key'), v = b.getAttribute('data-v');
+        A[key] = v === 'true' ? true : v === 'false' ? false : +v;
+        $$('.tc[data-key="' + key + '"]').forEach(function (o) { o.setAttribute('aria-checked', String(o === b)); });
+        refreshLeft(); persist(true);
+      });
+    });
+
+    // matching
+    $$('.match').forEach(function (m) {
+      var sel = null;
+      var prompts = $$('.mprompt', m), options = $$('.mopt', m);
+      function letterOf(id) { var o = options.filter(function (x) { return x.getAttribute('data-opt') === id; })[0]; return o ? o.getAttribute('data-letter') : ''; }
+      function paint() {
+        prompts.forEach(function (p) {
+          var k = p.getAttribute('data-key'), a = A[k];
+          p.classList.toggle('sel', k === sel);
+          p.setAttribute('aria-pressed', String(k === sel));
+          var slot = $('[data-slot="' + k + '"]', p);
+          slot.textContent = a ? letterOf(a) : '—';
+          slot.classList.toggle('filled', !!a);
+        });
+        options.forEach(function (o) {
+          var id = o.getAttribute('data-opt');
+          var owner = prompts.filter(function (p) { return A[p.getAttribute('data-key')] === id; })[0];
+          o.classList.toggle('used', !!owner);
+          $('.mused', o).textContent = owner ? '→ ' + $('.tnum', owner).textContent.replace('.', '') : '';
+          o.setAttribute('aria-label', 'Answer ' + o.getAttribute('data-letter') + (owner ? ', matched to question ' + $('.tnum', owner).textContent.replace('.', '') : ''));
+        });
+      }
+      function choose(id) {
+        if (!sel) { var free = prompts.filter(function (p) { return !A[p.getAttribute('data-key')]; })[0]; sel = (free || prompts[0]).getAttribute('data-key'); }
+        if (A[sel] === id) delete A[sel];
+        else {
+          prompts.forEach(function (p) { var k = p.getAttribute('data-key'); if (A[k] === id) delete A[k]; });
+          A[sel] = id;
+          var next = prompts.filter(function (p) { return !A[p.getAttribute('data-key')]; })[0];
+          sel = next ? next.getAttribute('data-key') : null;
+        }
+        // keyboard: follow the selection so the next letter goes to the next prompt
+        if (m.contains(document.activeElement) && document.activeElement.classList.contains('mprompt') && sel) {
+          $('.mprompt[data-key="' + sel + '"]', m).focus({ preventScroll: true });
+        }
+        paint(); refreshLeft(); persist(true);
+      }
+      prompts.forEach(function (p) {
+        p.addEventListener('click', function () { var k = p.getAttribute('data-key'); sel = sel === k ? null : k; paint(); });
+        p.addEventListener('keydown', function (e) {
+          // keyboard: focus a prompt, press the answer's letter
+          var L = e.key.length === 1 ? e.key.toUpperCase() : '';
+          var o = L && options.filter(function (x) { return x.getAttribute('data-letter') === L; })[0];
+          if (o && !e.ctrlKey && !e.metaKey && !e.altKey) { e.preventDefault(); sel = p.getAttribute('data-key'); choose(o.getAttribute('data-opt')); }
+        });
+      });
+      options.forEach(function (o) { o.addEventListener('click', function () { choose(o.getAttribute('data-opt')); }); });
+      paint();
+    });
+
+    refreshLeft();
+    on('#tSubmit', 'click', function () {
+      var left = FL.testUnanswered(t, A);
+      if (!left) return submitTest(deck);
+      modal('<h2>Submit test?</h2><p>You left ' + left + ' of ' + total + ' question' + (total > 1 ? 's' : '') + ' blank. Blank answers count as wrong.</p>' +
+        '<div class="row gap end"><button class="btn ghost" id="tsKeep">Keep working</button><button class="btn primary" id="tsAnyway">Submit anyway</button></div>',
+        function (w) {
+          $('#tsKeep', w).addEventListener('click', function () {
+            closeModal();
+            var first = t.items.filter(function (it) { return !FL.testAnswered(it, A); })[0];
+            var el = first && (first.type === 'match' ? $('.mprompt[data-key="' + first.key + '"]') : $('#tq-' + first.key));
+            if (el) { el.scrollIntoView({ block: 'center' }); var f = el.matches('.mprompt') ? el : $('textarea, button', el); if (f) f.focus({ preventScroll: true }); }
+          });
+          $('#tsAnyway', w).addEventListener('click', function () { closeModal(); submitTest(deck); });
+        });
+    });
+  }
+
+  function recordScore(deck) {
+    var run = deck.testRun;
+    var r = FL.scoreTest(run.test, run.answers, deck.cards, run.overrides);
+    deck.testLast = { pct: r.pct, correct: r.correct, total: r.total, at: run.submittedAt || Date.now() };
+    return r;
+  }
+
+  function submitTest(deck) {
+    var run = deck.testRun;
+    run.submitted = true;
+    run.submittedAt = Date.now();
+    recordScore(deck);
+    touch(deck);
+    testFilter = 'all';
+    go('#/d/' + encodeURIComponent(deck.id) + '/test/results');
+  }
+
+  function testResults(deck) {
+    var run = deck.testRun, t = run.test;
+    var sd = sides({ answerWith: t.side === 'term' ? 'term' : 'def' });
+    var byId = byIdOf(deck);
+    var r = FL.scoreTest(t, run.answers, deck.cards, run.overrides);
+    var itemOf = {};
+    t.items.forEach(function (it) { itemOf[it.key] = it; });
+    var missedN = r.total - r.correct;
+    var missedIds = r.missed.filter(function (id, i, a) { return a.indexOf(id) === i; });
+    var msg = r.pct === 100 ? 'Perfect score.' : r.pct >= 90 ? 'Excellent.' : r.pct >= 75 ? 'Good work. Review the misses below.' : 'Keep going. Retake the missed ones.';
+    var list = r.items.filter(function (x) { return testFilter === 'all' || !x.correct || x.overridden; });
+
+    function givenHtml(x, it) {
+      var a = x.given;
+      if (it.type === 'written') return typeof a === 'string' && a.trim() ? '<div class="otext">' + esc(a) + '</div>' : '<div class="muted">No answer</div>';
+      if (it.type === 'mc') return typeof a === 'number' && it.choices[a] ? optionHtml(it.choices[a], byId, sd.a, 'thumb-img') : '<div class="muted">No answer</div>';
+      if (it.type === 'tf') return a === true || a === false ? '<div class="otext">' + (a ? 'True' : 'False') + '</div>' : '<div class="muted">No answer</div>';
+      return a && byId[a] ? sideHtml(byId[a], sd.a, 'otext', 'thumb-img') : '<div class="muted">No answer</div>';
+    }
+
+    var items = list.map(function (x) {
+      var it = itemOf[x.key], card = byId[x.id];
+      var stmt = it.type === 'tf' ? '<div class="small muted">Statement</div><div class="tf-cand small-cand">' +
+        (it.cand.isTrue ? sideHtml(card, sd.a, 'otext', 'thumb-img') : optionHtml(it.cand, byId, sd.a, 'thumb-img')) + '</div>' : '';
+      var correctAns = it.type === 'tf'
+        ? '<div class="otext">' + (it.cand.isTrue ? 'True' : 'False') + '</div>' + (it.cand.isTrue ? '' : '<div class="small muted">The ' + sd.aLabel.toLowerCase() + ' is</div>' + sideHtml(card, sd.a, 'otext', 'thumb-img'))
+        : sideHtml(card, sd.a, 'otext', 'thumb-img');
+      var override = '';
+      if (it.type === 'written' && typeof x.given === 'string' && x.given.trim()) {
+        if (x.overridden) override = '<div class="row gap wrap"><span class="small muted">You marked this right.</span><button class="btn small ghost" data-undo="' + x.key + '">Undo</button></div>';
+        else if (!x.correct) override = '<div class="row"><button class="btn small" data-override="' + x.key + '">I was right</button></div>';
+      }
+      return '<div class="ritem ' + (x.correct ? 'ok' : 'miss') + '">' +
+        '<div class="row between"><span class="small muted">' + x.n + ' · ' + TYPE_LABEL[it.type] + '</span>' +
+        '<span class="mark ' + (x.correct ? 'good-text' : 'bad-text') + '">' + (x.correct ? '✓ Correct' + (x.typo ? ' (typo)' : '') : '✗ Incorrect') + '</span></div>' +
+        sideHtml(card, sd.q, 'prompt-text', 'thumb-img') + stmt +
+        '<div class="small muted">Your answer</div><div class="ans-box ' + (x.correct ? 'good' : 'bad') + '">' + givenHtml(x, it) + '</div>' +
+        (x.correct && !x.overridden && !x.typo ? '' : '<div class="small muted">Correct answer</div><div class="answer-box">' + correctAns + '</div>') +
+        override + '</div>';
+    }).join('') || '<p class="muted center">No incorrect answers.</p>';
+
+    app.innerHTML = testHeader(deck, 'Test results', true) + '<main class="page study test">' +
+      '<div class="summary score"><div class="score-row"><div class="score-pct ' + (r.pct >= 75 ? 'good-text' : 'bad-text') + '">' + r.pct + '%</div>' +
+      '<div><div><b>' + r.correct + ' of ' + r.total + ' correct</b></div><div class="small muted">' + (missedN ? missedN + ' incorrect · ' : '') + msg + '</div></div></div>' +
+      '<div class="score-actions">' +
+      '<button class="btn primary" id="trRetake">Retake test</button>' +
+      (missedIds.length ? '<button class="btn" id="trMissed">Retake missed only (' + missedIds.length + ')</button><button class="btn" id="trStar">Star missed cards</button>' : '') +
+      '<a class="btn" href="#/d/' + encodeURIComponent(deck.id) + '/test/new">New test options</a>' +
+      '<a class="btn ghost" href="#/d/' + encodeURIComponent(deck.id) + '">Back to deck</a></div>' +
+      '<p class="small muted">Test results do not change Learn or Cram progress.</p></div>' +
+      '<div class="row gap" role="group" aria-label="Show">' +
+      '<button class="btn toggle' + (testFilter === 'all' ? ' on' : '') + '" data-filter="all">All (' + r.total + ')</button>' +
+      '<button class="btn toggle' + (testFilter === 'miss' ? ' on' : '') + '" data-filter="miss">Incorrect only (' + missedN + ')</button></div>' +
+      '<div class="review-list results">' + items + '</div></main>';
+
+    $$('[data-filter]').forEach(function (b) {
+      b.addEventListener('click', function () { testFilter = b.getAttribute('data-filter'); testResults(deck); });
+    });
+    function setOverride(key, v) {
+      var y = window.scrollY;
+      if (v) run.overrides[key] = true; else delete run.overrides[key];
+      recordScore(deck); touch(deck); testResults(deck);
+      window.scrollTo(0, y);
+    }
+    $$('[data-override]').forEach(function (b) { b.addEventListener('click', function () { setOverride(b.getAttribute('data-override'), true); }); });
+    $$('[data-undo]').forEach(function (b) { b.addEventListener('click', function () { setOverride(b.getAttribute('data-undo'), false); }); });
+    on('#trRetake', 'click', function () {
+      var s = Object.assign({}, t.settings);
+      if (t.only) s.count = t.only.length;
+      startTest(deck, s, t.only);
+    });
+    on('#trMissed', 'click', function () {
+      startTest(deck, Object.assign({}, t.settings, { count: missedIds.length }), missedIds);
+    });
+    on('#trStar', 'click', function () {
+      missedIds.forEach(function (id) { if (byId[id]) byId[id].starred = true; });
+      touch(deck);
+      toast(missedIds.length + ' card' + (missedIds.length > 1 ? 's' : '') + ' starred. Choose “Starred cards only” to drill just these.', 4000);
     });
   }
 

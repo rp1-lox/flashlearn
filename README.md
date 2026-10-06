@@ -89,7 +89,7 @@ Quizlet separates long-term spaced study from test-prep cramming: its engineerin
 
 ```
 npm test          # node --test, pure logic in js/core.js
-npm run seed      # rebuild decks/seed.js from decks/src/*.txt and decks/src/pcc101-fakes.json
+npm run seed      # rebuild decks/seed.js from decks/src/*.txt and decks/src/*-fakes.json
 node tools/merge-fakes.js [dir]   # merge fakes_*.json files into decks/src/pcc101-fakes.json
 node tools/build-single.js   # rebuild dist/flashlearn.html after changing the app
 ```
@@ -97,5 +97,5 @@ node tools/build-single.js   # rebuild dist/flashlearn.html after changing the a
 - `js/core.js`: grading, import parsing, distractors, Learn and Cram scheduling, test generation and scoring (pure, tested).
 - `js/app.js`: the UI. `decks/seed.js`: first-run decks, embedded as JS so they load under `file://`.
 - Built-in decks: bump a deck's `version` in `tools/build-seed.js` when its cards change. Browsers then take the new cards and keep progress, stars and settings for every card whose id, term and definition are unchanged; changed or new cards start fresh. Cards you added yourself to a built-in deck are kept.
-- `pcc101-fakes.json` maps each exact source term line (structure terms with their `(add image NN.png)` note) to its fakes. The build logs how many cards got fakes, the unmatched keys, and the fakes it dropped for grading as the answer.
+- `pcc101-fakes.json` and `py205-fakes.json` map each exact source term line (structure terms with their `(add image NN.png)` note) to its fakes. The build logs how many cards got fakes, the unmatched keys, and the fakes it dropped for grading as the answer.
 - Classic `<script>` tags on purpose: ES modules do not load from `file://` in Chrome.

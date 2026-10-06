@@ -4231,6 +4231,2100 @@ window.SEED_DECKS = [
     ]
    }
   ]
+ },
+ {
+  "id": "seed-py205-test2",
+  "version": 1,
+  "name": "PY 205 Test 2",
+  "folder": "PY 205",
+  "cards": [
+   {
+    "id": "seed-py205-001",
+    "term": "Magnitude of the electric force between two point charges",
+    "def": "k q1 q2 / r^2",
+    "fakes": [
+     "k q1 q2 / r",
+     "k q1^2 / r^2",
+     "k q1 / r^2",
+     "k (q1 + q2) / r^2",
+     "k q1 q2 / r^3",
+     "G q1 q2 / r^2",
+     "q1 q2 / (k r^2)"
+    ]
+   },
+   {
+    "id": "seed-py205-002",
+    "term": "Electric force depends on distance as",
+    "def": "1/r^2",
+    "fakes": [
+     "1/r",
+     "r^2",
+     "1/r^3",
+     "r",
+     "1/sqrt(r)",
+     "independent of r",
+     "1/r^4"
+    ]
+   },
+   {
+    "id": "seed-py205-003",
+    "term": "Distance between two charges doubles: electric force becomes",
+    "def": "1/4 as large",
+    "fakes": [
+     "1/2 as large",
+     "2 times larger",
+     "4 times larger",
+     "unchanged",
+     "1/8 as large",
+     "1/16 as large",
+     "1/sqrt(2) as large"
+    ]
+   },
+   {
+    "id": "seed-py205-004",
+    "term": "Proton and electron: electric force is attractive or repulsive?",
+    "def": "attractive",
+    "fakes": [
+     "repulsive",
+     "zero",
+     "neither",
+     "depends on speed",
+     "attractive only if touching",
+     "depends on mass",
+     "repulsive at short range"
+    ]
+   },
+   {
+    "id": "seed-py205-005",
+    "term": "Force on a negative charge from a nearby positive charge points",
+    "def": "toward the positive charge",
+    "fakes": [
+     "away from the positive charge",
+     "perpendicular to the line",
+     "zero",
+     "along its velocity",
+     "straight down",
+     "away from both charges",
+     "tangent to a circle around it"
+    ]
+   },
+   {
+    "id": "seed-py205-006",
+    "term": "Force on electron by proton vs force on proton by electron: magnitudes",
+    "def": "equal",
+    "fakes": [
+     "the electron's is larger",
+     "the proton's is larger",
+     "depends on their masses",
+     "the electron's is 1836 times larger",
+     "the proton's is 1836 times larger",
+     "both are zero",
+     "depends on their speeds"
+    ]
+   },
+   {
+    "id": "seed-py205-007",
+    "term": "Name for: force on A by B equals minus force on B by A",
+    "def": "reciprocity",
+    "fakes": [
+     "superposition",
+     "conservation of momentum",
+     "equilibrium",
+     "inertia",
+     "the momentum principle",
+     "symmetry breaking",
+     "the inverse-square law"
+    ]
+   },
+   {
+    "id": "seed-py205-008",
+    "term": "Reciprocity is also called",
+    "def": "Newton's third law",
+    "fakes": [
+     "Newton's first law",
+     "Newton's second law",
+     "the momentum principle",
+     "Coulomb's law",
+     "conservation of energy",
+     "the superposition principle",
+     "Hooke's law"
+    ]
+   },
+   {
+    "id": "seed-py205-009",
+    "term": "In F on 2 by 1, the relative position vector r points from",
+    "def": "1 to 2",
+    "fakes": [
+     "2 to 1",
+     "origin to 1",
+     "origin to 2",
+     "the midpoint to 2",
+     "1 to the origin",
+     "perpendicular to the line",
+     "the larger charge to the smaller"
+    ]
+   },
+   {
+    "id": "seed-py205-010",
+    "term": "Total momentum of an isolated system",
+    "def": "constant",
+    "fakes": [
+     "zero",
+     "increasing",
+     "decreasing",
+     "equal to its mass times g",
+     "equal to the net external force",
+     "always equal to each object's p",
+     "changing direction"
+    ]
+   },
+   {
+    "id": "seed-py205-011",
+    "term": "Delta p_system + Delta p_surroundings =",
+    "def": "0",
+    "fakes": [
+     "F_net",
+     "2 Delta p_system",
+     "p_total",
+     "Delta t",
+     "m Delta v",
+     "1",
+     "2 p_total"
+    ]
+   },
+   {
+    "id": "seed-py205-012",
+    "term": "Delta p of the system vs Delta p of the surroundings: directions",
+    "def": "opposite",
+    "fakes": [
+     "same",
+     "perpendicular",
+     "always zero",
+     "both along the system's velocity",
+     "unrelated",
+     "45 degrees apart",
+     "same as the system's p"
+    ]
+   },
+   {
+    "id": "seed-py205-013",
+    "term": "Forces that can change a system's total momentum",
+    "def": "external forces",
+    "fakes": [
+     "internal forces",
+     "all forces between the parts",
+     "only gravity between the parts",
+     "only friction between the parts",
+     "forces the system exerts on itself",
+     "only contact forces inside",
+     "no forces at all"
+    ]
+   },
+   {
+    "id": "seed-py205-014",
+    "term": "Can internal forces change a system's total momentum?",
+    "def": "no",
+    "fakes": [
+     "yes",
+     "only if they are large",
+     "only in collisions",
+     "only if friction is internal",
+     "yes, if the collision is sticky",
+     "only for springs",
+     "only in 2D"
+    ]
+   },
+   {
+    "id": "seed-py205-015",
+    "term": "Collision: why ignore the road's force on the cars?",
+    "def": "short time, tiny impulse",
+    "fakes": [
+     "the road exerts no force",
+     "gravity is canceled by friction",
+     "the cars are too heavy",
+     "momentum is only conserved in space",
+     "momentum isn't conserved anyway",
+     "friction is always zero",
+     "the cars stop instantly"
+    ]
+   },
+   {
+    "id": "seed-py205-016",
+    "term": "Two objects stick together: final velocity",
+    "def": "p_total / m_total",
+    "fakes": [
+     "p_total * m_total",
+     "average of the two velocities",
+     "sum of the two velocities",
+     "m_total / p_total",
+     "p_total / m_lighter",
+     "p_total / m_heavier",
+     "the heavier object's velocity"
+    ]
+   },
+   {
+    "id": "seed-py205-017",
+    "term": "Ball bounces straight back: is |Delta p| more or less than |p_initial|?",
+    "def": "more",
+    "fakes": [
+     "less",
+     "equal",
+     "zero",
+     "half",
+     "depends on the mass",
+     "equal only at low speed",
+     "less if it bounces fast"
+    ]
+   },
+   {
+    "id": "seed-py205-018",
+    "term": "Tension in a rope is a vector or a scalar?",
+    "def": "scalar",
+    "fakes": [
+     "vector",
+     "a force vector along the rope",
+     "a unit vector",
+     "a vector pointing up",
+     "a direction",
+     "a torque",
+     "a momentum"
+    ]
+   },
+   {
+    "id": "seed-py205-019",
+    "term": "Elevator moving down and slowing down: acceleration direction?",
+    "def": "up",
+    "fakes": [
+     "down",
+     "zero",
+     "along the velocity",
+     "depends on speed",
+     "no acceleration",
+     "sideways",
+     "forward"
+    ]
+   },
+   {
+    "id": "seed-py205-020",
+    "term": "Elevator moving up and slowing down: acceleration direction?",
+    "def": "down",
+    "fakes": [
+     "up",
+     "zero",
+     "along the velocity",
+     "depends on speed",
+     "no acceleration",
+     "sideways",
+     "backward"
+    ]
+   },
+   {
+    "id": "seed-py205-021",
+    "term": "Elevator cable tension (a positive = upward acceleration)",
+    "def": "m(g + a)",
+    "fakes": [
+     "m(g - a)",
+     "m a",
+     "m g",
+     "m(a - g)",
+     "m(g + 2a)",
+     "m(g + a)/2",
+     "g(m + a)"
+    ]
+   },
+   {
+    "id": "seed-py205-022",
+    "term": "Elevator accelerating upward: tension vs mg",
+    "def": "greater",
+    "fakes": [
+     "less",
+     "equal",
+     "zero",
+     "twice as large",
+     "half as large",
+     "depends on speed",
+     "always equal"
+    ]
+   },
+   {
+    "id": "seed-py205-023",
+    "term": "Elevator moving down at constant speed: tension vs mg",
+    "def": "equal",
+    "fakes": [
+     "greater",
+     "less",
+     "zero",
+     "twice as large",
+     "half as large",
+     "depends on speed",
+     "m(g + v)"
+    ]
+   },
+   {
+    "id": "seed-py205-024",
+    "term": "Elevator moving down and speeding up: tension vs mg",
+    "def": "less",
+    "fakes": [
+     "greater",
+     "equal",
+     "zero",
+     "twice as large",
+     "infinite",
+     "depends on speed",
+     "always equal"
+    ]
+   },
+   {
+    "id": "seed-py205-025",
+    "term": "Bathroom scale in an elevator reads the",
+    "def": "normal force",
+    "fakes": [
+     "gravitational force",
+     "tension in the cable",
+     "net force",
+     "mass times a",
+     "true weight",
+     "the cable's force",
+     "the mass"
+    ]
+   },
+   {
+    "id": "seed-py205-026",
+    "term": "Mass of one atom from molar mass M",
+    "def": "M / N_A",
+    "fakes": [
+     "N_A / M",
+     "M times N_A",
+     "M / rho",
+     "M / 1000",
+     "M N_A / rho",
+     "rho / M",
+     "1 / (M N_A)"
+    ]
+   },
+   {
+    "id": "seed-py205-027",
+    "term": "Interatomic distance from atomic mass m_a and density rho",
+    "def": "(m_a/rho)^(1/3)",
+    "fakes": [
+     "(rho/m_a)^(1/3)",
+     "(m_a/rho)^(1/2)",
+     "m_a / rho",
+     "rho / m_a",
+     "(N_A/rho)^(1/3)",
+     "(m_a/rho)^3",
+     "(m_a/rho)^(2/3)"
+    ]
+   },
+   {
+    "id": "seed-py205-028",
+    "term": "Stiffness of one interatomic bond from Young's modulus Y",
+    "def": "Y d",
+    "fakes": [
+     "2 Y d",
+     "Y d^2",
+     "d / Y",
+     "Y + d",
+     "Y d^3",
+     "Y",
+     "Y A / L"
+    ]
+   },
+   {
+    "id": "seed-py205-029",
+    "term": "Number of side-by-side atomic chains in a wire of cross-section A",
+    "def": "A / d^2",
+    "fakes": [
+     "A / (2 d^2)",
+     "A / d",
+     "A^2 / d",
+     "sqrt(A) / d",
+     "A / d^3",
+     "L / d",
+     "4A / d^2"
+    ]
+   },
+   {
+    "id": "seed-py205-030",
+    "term": "Number of bonds in one chain of a wire of length L",
+    "def": "L / d",
+    "fakes": [
+     "L / (2d)",
+     "d / L",
+     "L / d^2",
+     "L^2 / d",
+     "L / d^3",
+     "A / d^2",
+     "2L / d"
+    ]
+   },
+   {
+    "id": "seed-py205-031",
+    "term": "Wire stiffness from k_bond, N_chains, N_bonds",
+    "def": "k_bond N_chains / N_bonds",
+    "fakes": [
+     "k_bond N_bonds / N_chains",
+     "k_bond N_chains^2 / N_bonds",
+     "k_bond N_bonds^2 / N_chains",
+     "N_chains / (k_bond N_bonds)",
+     "k_bond (N_chains + N_bonds)",
+     "k_bond N_bonds",
+     "k_bond / N_chains"
+    ]
+   },
+   {
+    "id": "seed-py205-032",
+    "term": "Springs in series: what adds?",
+    "def": "1/k",
+    "fakes": [
+     "k",
+     "k^2",
+     "1/k^2",
+     "sqrt(k)",
+     "s",
+     "1/s",
+     "k s"
+    ]
+   },
+   {
+    "id": "seed-py205-033",
+    "term": "Springs in parallel: what adds?",
+    "def": "k",
+    "fakes": [
+     "1/k",
+     "k^2",
+     "1/k^2",
+     "sqrt(k)",
+     "s",
+     "1/s",
+     "k s"
+    ]
+   },
+   {
+    "id": "seed-py205-034",
+    "term": "N identical springs end to end (series): total stiffness",
+    "def": "k/N",
+    "fakes": [
+     "N times k",
+     "k",
+     "k^2/N",
+     "k/N^2",
+     "N^2 times k",
+     "k/(2N)",
+     "k + N"
+    ]
+   },
+   {
+    "id": "seed-py205-035",
+    "term": "N identical springs side by side (parallel): total stiffness",
+    "def": "N times k",
+    "fakes": [
+     "k/N",
+     "k",
+     "k/N^2",
+     "N^2 times k",
+     "N^2 / k",
+     "k + N",
+     "2N times k"
+    ]
+   },
+   {
+    "id": "seed-py205-036",
+    "term": "4 identical springs side by side: total stiffness",
+    "def": "4k",
+    "fakes": [
+     "k/4",
+     "k",
+     "16k",
+     "2k",
+     "k/2",
+     "k/16",
+     "8k"
+    ]
+   },
+   {
+    "id": "seed-py205-037",
+    "term": "Cut a spring in half: stiffness of each half",
+    "def": "2k",
+    "fakes": [
+     "k/2",
+     "k",
+     "4k",
+     "k/4",
+     "sqrt(2) k",
+     "3k",
+     "1.5k"
+    ]
+   },
+   {
+    "id": "seed-py205-038",
+    "term": "Mass hanging at rest from a spring: stretch s",
+    "def": "mg / k_s",
+    "fakes": [
+     "k_s / mg",
+     "g / (m k_s)",
+     "m / k_s",
+     "k_s g / m",
+     "2 mg / k_s",
+     "mg / (2 k_s)",
+     "g / k_s"
+    ]
+   },
+   {
+    "id": "seed-py205-039",
+    "term": "Identical springs in series holding a weight: force on each spring",
+    "def": "full weight",
+    "fakes": [
+     "weight / N",
+     "half the weight",
+     "zero",
+     "weight times N",
+     "weight / 2N",
+     "depends on position",
+     "weight / sqrt(N)"
+    ]
+   },
+   {
+    "id": "seed-py205-040",
+    "term": "Young's modulus Y =",
+    "def": "(F/A)/(Delta L/L)",
+    "fakes": [
+     "(F/L)/(Delta L/A)",
+     "(Delta L/L)/(F/A)",
+     "(F/A)/Delta L",
+     "F/(Delta L)",
+     "(F L)/(A^2 Delta L)",
+     "(F/A) L",
+     "(F/A)/(L/Delta L)"
+    ]
+   },
+   {
+    "id": "seed-py205-041",
+    "term": "F/A in Young's modulus is called",
+    "def": "stress",
+    "fakes": [
+     "strain",
+     "pressure gradient",
+     "stiffness",
+     "elasticity",
+     "tension",
+     "modulus",
+     "work per area"
+    ]
+   },
+   {
+    "id": "seed-py205-042",
+    "term": "Delta L/L in Young's modulus is called",
+    "def": "strain",
+    "fakes": [
+     "stress",
+     "stiffness",
+     "pressure",
+     "modulus",
+     "compression force",
+     "elongation force",
+     "elasticity"
+    ]
+   },
+   {
+    "id": "seed-py205-043",
+    "term": "SI units of Young's modulus",
+    "def": "N/m^2",
+    "fakes": [
+     "N/m",
+     "N",
+     "kg/m^3",
+     "J",
+     "kg/m^2",
+     "m^2/N",
+     "N/m^3"
+    ]
+   },
+   {
+    "id": "seed-py205-044",
+    "term": "Which depends on wire length: Y or k_wire?",
+    "def": "k_wire",
+    "fakes": [
+     "Y",
+     "both",
+     "neither",
+     "Y only for long wires",
+     "Y, since k_wire is fixed",
+     "both equally",
+     "depends on the force"
+    ]
+   },
+   {
+    "id": "seed-py205-045",
+    "term": "Same force on a wire twice as long: Delta L",
+    "def": "doubles",
+    "fakes": [
+     "halves",
+     "unchanged",
+     "quadruples",
+     "drops to 1/4",
+     "doubles only if Y doubles",
+     "is zero",
+     "triples"
+    ]
+   },
+   {
+    "id": "seed-py205-046",
+    "term": "Same force on a wire with twice the cross-sectional area: Delta L",
+    "def": "halves",
+    "fakes": [
+     "doubles",
+     "unchanged",
+     "quadruples",
+     "drops to 1/4",
+     "halves only if Y halves",
+     "is zero",
+     "triples"
+    ]
+   },
+   {
+    "id": "seed-py205-047",
+    "term": "Magnitude of the spring force",
+    "def": "k_s |s|",
+    "fakes": [
+     "k_s s^2",
+     "k_s^2 |s|",
+     "|s| / k_s",
+     "1/2 k_s s^2",
+     "k_s L",
+     "m g s",
+     "k_s (L + s)"
+    ]
+   },
+   {
+    "id": "seed-py205-048",
+    "term": "Spring force direction compared to the stretch",
+    "def": "opposite",
+    "fakes": [
+     "same",
+     "perpendicular",
+     "always down",
+     "always up",
+     "always sideways",
+     "random",
+     "along the velocity"
+    ]
+   },
+   {
+    "id": "seed-py205-049",
+    "term": "s in the spring force means",
+    "def": "stretch from relaxed length",
+    "fakes": [
+     "total length of the spring",
+     "relaxed length",
+     "the spring's thickness",
+     "the spring's speed",
+     "the coil spacing",
+     "the amplitude only",
+     "distance from the floor"
+    ]
+   },
+   {
+    "id": "seed-py205-050",
+    "term": "Rod pushed at its left end in space: bonds most compressed where?",
+    "def": "near the pushed end",
+    "fakes": [
+     "near the far end",
+     "uniform along the rod",
+     "at the middle only",
+     "stretched near the pushed end",
+     "nowhere",
+     "compressed only at the far end",
+     "at both ends equally"
+    ]
+   },
+   {
+    "id": "seed-py205-051",
+    "term": "Direction of the normal force",
+    "def": "perpendicular to the surface",
+    "fakes": [
+     "parallel to the surface",
+     "always straight up",
+     "always straight down",
+     "along the velocity",
+     "opposite the velocity",
+     "along gravity",
+     "45 degrees to the surface"
+    ]
+   },
+   {
+    "id": "seed-py205-052",
+    "term": "Normal force when pushing down at angle theta below horizontal",
+    "def": "mg + F sin theta",
+    "fakes": [
+     "mg - F sin theta",
+     "mg + F cos theta",
+     "mg - F cos theta",
+     "mg",
+     "F sin theta",
+     "mg + F",
+     "F cos theta - mg"
+    ]
+   },
+   {
+    "id": "seed-py205-053",
+    "term": "Normal force when pulling up at angle theta above horizontal",
+    "def": "mg - F sin theta",
+    "fakes": [
+     "mg + F sin theta",
+     "mg - F cos theta",
+     "mg + F cos theta",
+     "mg",
+     "F sin theta",
+     "mg - F",
+     "F sin theta - mg"
+    ]
+   },
+   {
+    "id": "seed-py205-054",
+    "term": "Normal force on a block on an incline of angle theta",
+    "def": "mg cos theta",
+    "fakes": [
+     "mg sin theta",
+     "mg",
+     "mg tan theta",
+     "mg cot theta",
+     "2 mg cos theta",
+     "mg cos theta sin theta",
+     "mg (1 - cos theta)"
+    ]
+   },
+   {
+    "id": "seed-py205-055",
+    "term": "Component of gravity along an incline of angle theta",
+    "def": "mg sin theta",
+    "fakes": [
+     "mg cos theta",
+     "mg",
+     "mg tan theta",
+     "mg cot theta",
+     "2 mg sin theta",
+     "mg (1 - sin theta)",
+     "mg cos theta sin theta"
+    ]
+   },
+   {
+    "id": "seed-py205-056",
+    "term": "Box pushed with 20 N does not move: static friction",
+    "def": "20 N",
+    "fakes": [
+     "0 N",
+     "mu_s N",
+     "mu_k N",
+     "mg",
+     "20 N times mu_s",
+     "more than 20 N",
+     "less than 20 N"
+    ]
+   },
+   {
+    "id": "seed-py205-057",
+    "term": "mu_s N is the",
+    "def": "maximum static friction",
+    "fakes": [
+     "static friction at all times",
+     "kinetic friction",
+     "the normal force",
+     "the friction while sliding",
+     "the minimum static friction",
+     "the average friction",
+     "the net force"
+    ]
+   },
+   {
+    "id": "seed-py205-058",
+    "term": "Kinetic friction magnitude",
+    "def": "mu_k N",
+    "fakes": [
+     "mu_s N",
+     "mu_k mg sin theta",
+     "N / mu_k",
+     "mu_k N^2",
+     "mu_k m",
+     "mu_k F_applied",
+     "mu_k N v"
+    ]
+   },
+   {
+    "id": "seed-py205-059",
+    "term": "Box at rest, push slowly increased: friction just before it slips",
+    "def": "mu_s N",
+    "fakes": [
+     "mu_k N",
+     "0",
+     "mg",
+     "N / mu_s",
+     "half of mu_s N",
+     "the push minus mu_s N",
+     "mu_s mg plus the push"
+    ]
+   },
+   {
+    "id": "seed-py205-060",
+    "term": "Box sliding, you push harder: kinetic friction",
+    "def": "unchanged",
+    "fakes": [
+     "increases",
+     "decreases",
+     "doubles",
+     "becomes zero",
+     "becomes mu_s N",
+     "equals the push",
+     "drops by half"
+    ]
+   },
+   {
+    "id": "seed-py205-061",
+    "term": "Pulling a box at constant velocity on a rough floor: pull equals",
+    "def": "kinetic friction",
+    "fakes": [
+     "static friction",
+     "mg",
+     "the normal force",
+     "mu_s N",
+     "twice kinetic friction",
+     "zero",
+     "mg plus friction"
+    ]
+   },
+   {
+    "id": "seed-py205-062",
+    "term": "Heavier box, same mu_k and initial speed, sliding to a stop: stopping time",
+    "def": "unchanged",
+    "fakes": [
+     "doubles",
+     "halves",
+     "longer",
+     "shorter",
+     "zero",
+     "quadruples",
+     "depends on the box's area"
+    ]
+   },
+   {
+    "id": "seed-py205-063",
+    "term": "Car rounding a flat curve: force that supplies F_perp",
+    "def": "static friction",
+    "fakes": [
+     "kinetic friction",
+     "gravity",
+     "the normal force",
+     "centrifugal force",
+     "air drag",
+     "engine thrust",
+     "tension"
+    ]
+   },
+   {
+    "id": "seed-py205-064",
+    "term": "Rotor ride (spinning wall): force that holds the rider up",
+    "def": "static friction",
+    "fakes": [
+     "the normal force",
+     "kinetic friction",
+     "centrifugal force",
+     "gravity",
+     "air pressure",
+     "tension",
+     "magnetic force"
+    ]
+   },
+   {
+    "id": "seed-py205-065",
+    "term": "Rotor ride (spinning wall): force that supplies F_perp",
+    "def": "normal force",
+    "fakes": [
+     "static friction",
+     "gravity",
+     "centrifugal force",
+     "kinetic friction",
+     "tension",
+     "air drag",
+     "the rider's weight"
+    ]
+   },
+   {
+    "id": "seed-py205-066",
+    "term": "Falling at terminal speed: net force",
+    "def": "0",
+    "fakes": [
+     "mg",
+     "mg up",
+     "equal to drag only",
+     "maximum",
+     "decreasing toward mg",
+     "m v",
+     "infinite"
+    ]
+   },
+   {
+    "id": "seed-py205-067",
+    "term": "Angular frequency of a mass on a spring",
+    "def": "sqrt(k_s/m)",
+    "fakes": [
+     "sqrt(m/k_s)",
+     "k_s/m",
+     "2 pi sqrt(k_s/m)",
+     "k_s^2/m",
+     "m/k_s",
+     "sqrt(k_s/m)/(2 pi)",
+     "sqrt(g/m)"
+    ]
+   },
+   {
+    "id": "seed-py205-068",
+    "term": "Period of a mass on a spring",
+    "def": "2 pi sqrt(m/k_s)",
+    "fakes": [
+     "2 pi sqrt(k_s/m)",
+     "sqrt(m/k_s)",
+     "2 pi m/k_s",
+     "pi sqrt(m/k_s)",
+     "4 pi sqrt(m/k_s)",
+     "sqrt(k_s/m)/(2 pi)",
+     "2 pi sqrt(g/m)"
+    ]
+   },
+   {
+    "id": "seed-py205-069",
+    "term": "Double the amplitude: period",
+    "def": "unchanged",
+    "fakes": [
+     "doubles",
+     "halves",
+     "quadruples",
+     "increases by sqrt(2)",
+     "decreases by sqrt(2)",
+     "becomes zero",
+     "quarters"
+    ]
+   },
+   {
+    "id": "seed-py205-070",
+    "term": "Quadruple the mass on a spring: period",
+    "def": "doubles",
+    "fakes": [
+     "quadruples",
+     "halves",
+     "unchanged",
+     "increases by sqrt(2)",
+     "drops to 1/4",
+     "increases by 16",
+     "triples"
+    ]
+   },
+   {
+    "id": "seed-py205-071",
+    "term": "Same spring and mass taken to the Moon: period",
+    "def": "unchanged",
+    "fakes": [
+     "larger",
+     "smaller",
+     "zero",
+     "about 2.5 times longer",
+     "about 6 times longer",
+     "about 6 times shorter",
+     "infinite"
+    ]
+   },
+   {
+    "id": "seed-py205-072",
+    "term": "Mass-spring oscillator: where is speed greatest?",
+    "def": "equilibrium",
+    "fakes": [
+     "turning points",
+     "maximum stretch",
+     "maximum compression",
+     "halfway to the turning point",
+     "at the top only",
+     "at the bottom only",
+     "where acceleration is greatest"
+    ]
+   },
+   {
+    "id": "seed-py205-073",
+    "term": "Position of an oscillator released from rest at amplitude A",
+    "def": "A cos(omega t)",
+    "fakes": [
+     "A sin(omega t)",
+     "A cos(t / omega)",
+     "A omega t",
+     "A^2 cos(omega t)",
+     "omega cos(A t)",
+     "A sin(t / omega)",
+     "A tan(omega t)"
+    ]
+   },
+   {
+    "id": "seed-py205-074",
+    "term": "Calculator mode for cos(omega t)",
+    "def": "radians",
+    "fakes": [
+     "degrees",
+     "gradians",
+     "either one",
+     "revolutions",
+     "hertz",
+     "scientific",
+     "polar"
+    ]
+   },
+   {
+    "id": "seed-py205-075",
+    "term": "Objects that exert forces on a system",
+    "def": "touching objects and Earth",
+    "fakes": [
+     "everything in the room",
+     "only touching objects",
+     "only Earth",
+     "objects moving with it",
+     "the system's own parts",
+     "objects it touches and the Sun",
+     "only objects heavier than it"
+    ]
+   },
+   {
+    "id": "seed-py205-076",
+    "term": "A free-body diagram shows forces",
+    "def": "on the system only",
+    "fakes": [
+     "on and by the system",
+     "by the system on others",
+     "on the surroundings",
+     "third-law pairs",
+     "net force only",
+     "all forces in the problem",
+     "internal forces"
+    ]
+   },
+   {
+    "id": "seed-py205-077",
+    "term": "First step in applying the momentum principle",
+    "def": "choose the system",
+    "fakes": [
+     "write F = m a",
+     "pick a coordinate system",
+     "find the net force",
+     "draw velocity vectors",
+     "calculate Delta t",
+     "list the knowns",
+     "find the acceleration"
+    ]
+   },
+   {
+    "id": "seed-py205-078",
+    "term": "Book at rest on a table: number of forces on the book",
+    "def": "2",
+    "fakes": [
+     "1",
+     "3",
+     "0",
+     "4",
+     "5",
+     "6",
+     "8"
+    ]
+   },
+   {
+    "id": "seed-py205-079",
+    "term": "Normal force and gravity on a book: Newton's third law pair?",
+    "def": "no",
+    "fakes": [
+     "yes",
+     "only at rest",
+     "only on a level table",
+     "only if the book is still",
+     "yes, both act on the book",
+     "yes, equal and opposite",
+     "only without friction"
+    ]
+   },
+   {
+    "id": "seed-py205-080",
+    "term": "Third-law partner of Earth's pull on a book",
+    "def": "book's pull on Earth",
+    "fakes": [
+     "the normal force on the book",
+     "the table's push on the book",
+     "the book's push on the table",
+     "the floor's push on the table",
+     "air pressure on the book",
+     "the table's weight",
+     "friction on the book"
+    ]
+   },
+   {
+    "id": "seed-py205-081",
+    "term": "Ball in flight, no air resistance: forces on it",
+    "def": "gravity only",
+    "fakes": [
+     "gravity and a forward force",
+     "gravity and the throw",
+     "the force of motion",
+     "a forward force only",
+     "gravity and normal force",
+     "no forces",
+     "gravity and inertia force"
+    ]
+   },
+   {
+    "id": "seed-py205-082",
+    "term": "Thrown ball after release: is there a force in its direction of motion?",
+    "def": "no",
+    "fakes": [
+     "yes",
+     "yes, until it stops",
+     "yes, the throw's force",
+     "yes, momentum is a force",
+     "yes, inertia",
+     "only on the way up",
+     "only on the way down"
+    ]
+   },
+   {
+    "id": "seed-py205-083",
+    "term": "F_net = 0 means no forces act?",
+    "def": "no",
+    "fakes": [
+     "yes",
+     "only at rest",
+     "only in space",
+     "yes, nothing acts",
+     "only for constant speed",
+     "yes, if p is constant",
+     "only in 1D"
+    ]
+   },
+   {
+    "id": "seed-py205-084",
+    "term": "F_net = 0 means momentum is",
+    "def": "constant",
+    "fakes": [
+     "zero",
+     "increasing",
+     "decreasing",
+     "changing direction",
+     "equal to F_net",
+     "equal to mg",
+     "equal to impulse"
+    ]
+   },
+   {
+    "id": "seed-py205-085",
+    "term": "Momentum principle (update form)",
+    "def": "p_f = p_i + F_net Delta t",
+    "fakes": [
+     "p_f = p_i + F_net Delta t^2",
+     "p_f = p_i - F_net Delta t",
+     "p_f = F_net Delta t",
+     "p_f = p_i + m Delta t",
+     "p_f = p_i + F_net / m",
+     "v_f = v_i + F_net Delta t",
+     "p_f = p_i + F_net Delta x"
+    ]
+   },
+   {
+    "id": "seed-py205-086",
+    "term": "Momentum principle (derivative form)",
+    "def": "F_net = dp/dt",
+    "fakes": [
+     "F_net = dp/dx",
+     "F_net = p/t",
+     "F_net = m v",
+     "F_net = d(m)/dt",
+     "F_net = dv/dt",
+     "p = dF/dt",
+     "F_net = m dp/dt"
+    ]
+   },
+   {
+    "id": "seed-py205-087",
+    "term": "Delta p / Delta t equals",
+    "def": "F_net",
+    "fakes": [
+     "F_net / m",
+     "F_net Delta t",
+     "impulse",
+     "Delta v",
+     "Delta p",
+     "momentum",
+     "m F_net"
+    ]
+   },
+   {
+    "id": "seed-py205-088",
+    "term": "F_net Delta t is called",
+    "def": "impulse",
+    "fakes": [
+     "momentum",
+     "work",
+     "power",
+     "acceleration",
+     "kinetic energy",
+     "average force",
+     "net force"
+    ]
+   },
+   {
+    "id": "seed-py205-089",
+    "term": "Impulse vs Delta p over the same interval",
+    "def": "equal",
+    "fakes": [
+     "impulse is larger",
+     "Delta p is larger",
+     "perpendicular",
+     "unrelated",
+     "impulse is m times Delta p",
+     "impulse is Delta p / m",
+     "impulse is Delta p / Delta t"
+    ]
+   },
+   {
+    "id": "seed-py205-090",
+    "term": "Units of momentum",
+    "def": "kg m/s",
+    "fakes": [
+     "kg m/s^2",
+     "kg m^2/s",
+     "N",
+     "J",
+     "kg/s",
+     "N/s",
+     "kg m^2/s^2"
+    ]
+   },
+   {
+    "id": "seed-py205-091",
+    "term": "Units of impulse",
+    "def": "N s",
+    "fakes": [
+     "N",
+     "N/m",
+     "kg m/s^2",
+     "J",
+     "kg m^2/s",
+     "W",
+     "N/kg"
+    ]
+   },
+   {
+    "id": "seed-py205-092",
+    "term": "Constant force: average velocity",
+    "def": "(v_i + v_f)/2",
+    "fakes": [
+     "(v_f - v_i)/2",
+     "v_i + v_f",
+     "(v_i + v_f)/Delta t",
+     "v_f / 2",
+     "(v_i v_f)/2",
+     "sqrt(v_i v_f)",
+     "(v_f - v_i)/Delta t"
+    ]
+   },
+   {
+    "id": "seed-py205-093",
+    "term": "Constant force: Delta t from distance and v_avg",
+    "def": "distance / v_avg",
+    "fakes": [
+     "distance times v_avg",
+     "v_avg / distance",
+     "distance / v_f",
+     "distance / Delta p",
+     "distance / (2 v_avg)",
+     "2 distance / v_avg",
+     "v_f / distance"
+    ]
+   },
+   {
+    "id": "seed-py205-094",
+    "term": "Missing force F3 so that F_net = 0",
+    "def": "opposite of F1 + F2",
+    "fakes": [
+     "F1 + F2",
+     "F1 - F2",
+     "F2 - F1",
+     "0",
+     "F1 times F2",
+     "the larger of F1 and F2",
+     "the average of F1 and F2"
+    ]
+   },
+   {
+    "id": "seed-py205-095",
+    "term": "x-component of a force from its direction cosine",
+    "def": "|F| cos(theta_x)",
+    "fakes": [
+     "|F| sin(theta_x)",
+     "cos(theta_x)",
+     "|F| tan(theta_x)",
+     "cos(theta_x) / |F|",
+     "|F| cos(theta_y)",
+     "|F| sin(theta_y)",
+     "|F|^2 cos(theta_x)"
+    ]
+   },
+   {
+    "id": "seed-py205-096",
+    "term": "Sum of the squares of the three direction cosines",
+    "def": "1",
+    "fakes": [
+     "0",
+     "3",
+     "2",
+     "1/3",
+     "sqrt(3)",
+     "9",
+     "1/2"
+    ]
+   },
+   {
+    "id": "seed-py205-097",
+    "term": "Mass hung by two ropes, each theta from vertical: tension in each",
+    "def": "mg / (2 cos theta)",
+    "fakes": [
+     "mg / (2 sin theta)",
+     "mg / 2",
+     "mg cos theta / 2",
+     "mg / cos theta",
+     "2 mg cos theta",
+     "mg tan theta",
+     "mg / (2 tan theta)"
+    ]
+   },
+   {
+    "id": "seed-py205-098",
+    "term": "F_parallel to the momentum changes the",
+    "def": "speed",
+    "fakes": [
+     "direction",
+     "mass",
+     "radius of curvature",
+     "angle of motion",
+     "path shape",
+     "position only",
+     "spin"
+    ]
+   },
+   {
+    "id": "seed-py205-099",
+    "term": "F_perpendicular to the momentum changes the",
+    "def": "direction",
+    "fakes": [
+     "speed",
+     "mass",
+     "magnitude of p",
+     "kinetic energy",
+     "the mass and speed",
+     "the radius only",
+     "gravity"
+    ]
+   },
+   {
+    "id": "seed-py205-100",
+    "term": "F_parallel and F_perp are measured relative to the",
+    "def": "momentum",
+    "fakes": [
+     "position",
+     "displacement",
+     "ground",
+     "x-axis",
+     "gravity",
+     "acceleration",
+     "normal"
+    ]
+   },
+   {
+    "id": "seed-py205-101",
+    "term": "Constant speed along a curve: F_parallel",
+    "def": "0",
+    "fakes": [
+     "|p| v / R",
+     "maximum",
+     "equal to F_net",
+     "m g",
+     "m v^2 / R",
+     "|p| / R",
+     "F_perp"
+    ]
+   },
+   {
+    "id": "seed-py205-102",
+    "term": "Angle between F_net and p less than 90 degrees: speed is",
+    "def": "increasing",
+    "fakes": [
+     "decreasing",
+     "constant",
+     "zero",
+     "oscillating",
+     "infinite",
+     "undefined",
+     "reversing"
+    ]
+   },
+   {
+    "id": "seed-py205-103",
+    "term": "Angle between F_net and p greater than 90 degrees: speed is",
+    "def": "decreasing",
+    "fakes": [
+     "increasing",
+     "constant",
+     "zero",
+     "oscillating",
+     "infinite",
+     "undefined",
+     "reversing"
+    ]
+   },
+   {
+    "id": "seed-py205-104",
+    "term": "F_net always perpendicular to p: speed is",
+    "def": "constant",
+    "fakes": [
+     "increasing",
+     "decreasing",
+     "zero",
+     "oscillating",
+     "reversing",
+     "infinite",
+     "doubling"
+    ]
+   },
+   {
+    "id": "seed-py205-105",
+    "term": "|F_parallel| from |F_net| and angle theta to p",
+    "def": "|F_net| cos theta",
+    "fakes": [
+     "|F_net| sin theta",
+     "|F_net| tan theta",
+     "|F_net|^2 cos theta",
+     "2 |F_net| cos theta",
+     "|F_net|",
+     "0",
+     "|F_net| cos theta sin theta"
+    ]
+   },
+   {
+    "id": "seed-py205-106",
+    "term": "|F_perp| from |F_net| and angle theta to p",
+    "def": "|F_net| sin theta",
+    "fakes": [
+     "|F_net| cos theta",
+     "|F_net| tan theta",
+     "|F_net|^2 sin theta",
+     "2 |F_net| sin theta",
+     "|F_net|",
+     "0",
+     "|F_net| cos theta sin theta"
+    ]
+   },
+   {
+    "id": "seed-py205-107",
+    "term": "Vector F_perp from F_net and F_parallel",
+    "def": "F_net - F_parallel",
+    "fakes": [
+     "F_net + F_parallel",
+     "F_parallel - F_net",
+     "F_net times F_parallel",
+     "F_net + 2 F_parallel",
+     "F_parallel",
+     "F_net",
+     "0"
+    ]
+   },
+   {
+    "id": "seed-py205-108",
+    "term": "A dot B from magnitudes and the angle between them",
+    "def": "|A| |B| cos theta",
+    "fakes": [
+     "|A| |B| sin theta",
+     "|A| + |B| cos theta",
+     "|A| |B| tan theta",
+     "|A|^2 |B|^2 cos theta",
+     "|A| cos theta",
+     "|A| |B|",
+     "2 |A| |B| cos theta"
+    ]
+   },
+   {
+    "id": "seed-py205-109",
+    "term": "A dot B from components",
+    "def": "AxBx + AyBy + AzBz",
+    "fakes": [
+     "AxBy + AyBz + AzBx",
+     "Ax + Bx + Ay + By + Az + Bz",
+     "AxAy + BxBy",
+     "AxBx AyBy AzBz",
+     "(Ax + Bx)(Ay + By)",
+     "AyBz + AzBy",
+     "AxBz + AyBy + AzBx"
+    ]
+   },
+   {
+    "id": "seed-py205-110",
+    "term": "Dot product of two perpendicular vectors",
+    "def": "0",
+    "fakes": [
+     "1",
+     "|A| |B|",
+     "3",
+     "|A| + |B|",
+     "|A|^2",
+     "undefined",
+     "2"
+    ]
+   },
+   {
+    "id": "seed-py205-111",
+    "term": "Signed F_parallel from F_net and the unit vector p_hat",
+    "def": "F_net dot p_hat",
+    "fakes": [
+     "F_net cross p_hat",
+     "|F_net| |p_hat|",
+     "F_net times p",
+     "p_hat / F_net",
+     "F_net + p_hat",
+     "p_hat dot p_hat",
+     "p dot F_net / m"
+    ]
+   },
+   {
+    "id": "seed-py205-112",
+    "term": "F_net dot p is negative: speed is",
+    "def": "decreasing",
+    "fakes": [
+     "increasing",
+     "constant",
+     "zero",
+     "reversing",
+     "doubling",
+     "oscillating",
+     "infinite"
+    ]
+   },
+   {
+    "id": "seed-py205-113",
+    "term": "|dp/dt| perpendicular for curving motion",
+    "def": "|p| v / R",
+    "fakes": [
+     "|p| v^2 / R",
+     "|p| R / v",
+     "|p| / R",
+     "m v / R",
+     "|p|^2 v / R",
+     "|p| v / R^2",
+     "2 |p| v / R"
+    ]
+   },
+   {
+    "id": "seed-py205-114",
+    "term": "|p| v / R at low speed",
+    "def": "m v^2 / R",
+    "fakes": [
+     "m v / R",
+     "m v / R^2",
+     "m^2 v^2 / R",
+     "m^2 v / R",
+     "v^2 / R",
+     "m v^2 / R^2",
+     "m R / v^2"
+    ]
+   },
+   {
+    "id": "seed-py205-115",
+    "term": "Direction of (dp/dt) perpendicular",
+    "def": "toward the center of the curve",
+    "fakes": [
+     "away from the center",
+     "along the velocity",
+     "opposite the velocity",
+     "straight up",
+     "straight down",
+     "outward from the curve",
+     "tangent to the path"
+    ]
+   },
+   {
+    "id": "seed-py205-116",
+    "term": "R in |p| v / R is the radius of the",
+    "def": "kissing circle",
+    "fakes": [
+     "Earth",
+     "the planet's orbit",
+     "the object",
+     "the speedometer circle",
+     "the momentum vector",
+     "the tangent line",
+     "the wheel"
+    ]
+   },
+   {
+    "id": "seed-py205-117",
+    "term": "Kissing circle",
+    "def": "circle that best fits the curve there",
+    "fakes": [
+     "circle with the object's speed",
+     "circle centered on the origin",
+     "largest circle through the path",
+     "circle tangent to the ground",
+     "circle of the orbit's apogee",
+     "circle of radius v",
+     "unit circle"
+    ]
+   },
+   {
+    "id": "seed-py205-118",
+    "term": "Speed in uniform circular motion from R and period T",
+    "def": "2 pi R / T",
+    "fakes": [
+     "R / (2 pi T)",
+     "2 pi T / R",
+     "pi R / T",
+     "2 pi R^2 / T",
+     "R / T",
+     "2 R / T",
+     "pi R^2 / T"
+    ]
+   },
+   {
+    "id": "seed-py205-119",
+    "term": "Is F_perp a separate force on the free-body diagram?",
+    "def": "no",
+    "fakes": [
+     "yes",
+     "yes, the centripetal force",
+     "yes, pointing out",
+     "yes, centrifugal force",
+     "only on curves",
+     "only at constant speed",
+     "only in orbits"
+    ]
+   },
+   {
+    "id": "seed-py205-120",
+    "term": "Same radius, speed doubled: F_perp needed",
+    "def": "4 times",
+    "fakes": [
+     "2 times",
+     "8 times",
+     "half",
+     "1/4",
+     "unchanged",
+     "16 times",
+     "sqrt(2) times"
+    ]
+   },
+   {
+    "id": "seed-py205-121",
+    "term": "Ferris wheel at constant speed, rider at the top: F_net points",
+    "def": "down",
+    "fakes": [
+     "up",
+     "zero",
+     "forward",
+     "outward",
+     "backward",
+     "sideways",
+     "tangent"
+    ]
+   },
+   {
+    "id": "seed-py205-122",
+    "term": "Bottom of a dip: normal force vs mg",
+    "def": "greater",
+    "fakes": [
+     "less",
+     "equal",
+     "zero",
+     "half",
+     "depends on direction",
+     "always mg",
+     "infinite"
+    ]
+   },
+   {
+    "id": "seed-py205-123",
+    "term": "Top of a hill: normal force vs mg",
+    "def": "less",
+    "fakes": [
+     "greater",
+     "equal",
+     "zero",
+     "twice as large",
+     "depends on direction",
+     "always mg",
+     "infinite"
+    ]
+   },
+   {
+    "id": "seed-py205-124",
+    "term": "Bottom of a dip: N - mg =",
+    "def": "m v^2 / R",
+    "fakes": [
+     "m v / R",
+     "0",
+     "m g",
+     "m v^2 / (2R)",
+     "m v^2 / R^2",
+     "m v^2",
+     "m g R"
+    ]
+   },
+   {
+    "id": "seed-py205-125",
+    "term": "Pendulum at the bottom of its swing: tension vs mg",
+    "def": "greater",
+    "fakes": [
+     "less",
+     "equal",
+     "zero",
+     "half",
+     "depends on angle",
+     "always mg",
+     "infinite"
+    ]
+   },
+   {
+    "id": "seed-py205-126",
+    "term": "Satellite in circular orbit: force supplying F_perp",
+    "def": "gravity",
+    "fakes": [
+     "thrust",
+     "centrifugal force",
+     "the normal force",
+     "tension",
+     "air drag",
+     "the Moon's pull",
+     "inertia"
+    ]
+   },
+   {
+    "id": "seed-py205-127",
+    "term": "String breaks on a ball whirled in a circle: ball moves",
+    "def": "straight along the tangent",
+    "fakes": [
+     "outward along the radius",
+     "inward toward the center",
+     "in a smaller circle",
+     "in a spiral",
+     "straight down",
+     "backward",
+     "in the same circle"
+    ]
+   },
+   {
+    "id": "seed-py205-128",
+    "term": "Energy principle",
+    "def": "Delta E_sys = W_surr + Q",
+    "fakes": [
+     "Delta E_sys = W_surr - Q",
+     "E_sys = W_surr",
+     "Delta E_sys = 0 always",
+     "Delta E_sys = F_net Delta t",
+     "Delta p = W_surr + Q",
+     "Delta E_sys = W_sys + Q",
+     "Delta K = Q"
+    ]
+   },
+   {
+    "id": "seed-py205-129",
+    "term": "Everything that is not part of the system",
+    "def": "surroundings",
+    "fakes": [
+     "environment only if touching",
+     "the system",
+     "the boundary",
+     "the universe including the system",
+     "internal forces",
+     "the free-body diagram",
+     "the reference frame"
+    ]
+   },
+   {
+    "id": "seed-py205-130",
+    "term": "Rest energy of a particle",
+    "def": "m c^2",
+    "fakes": [
+     "1/2 m c^2",
+     "gamma m c^2",
+     "m c",
+     "m v^2",
+     "m c^2 / gamma",
+     "(gamma - 1) m c^2",
+     "m c^3"
+    ]
+   },
+   {
+    "id": "seed-py205-131",
+    "term": "Total energy of a single particle",
+    "def": "gamma m c^2",
+    "fakes": [
+     "m c^2",
+     "1/2 m v^2",
+     "gamma m v^2",
+     "(gamma - 1) m c^2",
+     "m c^2 / gamma",
+     "gamma m c",
+     "gamma m v"
+    ]
+   },
+   {
+    "id": "seed-py205-132",
+    "term": "Kinetic energy from E and rest energy",
+    "def": "E - m c^2",
+    "fakes": [
+     "E + m c^2",
+     "m c^2 - E",
+     "E - 2 m c^2",
+     "E times m c^2",
+     "gamma E",
+     "E - m v^2",
+     "m c^2"
+    ]
+   },
+   {
+    "id": "seed-py205-133",
+    "term": "Kinetic energy at low speed",
+    "def": "1/2 m v^2",
+    "fakes": [
+     "m v^2",
+     "1/2 m v",
+     "1/2 m^2 v",
+     "m v",
+     "2 m v^2",
+     "1/2 m c^2",
+     "gamma m v^2"
+    ]
+   },
+   {
+    "id": "seed-py205-134",
+    "term": "Spring force F vs stretch s graph: slope",
+    "def": "k_s",
+    "fakes": [
+     "1/k_s",
+     "m g",
+     "s",
+     "mass",
+     "1/2 k_s",
+     "k_s / 2",
+     "g"
+    ]
+   },
+   {
+    "id": "seed-py205-135",
+    "term": "y vs x is a straight line through the origin: relationship",
+    "def": "directly proportional",
+    "fakes": [
+     "inverse",
+     "quadratic",
+     "inverse-square",
+     "exponential",
+     "logarithmic",
+     "square root",
+     "no relationship"
+    ]
+   },
+   {
+    "id": "seed-py205-136",
+    "term": "Position vs time from rest with constant force: shape",
+    "def": "quadratic",
+    "fakes": [
+     "linear",
+     "inverse",
+     "exponential",
+     "constant",
+     "square root",
+     "inverse-square",
+     "cubic"
+    ]
+   },
+   {
+    "id": "seed-py205-137",
+    "term": "To linearize y = C x^2, plot y vs",
+    "def": "x^2",
+    "fakes": [
+     "x",
+     "1/x",
+     "sqrt(x)",
+     "log x",
+     "x^3",
+     "1/x^2",
+     "2x"
+    ]
+   },
+   {
+    "id": "seed-py205-138",
+    "term": "To linearize y = C / x, plot y vs",
+    "def": "1/x",
+    "fakes": [
+     "x",
+     "1/x^2",
+     "x^2",
+     "sqrt(x)",
+     "log x",
+     "1/x^3",
+     "2x"
+    ]
+   },
+   {
+    "id": "seed-py205-139",
+    "term": "Log-log plot of y = C x^n: slope",
+    "def": "n",
+    "fakes": [
+     "C",
+     "log n",
+     "1/n",
+     "n^2",
+     "log C",
+     "x",
+     "e^n"
+    ]
+   },
+   {
+    "id": "seed-py205-140",
+    "term": "Log-log plot of y = C x^n: intercept",
+    "def": "log C",
+    "fakes": [
+     "C",
+     "n",
+     "log n",
+     "1/C",
+     "0",
+     "C^n",
+     "e^C"
+    ]
+   },
+   {
+    "id": "seed-py205-141",
+    "term": "Spring oscillator: plot T^2 vs m, slope equals",
+    "def": "4 pi^2 / k_s",
+    "fakes": [
+     "k_s / (4 pi^2)",
+     "2 pi / k_s",
+     "pi^2 / k_s",
+     "2 pi sqrt(k_s)",
+     "1 / k_s",
+     "k_s",
+     "4 pi^2 / m"
+    ]
+   },
+   {
+    "id": "seed-py205-142",
+    "term": "Units of the slope of a y vs x graph",
+    "def": "y units / x units",
+    "fakes": [
+     "x units / y units",
+     "y units times x units",
+     "y units",
+     "x units",
+     "dimensionless",
+     "y units / x units^2",
+     "y units^2 / x units"
+    ]
+   },
+   {
+    "id": "seed-py205-143",
+    "term": "Uncertainty of the mean of N measurements",
+    "def": "sigma / sqrt(N)",
+    "fakes": [
+     "sigma",
+     "sigma / N^2",
+     "sigma / N",
+     "N sigma",
+     "sigma^2 / N",
+     "sqrt(sigma / N)",
+     "sigma / (N - 1)"
+    ]
+   },
+   {
+    "id": "seed-py205-144",
+    "term": "Round the measured value to the same decimal place as its",
+    "def": "uncertainty",
+    "fakes": [
+     "first digit",
+     "units",
+     "percent error",
+     "mean",
+     "largest digit",
+     "smallest division",
+     "number of trials"
+    ]
+   },
+   {
+    "id": "seed-py205-145",
+    "term": "Miscalibrated scale gives what kind of error?",
+    "def": "systematic",
+    "fakes": [
+     "random",
+     "statistical",
+     "human reaction",
+     "rounding",
+     "precision",
+     "no error",
+     "scatter"
+    ]
+   },
+   {
+    "id": "seed-py205-146",
+    "term": "Residuals of a good fit look",
+    "def": "random",
+    "fakes": [
+     "curved in a pattern",
+     "all positive",
+     "all negative",
+     "growing with x",
+     "U-shaped",
+     "increasing steadily",
+     "equal to y"
+    ]
+   },
+   {
+    "id": "seed-py205-147",
+    "term": "Two measurements agree if their uncertainty ranges",
+    "def": "overlap",
+    "fakes": [
+     "don't overlap",
+     "are equal in size",
+     "are both zero",
+     "are both large",
+     "touch zero",
+     "point the same way",
+     "double"
+    ]
+   },
+   {
+    "id": "seed-py205-148",
+    "term": "Significant figures in 0.00450",
+    "def": "3",
+    "fakes": [
+     "2",
+     "5",
+     "6",
+     "4",
+     "1",
+     "7",
+     "0"
+    ]
+   },
+   {
+    "id": "seed-py205-149",
+    "term": "Significant figures in 2.5 x 3.14",
+    "def": "2",
+    "fakes": [
+     "3",
+     "1",
+     "4",
+     "5",
+     "6",
+     "7",
+     "8"
+    ]
+   }
+  ]
  }
 ];
 window.SEED_RETIRED = ["seed-pcc101-structures"];

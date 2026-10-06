@@ -1,5 +1,5 @@
 // Regenerates decks/seed.js from decks/src/*.txt (and fake answers from
-// decks/src/pcc101-fakes.json, if present). Run: node tools/build-seed.js
+// decks/src/*-fakes.json, if present). Run: node tools/build-seed.js
 // The output is committed, so the app itself needs no build step.
 const fs = require('fs');
 const path = require('path');
@@ -10,8 +10,18 @@ const read = (f) => fs.readFileSync(path.join(root, 'decks/src', f), 'utf8');
 
 // Fake answers: exact source term line (structure terms keep their
 // "(add image NN.png)" note) -> array of wrong answers.
-const fakesFile = path.join(root, 'decks/src/pcc101-fakes.json');
-const fakesByTerm = fs.existsSync(fakesFile) ? JSON.parse(fs.readFileSync(fakesFile, 'utf8')) : {};
+// Each deck's fakes live in their own file; terms are unique across files.
+const FAKES_FILES = ['pcc101-fakes.json', 'py205-fakes.json'];
+const fakesByTerm = {};
+FAKES_FILES.forEach((f) => {
+  const file = path.join(root, 'decks/src', f);
+  if (!fs.existsSync(file)) return;
+  const data = JSON.parse(fs.readFileSync(file, 'utf8'));
+  Object.keys(data).forEach((k) => {
+    if (fakesByTerm[k]) throw new Error(f + ': fake key also in another fakes file: ' + k);
+    fakesByTerm[k] = data[k];
+  });
+});
 const usedKeys = new Set();
 const stats = { cards: 0, withFakes: 0, fakes: 0, dropped: 0, dupes: 0, droppedList: [] };
 
@@ -46,11 +56,16 @@ const structures = FL.parseImport(read('pcc101-structures.txt'), '	').map((c, i)
   return withFakes({ id: 'seed-struct-' + n, term: s.term, def: c.def, termImg: 'decks/pcc-structures/' + n + '.png' }, c.term);
 });
 
+const py205 = FL.parseImport(read('py205-test2.txt'), '	').map((c, i) => withFakes({
+  id: 'seed-py205-' + String(i + 1).padStart(3, '0'), term: c.term, def: c.def,
+}, c.term));
+
 // Bump a deck's version whenever its cards change, so browsers that already
 // have the old copy pick up the new cards (progress on unchanged cards is kept).
 const seed = [
   { id: 'seed-pcc101-exam1', version: 5, name: 'PCC 101 Exam 1', folder: 'PCC 101', cards: core.concat(structures) },
   { id: 'seed-pcc101-exam1-full', version: 3, name: 'PCC 101 Exam 1 (all 177 text cards)', folder: 'PCC 101', cards: full },
+  { id: 'seed-py205-test2', version: 1, name: 'PY 205 Test 2', folder: 'PY 205', cards: py205 },
 ];
 
 // Built-in decks that no longer ship. Removed from storage if still present.
@@ -63,7 +78,7 @@ fs.writeFileSync(path.join(root, 'decks/seed.js'), out, 'utf8');
 console.log('seed decks:', seed.map((d) => d.name + ' (' + d.cards.length + ', ' + d.cards.filter((c) => c.fakes).length + ' with fakes)').join(', '));
 const keys = Object.keys(fakesByTerm);
 const unmatched = keys.filter((k) => !usedKeys.has(k));
-console.log('fakes: ' + keys.length + ' terms in pcc101-fakes.json; ' + stats.withFakes + ' of ' + stats.cards + ' seed cards got fakes (' + stats.fakes + ' fakes)');
+console.log('fakes: ' + keys.length + ' terms in ' + FAKES_FILES.join(' + ') + '; ' + stats.withFakes + ' of ' + stats.cards + ' seed cards got fakes (' + stats.fakes + ' fakes)');
 console.log('fakes dropped because they match the answer or grade as correct: ' + stats.dropped + (stats.dupes ? '; duplicates removed: ' + stats.dupes : ''));
 stats.droppedList.forEach((l) => console.log('  dropped: ' + l));
 console.log('unmatched fake keys: ' + unmatched.length);

@@ -1,0 +1,149 @@
+Magnitude of the electric force between two point charges	k q1 q2 / r^2
+Electric force depends on distance as	1/r^2
+Distance between two charges doubles: electric force becomes	1/4 as large
+Proton and electron: electric force is attractive or repulsive?	attractive
+Force on a negative charge from a nearby positive charge points	toward the positive charge
+Force on electron by proton vs force on proton by electron: magnitudes	equal
+Name for: force on A by B equals minus force on B by A	reciprocity
+Reciprocity is also called	Newton's third law
+In F on 2 by 1, the relative position vector r points from	1 to 2
+Total momentum of an isolated system	constant
+Delta p_system + Delta p_surroundings =	0
+Delta p of the system vs Delta p of the surroundings: directions	opposite
+Forces that can change a system's total momentum	external forces
+Can internal forces change a system's total momentum?	no
+Collision: why ignore the road's force on the cars?	short time, tiny impulse
+Two objects stick together: final velocity	p_total / m_total
+Ball bounces straight back: is |Delta p| more or less than |p_initial|?	more
+Tension in a rope is a vector or a scalar?	scalar
+Elevator moving down and slowing down: acceleration direction?	up
+Elevator moving up and slowing down: acceleration direction?	down
+Elevator cable tension (a positive = upward acceleration)	m(g + a)
+Elevator accelerating upward: tension vs mg	greater
+Elevator moving down at constant speed: tension vs mg	equal
+Elevator moving down and speeding up: tension vs mg	less
+Bathroom scale in an elevator reads the	normal force
+Mass of one atom from molar mass M	M / N_A
+Interatomic distance from atomic mass m_a and density rho	(m_a/rho)^(1/3)
+Stiffness of one interatomic bond from Young's modulus Y	Y d
+Number of side-by-side atomic chains in a wire of cross-section A	A / d^2
+Number of bonds in one chain of a wire of length L	L / d
+Wire stiffness from k_bond, N_chains, N_bonds	k_bond N_chains / N_bonds
+Springs in series: what adds?	1/k
+Springs in parallel: what adds?	k
+N identical springs end to end (series): total stiffness	k/N
+N identical springs side by side (parallel): total stiffness	N times k
+4 identical springs side by side: total stiffness	4k
+Cut a spring in half: stiffness of each half	2k
+Mass hanging at rest from a spring: stretch s	mg / k_s
+Identical springs in series holding a weight: force on each spring	full weight
+Young's modulus Y =	(F/A)/(Delta L/L)
+F/A in Young's modulus is called	stress
+Delta L/L in Young's modulus is called	strain
+SI units of Young's modulus	N/m^2
+Which depends on wire length: Y or k_wire?	k_wire
+Same force on a wire twice as long: Delta L	doubles
+Same force on a wire with twice the cross-sectional area: Delta L	halves
+Magnitude of the spring force	k_s |s|
+Spring force direction compared to the stretch	opposite
+s in the spring force means	stretch from relaxed length
+Rod pushed at its left end in space: bonds most compressed where?	near the pushed end
+Direction of the normal force	perpendicular to the surface
+Normal force when pushing down at angle theta below horizontal	mg + F sin theta
+Normal force when pulling up at angle theta above horizontal	mg - F sin theta
+Normal force on a block on an incline of angle theta	mg cos theta
+Component of gravity along an incline of angle theta	mg sin theta
+Box pushed with 20 N does not move: static friction	20 N
+mu_s N is the	maximum static friction
+Kinetic friction magnitude	mu_k N
+Box at rest, push slowly increased: friction just before it slips	mu_s N
+Box sliding, you push harder: kinetic friction	unchanged
+Pulling a box at constant velocity on a rough floor: pull equals	kinetic friction
+Heavier box, same mu_k and initial speed, sliding to a stop: stopping time	unchanged
+Car rounding a flat curve: force that supplies F_perp	static friction
+Rotor ride (spinning wall): force that holds the rider up	static friction
+Rotor ride (spinning wall): force that supplies F_perp	normal force
+Falling at terminal speed: net force	0
+Angular frequency of a mass on a spring	sqrt(k_s/m)
+Period of a mass on a spring	2 pi sqrt(m/k_s)
+Double the amplitude: period	unchanged
+Quadruple the mass on a spring: period	doubles
+Same spring and mass taken to the Moon: period	unchanged
+Mass-spring oscillator: where is speed greatest?	equilibrium
+Position of an oscillator released from rest at amplitude A	A cos(omega t)
+Calculator mode for cos(omega t)	radians
+Objects that exert forces on a system	touching objects and Earth
+A free-body diagram shows forces	on the system only
+First step in applying the momentum principle	choose the system
+Book at rest on a table: number of forces on the book	2
+Normal force and gravity on a book: Newton's third law pair?	no
+Third-law partner of Earth's pull on a book	book's pull on Earth
+Ball in flight, no air resistance: forces on it	gravity only
+Thrown ball after release: is there a force in its direction of motion?	no
+F_net = 0 means no forces act?	no
+F_net = 0 means momentum is	constant
+Momentum principle (update form)	p_f = p_i + F_net Delta t
+Momentum principle (derivative form)	F_net = dp/dt
+Delta p / Delta t equals	F_net
+F_net Delta t is called	impulse
+Impulse vs Delta p over the same interval	equal
+Units of momentum	kg m/s
+Units of impulse	N s
+Constant force: average velocity	(v_i + v_f)/2
+Constant force: Delta t from distance and v_avg	distance / v_avg
+Missing force F3 so that F_net = 0	opposite of F1 + F2
+x-component of a force from its direction cosine	|F| cos(theta_x)
+Sum of the squares of the three direction cosines	1
+Mass hung by two ropes, each theta from vertical: tension in each	mg / (2 cos theta)
+F_parallel to the momentum changes the	speed
+F_perpendicular to the momentum changes the	direction
+F_parallel and F_perp are measured relative to the	momentum
+Constant speed along a curve: F_parallel	0
+Angle between F_net and p less than 90 degrees: speed is	increasing
+Angle between F_net and p greater than 90 degrees: speed is	decreasing
+F_net always perpendicular to p: speed is	constant
+|F_parallel| from |F_net| and angle theta to p	|F_net| cos theta
+|F_perp| from |F_net| and angle theta to p	|F_net| sin theta
+Vector F_perp from F_net and F_parallel	F_net - F_parallel
+A dot B from magnitudes and the angle between them	|A| |B| cos theta
+A dot B from components	AxBx + AyBy + AzBz
+Dot product of two perpendicular vectors	0
+Signed F_parallel from F_net and the unit vector p_hat	F_net dot p_hat
+F_net dot p is negative: speed is	decreasing
+|dp/dt| perpendicular for curving motion	|p| v / R
+|p| v / R at low speed	m v^2 / R
+Direction of (dp/dt) perpendicular	toward the center of the curve
+R in |p| v / R is the radius of the	kissing circle
+Kissing circle	circle that best fits the curve there
+Speed in uniform circular motion from R and period T	2 pi R / T
+Is F_perp a separate force on the free-body diagram?	no
+Same radius, speed doubled: F_perp needed	4 times
+Ferris wheel at constant speed, rider at the top: F_net points	down
+Bottom of a dip: normal force vs mg	greater
+Top of a hill: normal force vs mg	less
+Bottom of a dip: N - mg =	m v^2 / R
+Pendulum at the bottom of its swing: tension vs mg	greater
+Satellite in circular orbit: force supplying F_perp	gravity
+String breaks on a ball whirled in a circle: ball moves	straight along the tangent
+Energy principle	Delta E_sys = W_surr + Q
+Everything that is not part of the system	surroundings
+Rest energy of a particle	m c^2
+Total energy of a single particle	gamma m c^2
+Kinetic energy from E and rest energy	E - m c^2
+Kinetic energy at low speed	1/2 m v^2
+Spring force F vs stretch s graph: slope	k_s
+y vs x is a straight line through the origin: relationship	directly proportional
+Position vs time from rest with constant force: shape	quadratic
+To linearize y = C x^2, plot y vs	x^2
+To linearize y = C / x, plot y vs	1/x
+Log-log plot of y = C x^n: slope	n
+Log-log plot of y = C x^n: intercept	log C
+Spring oscillator: plot T^2 vs m, slope equals	4 pi^2 / k_s
+Units of the slope of a y vs x graph	y units / x units
+Uncertainty of the mean of N measurements	sigma / sqrt(N)
+Round the measured value to the same decimal place as its	uncertainty
+Miscalibrated scale gives what kind of error?	systematic
+Residuals of a good fit look	random
+Two measurements agree if their uncertainty ranges	overlap
+Significant figures in 0.00450	3
+Significant figures in 2.5 x 3.14	2

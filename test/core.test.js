@@ -737,3 +737,34 @@ test('buildTest answering with the term: written asks for the term', () => {
   ans[w.key] = cards.find((c) => c.id === w.id).term;
   assert.equal(FL.scoreTest(t, ans, cards).items.find((i) => i.key === w.key).correct, true);
 });
+
+test('seed: PY 205 Test 2 deck loads; answers grade correct, no fake grades correct', () => {
+  const fs = require('fs');
+  const path = require('path');
+  const vm = require('vm');
+  const sandbox = { window: {} };
+  vm.runInNewContext(fs.readFileSync(path.join(__dirname, '../decks/seed.js'), 'utf8'), sandbox);
+  const deck = sandbox.window.SEED_DECKS.find((d) => d.id === 'seed-py205-test2');
+  assert.ok(deck, 'deck present');
+  assert.equal(deck.name, 'PY 205 Test 2');
+  assert.equal(deck.folder, 'PY 205');
+  assert.ok(deck.cards.length >= 110, 'at least 110 cards');
+  const rawFakes = JSON.parse(fs.readFileSync(path.join(__dirname, '../decks/src/py205-fakes.json'), 'utf8'));
+  const srcTerms = FL.parseImport(fs.readFileSync(path.join(__dirname, '../decks/src/py205-test2.txt'), 'utf8'), '\t').map((c) => c.term);
+  assert.deepEqual(Object.keys(rawFakes).sort(), srcTerms.slice().sort(), 'every card has a fakes entry and no stray keys');
+  const ids = new Set();
+  deck.cards.forEach((c) => {
+    assert.ok(!ids.has(c.id)); ids.add(c.id);
+    assert.ok(FL.grade(c.def, c.def).correct, 'answer grades correct: ' + c.def);
+    const raw = rawFakes[c.term];
+    assert.ok(raw.length >= 6, 'at least 6 fakes: ' + c.term);
+    assert.equal(c.fakes.length, raw.length, 'no fake dropped or duplicate: ' + c.term);
+    c.fakes.forEach((f) => {
+      assert.equal(FL.grade(f, c.def, c.fakes).correct, false, 'fake graded correct: ' + c.def + ' <- ' + f);
+    });
+  });
+  // PCC decks keep their ids and versions
+  const v = Object.fromEntries(sandbox.window.SEED_DECKS.map((d) => [d.id, d.version]));
+  assert.equal(v['seed-pcc101-exam1'], 5);
+  assert.equal(v['seed-pcc101-exam1-full'], 3);
+});

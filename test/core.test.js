@@ -744,25 +744,48 @@ test('seed: PY 205 Test 2 deck loads; answers grade correct, no fake grades corr
   const vm = require('vm');
   const sandbox = { window: {} };
   vm.runInNewContext(fs.readFileSync(path.join(__dirname, '../decks/seed.js'), 'utf8'), sandbox);
-  const deck = sandbox.window.SEED_DECKS.find((d) => d.id === 'seed-py205-test2');
-  assert.ok(deck, 'deck present');
-  assert.equal(deck.name, 'PY 205 Test 2');
-  assert.equal(deck.folder, 'PY 205');
-  assert.ok(deck.cards.length >= 110, 'at least 110 cards');
+  const decks = sandbox.window.SEED_DECKS;
+  const core = decks.find((d) => d.id === 'seed-py205-test2');
+  const full = decks.find((d) => d.id === 'seed-py205-test2-full');
+  assert.ok(core && full, 'core and full decks present');
+  assert.equal(core.name, 'PY 205 Test 2');
+  assert.equal(full.name, 'PY 205 Test 2 (all 149 cards)');
+  assert.equal(core.folder, 'PY 205');
+  assert.equal(full.folder, 'PY 205');
+  assert.equal(core.version, 2);
+  assert.equal(full.version, 1);
+  assert.equal(full.cards.length, 149);
+  assert.ok(core.cards.length >= 30 && core.cards.length <= 40, 'core deck has 30-40 cards');
   const rawFakes = JSON.parse(fs.readFileSync(path.join(__dirname, '../decks/src/py205-fakes.json'), 'utf8'));
-  const srcTerms = FL.parseImport(fs.readFileSync(path.join(__dirname, '../decks/src/py205-test2.txt'), 'utf8'), '\t').map((c) => c.term);
+  const srcTerms = FL.parseImport(fs.readFileSync(path.join(__dirname, '../decks/src/py205-test2.txt'), 'utf8'), '	').map((c) => c.term);
   assert.deepEqual(Object.keys(rawFakes).sort(), srcTerms.slice().sort(), 'every card has a fakes entry and no stray keys');
-  const ids = new Set();
-  deck.cards.forEach((c) => {
-    assert.ok(!ids.has(c.id)); ids.add(c.id);
-    assert.ok(FL.grade(c.def, c.def).correct, 'answer grades correct: ' + c.def);
-    const raw = rawFakes[c.term];
-    assert.ok(raw.length >= 6, 'at least 6 fakes: ' + c.term);
-    assert.equal(c.fakes.length, raw.length, 'no fake dropped or duplicate: ' + c.term);
-    c.fakes.forEach((f) => {
-      assert.equal(FL.grade(f, c.def, c.fakes).correct, false, 'fake graded correct: ' + c.def + ' <- ' + f);
+  // core cards are full-deck cards with the id they had at that full-deck position
+  core.cards.forEach((c) => {
+    const i = full.cards.findIndex((f) => f.term === c.term && f.def === c.def);
+    assert.ok(i >= 0, 'core card is in the full deck: ' + c.term);
+    assert.equal(c.id, 'seed-py205-' + String(i + 1).padStart(3, '0'), 'core id matches full position: ' + c.term);
+    assert.equal(full.cards[i].id, 'seed-py205full-' + String(i + 1).padStart(3, '0'));
+  });
+  [core, full].forEach((deck) => {
+    const ids = new Set();
+    deck.cards.forEach((c) => {
+      assert.ok(!ids.has(c.id)); ids.add(c.id);
+      assert.ok(FL.grade(c.def, c.def).correct, 'answer grades correct: ' + c.def);
+      const raw = rawFakes[c.term];
+      assert.ok(raw.length >= 6, 'at least 6 fakes: ' + c.term);
+      assert.equal(c.fakes.length, raw.length, 'no fake dropped or duplicate: ' + c.term);
+      c.fakes.forEach((f) => {
+        assert.equal(FL.grade(f, c.def, c.fakes).correct, false, 'fake graded correct: ' + c.def + ' <- ' + f);
+      });
     });
   });
+  // upgrading the old 149-card v1 core deck keeps progress on cards that stayed
+  const prog = {};
+  full.cards.forEach((c, i) => { prog['seed-py205-' + String(i + 1).padStart(3, '0')] = { mastered: true }; });
+  const old = { id: 'seed-py205-test2', cards: full.cards.map((c, i) => Object.assign({}, c, { id: 'seed-py205-' + String(i + 1).padStart(3, '0') })), learn: { progress: prog } };
+  const merged = FL.mergeSeedDeck(old, core);
+  assert.equal(merged.cards.length, core.cards.length);
+  assert.equal(Object.keys(merged.learn.progress).length, core.cards.length, 'progress kept for every core card');
   // PCC decks keep their ids and versions
   const v = Object.fromEntries(sandbox.window.SEED_DECKS.map((d) => [d.id, d.version]));
   assert.equal(v['seed-pcc101-exam1'], 5);

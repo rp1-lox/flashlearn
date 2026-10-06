@@ -56,8 +56,19 @@ const structures = FL.parseImport(read('pcc101-structures.txt'), '	').map((c, i)
   return withFakes({ id: 'seed-struct-' + n, term: s.term, def: c.def, termImg: 'decks/pcc-structures/' + n + '.png' }, c.term);
 });
 
-const py205 = FL.parseImport(read('py205-test2.txt'), '	').map((c, i) => withFakes({
-  id: 'seed-py205-' + String(i + 1).padStart(3, '0'), term: c.term, def: c.def,
+// PY 205: the core deck holds the formulas and sign rules needed to start a
+// problem; the full deck has all cards. Core cards keep the id they had when
+// the full list was the only PY 205 deck (seed-py205-NNN by full position),
+// so progress made before the split carries over.
+const py205Src = FL.parseImport(read('py205-test2.txt'), '	');
+const py205Pos = new Map(py205Src.map((c, i) => [c.term + '	' + c.def, i + 1]));
+const py205 = FL.parseImport(read('py205-core.txt'), '	').map((c) => {
+  const pos = py205Pos.get(c.term + '	' + c.def);
+  if (!pos) throw new Error('py205-core.txt: card not in py205-test2.txt: ' + c.term);
+  return withFakes({ id: 'seed-py205-' + String(pos).padStart(3, '0'), term: c.term, def: c.def }, c.term);
+});
+const py205Full = py205Src.map((c, i) => withFakes({
+  id: 'seed-py205full-' + String(i + 1).padStart(3, '0'), term: c.term, def: c.def,
 }, c.term));
 
 // Bump a deck's version whenever its cards change, so browsers that already
@@ -65,7 +76,8 @@ const py205 = FL.parseImport(read('py205-test2.txt'), '	').map((c, i) => withFak
 const seed = [
   { id: 'seed-pcc101-exam1', version: 5, name: 'PCC 101 Exam 1', folder: 'PCC 101', cards: core.concat(structures) },
   { id: 'seed-pcc101-exam1-full', version: 3, name: 'PCC 101 Exam 1 (all 177 text cards)', folder: 'PCC 101', cards: full },
-  { id: 'seed-py205-test2', version: 1, name: 'PY 205 Test 2', folder: 'PY 205', cards: py205 },
+  { id: 'seed-py205-test2', version: 2, name: 'PY 205 Test 2', folder: 'PY 205', cards: py205 },
+  { id: 'seed-py205-test2-full', version: 1, name: 'PY 205 Test 2 (all 149 cards)', folder: 'PY 205', cards: py205Full },
 ];
 
 // Built-in decks that no longer ship. Removed from storage if still present.

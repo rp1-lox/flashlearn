@@ -768,3 +768,16 @@ test('seed: PY 205 Test 2 deck loads; answers grade correct, no fake grades corr
   assert.equal(v['seed-pcc101-exam1'], 5);
   assert.equal(v['seed-pcc101-exam1-full'], 3);
 });
+
+// ---------- grading: math symbols carry meaning ----------
+test('grade keeps division, minus signs and variable "a" in formulas', () => {
+  const ok = (g, a) => assert.equal(FL.grade(g, a).correct, true, g + ' for ' + a);
+  const no = (g, a) => assert.equal(FL.grade(g, a).correct, false, g + ' for ' + a);
+  ok('f/a', 'F/A'); no('F', 'F/A'); no('mg/k_s', 'mg k_s'); no('Y d', 'Y/d');
+  ok('-1.5', '-1.5'); no('1.5', '-1.5'); no('-1.5', '1.5');
+  ok('mg − F sinθ', 'mg - F sin θ'); ok('mg-Fsin θ', 'mg - F sin θ'); no('mg - F sin θ', 'mg + F sin θ');
+  no('E - mc^2', 'E + mc^2'); no('5 - x', '5 + x'); ok('Y*d', 'Y d');
+  // hyphenated words and names still match without the hyphen
+  ok('semisynthetic', 'semi-synthetic'); ok('1,6 diaminohexane', '1,6-diaminohexane'); ok('conh', 'C(=O)-NH'); ok('2-10', '2 to 10');
+  ok('a polymer', 'polymer');
+});

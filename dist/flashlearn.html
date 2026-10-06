@@ -386,11 +386,20 @@ details.fakes textarea { width: 100%; margin-top: 4px; }
   function normalize(s) {
     s = String(s || '');
     if (s.normalize) s = s.normalize('NFKC'); // CH₄ -> CH4, ² -> 2
-    s = s.toLowerCase()
+    s = s.replace(/[−–—]/g, '-')
+      .replace(/(\d)\s*-\s*(\d)/g, '$1 to $2')                    // 2-10 -> 2 to 10
+      .replace(/(\p{L})-(?=\p{Lu})/gu, '$1 minus ')               // mg-F: minus before a capital symbol
+      // Math symbols are meaning, not punctuation: "F/A" is not "F", "-1.5" is not "1.5".
+      .replace(/\//g, ' over ')
+      .replace(/(^|[\s(=,])-(?=\s*[\d.])/g, '$1 negative ')   // leading minus on a number
+      .replace(/(^|[^\p{L}\p{N})])\s*-\s*(?=[\p{L}\d(.])/gu, '$1 minus ')  // minus after a number, symbol or space
+      .replace(/(\p{L}|\p{N}|\))\s+-\s+/gu, '$1 minus ')               // spaced minus between terms
+      .replace(/\^/g, ' pow ')
+      .toLowerCase()
       .replace(/[→⟶]/g, ' to ')
       .replace(/&/g, ' and ')
       .replace(/\+/g, ' plus ')                       // "n + 1" must not equal "n - 1"
-      .replace(/[×*]/g, ' times ')
+      .replace(/[×*·]/g, ' ')
       .replace(/(\d),(\d{3})(?!\d)/g, '$1$2')          // 1,783 -> 1783 (but "2,8,8" stays a list)
       .replace(/(\d)\s*[-–—]\s*(\d)/g, '$1 to $2')     // 2-10 -> 2 to 10
       .replace(/(\d)\.(\d)/g, '$1\u0001$2')            // keep decimal points
@@ -413,12 +422,15 @@ details.fakes textarea { width: 100%; margin-top: 4px; }
   function isNum(t) { return /^\d+(\.\d+)?$/.test(t); }
 
   /** Canonical answer tokens: normalized, filler dropped, plurals and number/element words unified. */
+  // In a formula ("F/A", "a = F/m") a lone "a" is a variable, not an article.
+  var MATHY = /[\/=^*×+_]|over/;
   function tokensOf(s) {
+    var mathy = MATHY.test(String(s || ''));
     return normalize(s).split(' ').filter(Boolean).map(function (t) {
       if (NUMBER_WORDS[t]) return NUMBER_WORDS[t];
       if (t.length > 3 && /s$/.test(t) && !/ss$/.test(t) && !KEEP_S[t] && !isNum(t)) t = t.slice(0, -1);
       return ELEMENTS[t] || t;
-    }).filter(function (t) { return !FILLER[t]; });
+    }).filter(function (t) { return !FILLER[t] || (mathy && t === 'a'); });
   }
 
   /** A typed number matches if equal, or if it is the answer rounded to fewer decimals (226 for 226.32). */
@@ -3664,7 +3676,8 @@ window.SEED_DECKS = [
      "2n",
      "n / 2",
      "n + 3",
-     "2n + 1"
+     "2n + 1",
+     "n - 2"
     ]
    },
    {

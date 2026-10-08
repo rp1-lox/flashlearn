@@ -749,12 +749,12 @@ test('seed: PY 205 Test 2 deck loads; answers grade correct, no fake grades corr
   const full = decks.find((d) => d.id === 'seed-py205-test2-full');
   assert.ok(core && full, 'core and full decks present');
   assert.equal(core.name, 'PY 205 Test 2');
-  assert.equal(full.name, 'PY 205 Test 2 (all 149 cards)');
+  assert.equal(full.name, 'PY 205 Test 2 (all 151 cards)');
   assert.equal(core.folder, 'PY 205');
   assert.equal(full.folder, 'PY 205');
-  assert.equal(core.version, 2);
-  assert.equal(full.version, 1);
-  assert.equal(full.cards.length, 149);
+  assert.equal(core.version, 3);
+  assert.equal(full.version, 2);
+  assert.equal(full.cards.length, 151);
   assert.ok(core.cards.length >= 30 && core.cards.length <= 40, 'core deck has 30-40 cards');
   const rawFakes = JSON.parse(fs.readFileSync(path.join(__dirname, '../decks/src/py205-fakes.json'), 'utf8'));
   const srcTerms = FL.parseImport(fs.readFileSync(path.join(__dirname, '../decks/src/py205-test2.txt'), 'utf8'), '	').map((c) => c.term);

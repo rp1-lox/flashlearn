@@ -76,8 +76,8 @@ const py205Full = py205Src.map((c, i) => withFakes({
 const seed = [
   { id: 'seed-pcc101-exam1', version: 5, name: 'PCC 101 Exam 1', folder: 'PCC 101', cards: core.concat(structures) },
   { id: 'seed-pcc101-exam1-full', version: 3, name: 'PCC 101 Exam 1 (all 177 text cards)', folder: 'PCC 101', cards: full },
-  { id: 'seed-py205-test2', version: 2, name: 'PY 205 Test 2', folder: 'PY 205', cards: py205 },
-  { id: 'seed-py205-test2-full', version: 1, name: 'PY 205 Test 2 (all 149 cards)', folder: 'PY 205', cards: py205Full },
+  { id: 'seed-py205-test2', version: 3, name: 'PY 205 Test 2', folder: 'PY 205', cards: py205 },
+  { id: 'seed-py205-test2-full', version: 2, name: 'PY 205 Test 2 (all 151 cards)', folder: 'PY 205', cards: py205Full },
 ];
 
 // Built-in decks that no longer ship. Removed from storage if still present.

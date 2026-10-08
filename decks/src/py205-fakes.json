@@ -1339,5 +1339,21 @@
   "6",
   "7",
   "8"
+ ],
+ "Two cables at angles theta1 and theta2 above horizontal hold weight mg: tension in cable 1": [
+  "mg cos theta1 / sin(theta1 + theta2)",
+  "mg / (2 cos theta1)",
+  "mg sin theta2 / sin(theta1 + theta2)",
+  "mg cos theta2 / cos(theta1 + theta2)",
+  "mg cos theta2 / (2 sin theta1)",
+  "mg sin theta1 / sin(theta1 + theta2)"
+ ],
+ "Two-cable tension shortcut: whose angle goes in the cosine on top?": [
+  "its own angle",
+  "the larger angle",
+  "the smaller angle",
+  "the sum of both angles",
+  "the angle from vertical",
+  "the average of both angles"
  ]
 }

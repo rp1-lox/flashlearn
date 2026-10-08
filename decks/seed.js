@@ -4235,7 +4235,7 @@ window.SEED_DECKS = [
  },
  {
   "id": "seed-py205-test2",
-  "version": 2,
+  "version": 3,
   "name": "PY 205 Test 2",
   "folder": "PY 205",
   "cards": [
@@ -4770,13 +4770,39 @@ window.SEED_DECKS = [
      "k_s",
      "4 pi^2 / m"
     ]
+   },
+   {
+    "id": "seed-py205-150",
+    "term": "Two cables at angles theta1 and theta2 above horizontal hold weight mg: tension in cable 1",
+    "def": "mg cos theta2 / sin(theta1 + theta2)",
+    "fakes": [
+     "mg cos theta1 / sin(theta1 + theta2)",
+     "mg / (2 cos theta1)",
+     "mg sin theta2 / sin(theta1 + theta2)",
+     "mg cos theta2 / cos(theta1 + theta2)",
+     "mg cos theta2 / (2 sin theta1)",
+     "mg sin theta1 / sin(theta1 + theta2)"
+    ]
+   },
+   {
+    "id": "seed-py205-151",
+    "term": "Two-cable tension shortcut: whose angle goes in the cosine on top?",
+    "def": "the other cable's angle",
+    "fakes": [
+     "its own angle",
+     "the larger angle",
+     "the smaller angle",
+     "the sum of both angles",
+     "the angle from vertical",
+     "the average of both angles"
+    ]
    }
   ]
  },
  {
   "id": "seed-py205-test2-full",
-  "version": 1,
-  "name": "PY 205 Test 2 (all 149 cards)",
+  "version": 2,
+  "name": "PY 205 Test 2 (all 151 cards)",
   "folder": "PY 205",
   "cards": [
    {
@@ -6863,6 +6889,32 @@ window.SEED_DECKS = [
      "6",
      "7",
      "8"
+    ]
+   },
+   {
+    "id": "seed-py205full-150",
+    "term": "Two cables at angles theta1 and theta2 above horizontal hold weight mg: tension in cable 1",
+    "def": "mg cos theta2 / sin(theta1 + theta2)",
+    "fakes": [
+     "mg cos theta1 / sin(theta1 + theta2)",
+     "mg / (2 cos theta1)",
+     "mg sin theta2 / sin(theta1 + theta2)",
+     "mg cos theta2 / cos(theta1 + theta2)",
+     "mg cos theta2 / (2 sin theta1)",
+     "mg sin theta1 / sin(theta1 + theta2)"
+    ]
+   },
+   {
+    "id": "seed-py205full-151",
+    "term": "Two-cable tension shortcut: whose angle goes in the cosine on top?",
+    "def": "the other cable's angle",
+    "fakes": [
+     "its own angle",
+     "the larger angle",
+     "the smaller angle",
+     "the sum of both angles",
+     "the angle from vertical",
+     "the average of both angles"
     ]
    }
   ]
